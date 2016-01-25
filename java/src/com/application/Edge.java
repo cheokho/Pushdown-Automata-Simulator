@@ -20,6 +20,9 @@ public class Edge {
         try
         {
             graph.insertEdge(parent, null, transRule, nodeFrom, nodeTo);
+            graph.setAllowDanglingEdges(false);
+            graph.setEdgeLabelsMovable(false);
+            graph.setCellsEditable(false);
         }
         finally
         {

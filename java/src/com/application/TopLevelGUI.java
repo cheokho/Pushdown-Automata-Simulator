@@ -1,16 +1,20 @@
 package com.application;
 
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxStylesheet;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 /**
  * Created by CheokHo on 25/01/2016.
  */
 public class TopLevelGUI extends JFrame{
+
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
@@ -18,6 +22,7 @@ public class TopLevelGUI extends JFrame{
         createMenuBar();
 
     }
+
 
     public void createMenuBar(){
         JMenuBar menuBar = new JMenuBar();
@@ -64,9 +69,9 @@ public class TopLevelGUI extends JFrame{
 //        {
 //            graph.getModel().endUpdate();
 //        }
-        Node nodeA = new Node(graph, "a");
+        Node nodeA = new Node(graph, "a", false);
         nodeA.createNode(20,20);
-        Node nodeB = new Node(graph, "b");
+        Node nodeB = new Node(graph, "b", true);
         nodeB.createNode(240,150);
         try {
             edge.addEdge(nodeA.getNode(), nodeB.getNode(), "transition rule temp");
