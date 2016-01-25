@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Edge.class" afterPath="$PROJECT_DIR$/classes/com/application/Edge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Node.class" afterPath="$PROJECT_DIR$/classes/com/application/Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Node.java" afterPath="$PROJECT_DIR$/java/src/com/application/Node.java" />
+      <change type="MOVED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\PushdownAutomataTool.iml" afterPath="$PROJECT_DIR$/FinalYearProject.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Main.class" afterPath="$PROJECT_DIR$/classes/com/application/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mxgraph.iws" />
@@ -53,8 +55,8 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2908705">
-              <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.3970276">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -576,7 +578,7 @@
       <option name="number" value="Default" />
       <updated>1453751940289</updated>
       <workItem from="1453751944526" duration="3379000" />
-      <workItem from="1453755365974" duration="3302000" />
+      <workItem from="1453755365974" duration="3941000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1453755019677</created>
@@ -590,11 +592,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453758632809</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Node shape fixes">
+      <created>1453758677133</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1453758677133</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6681000" />
+    <option name="totallyTimeSpent" value="7320000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -763,8 +771,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2908705">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.3970276">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding />
         </state>
       </provider>
