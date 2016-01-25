@@ -23,7 +23,7 @@ public class Node {
     public void createNode(int x,int y) {
         try
         {
-            if (isFinal == true) {
+            if (isFinal) {
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse");
             }
             else {
