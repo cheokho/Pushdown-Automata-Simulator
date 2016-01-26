@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Main.class" afterPath="$PROJECT_DIR$/classes/com/application/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui">
-      <change type="MOVED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\java\src\com\application\pdaTypeGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDATypeGUI.java" />
-    </list>
+    <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
     <ignored path="mxgraph.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -78,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PDATypeGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/src/com/application/PDATypeGUI.java">
+      <file leaf-file-name="pdaTypeGUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.43524417">
+              <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2451#2452#0" expanded="true" />
@@ -92,10 +88,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PDAInputGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PDAInputGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInputGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49469215">
+            <state vertical-scroll-proportion="0.0">
               <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -129,9 +125,9 @@
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/pdaInputGUI.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDATypeGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDAInputGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java" />
       </list>
     </option>
   </component>
@@ -614,7 +610,7 @@
       <updated>1453751940289</updated>
       <workItem from="1453751944526" duration="3379000" />
       <workItem from="1453755365974" duration="4230000" />
-      <workItem from="1453818243411" duration="10124000" />
+      <workItem from="1453818243411" duration="10317000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1453755019677</created>
@@ -646,11 +642,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453820397857</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="update GUI">
+      <created>1453835366012</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1453835366012</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17733000" />
+    <option name="totallyTimeSpent" value="17926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -875,24 +877,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/PDATypeGUI.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInputGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2451#2452#0" expanded="true" />
-            <element signature="e#2481#2482#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInputGUI.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/pdaTypeGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49469215">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.43524417">
+          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2451#2452#0" expanded="true" />
+            <element signature="e#2481#2482#0" expanded="true" />
           </folding>
         </state>
       </provider>
