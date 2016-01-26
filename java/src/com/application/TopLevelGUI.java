@@ -41,6 +41,13 @@ public class TopLevelGUI extends JFrame{
         });
         file.add(menuNew); file.add(menuOpen); file.add(menuSave); file.add(menuClose);
 
+        menuNew.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pdaTypeGUI pdaTypeGUI = new pdaTypeGUI();
+            }
+        });
+
         JMenu edit = new JMenu("Edit");
         JMenuItem menuUndo = new JMenuItem("Undo");
         JMenuItem menuRedo = new JMenuItem("Redo");

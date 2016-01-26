@@ -19,8 +19,9 @@ public class Main
     {
         TopLevelGUI frame = new TopLevelGUI();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 320);
+        frame.setSize(800, 600);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 }
