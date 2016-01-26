@@ -1,14 +1,11 @@
 package com.application;
 
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxStylesheet;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Hashtable;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -44,7 +41,7 @@ public class TopLevelGUI extends JFrame{
         menuNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pdaTypeGUI pdaTypeGUI = new pdaTypeGUI();
+                PDATypeGUI pdaTypeGUI = new PDATypeGUI();
             }
         });
 
