@@ -38,8 +38,10 @@ public class pdaInputGUI extends JFrame {
     public void createpdaInput(){
         setLayout(new BorderLayout());
         centerPanel = new JPanel();
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel.setLayout(new GridLayout(4, 2, 0, 10));
         info = new JLabel("Separate a list of states using a space between each state.");
+        info.setBorder(BorderFactory.createEmptyBorder(10,10,0,0));
         states = new JLabel("States:");
         statesField = new JTextField();
 

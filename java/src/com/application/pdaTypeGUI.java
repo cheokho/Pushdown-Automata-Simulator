@@ -41,11 +41,11 @@ public class pdaTypeGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (dpda.isSelected()) {
                     isNdpda = false;
-                    PDAInputGUI pdaInputGUI = new PDAInputGUI(isNdpda);
+                    pdaInputGUI pdaInputGUI = new pdaInputGUI(isNdpda);
                     dispose();
                 } else if (ndpda.isSelected()) {
                     isNdpda = true;
-                    PDAInputGUI pdaInputGUI = new PDAInputGUI(isNdpda);
+                    pdaInputGUI pdaInputGUI = new pdaInputGUI(isNdpda);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);
