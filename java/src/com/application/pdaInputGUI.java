@@ -1,13 +1,21 @@
 package com.application;
 
+import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by CheokHo on 26/01/2016.
  */
 public class pdaInputGUI extends JFrame {
 
+    private JPanel inputPDA; //card 1
+    private JPanel defPDA; //card 2
+    private JPanel container; //container for card
+
+    //==input PDA components==//
     private JPanel centerPanel;
     private JPanel southPanel;
     private JPanel centerBotPanel;
@@ -24,6 +32,17 @@ public class pdaInputGUI extends JFrame {
     private ButtonGroup group;
     private JButton next;
 
+    //--def PDA components==//
+    private JPanel centerPanel1;
+    private JPanel southPanel1;
+    private JLabel info3;
+    private JLabel stackAlp;
+    private JTextField stackField;
+    private JLabel inputAlp;
+    private JTextField inputField;
+    private JButton done;
+    private JButton previous;
+
 
     public pdaInputGUI(boolean isNdpda) {
         super("Input PDA");
@@ -36,12 +55,20 @@ public class pdaInputGUI extends JFrame {
     }
 
     public void createpdaInput(){
-        setLayout(new BorderLayout());
+        //setLayout(new BorderLayout());
+        container = new JPanel();
+        CardLayout cl = new CardLayout();
+        container.setLayout(cl);
+        inputPDA = new JPanel();
+        defPDA = new JPanel();
+
+
+        inputPDA.setLayout(new BorderLayout());
         centerPanel = new JPanel();
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel.setLayout(new GridLayout(4, 2, 0, 10));
         info = new JLabel("Separate a list of states using a space between each state.");
-        info.setBorder(BorderFactory.createEmptyBorder(10,10,0,0));
+        info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
         states = new JLabel("States:");
         statesField = new JTextField();
 
@@ -55,7 +82,8 @@ public class pdaInputGUI extends JFrame {
         graph = new JRadioButton("Graph");
         transTable = new JRadioButton("Transition table");
         group = new ButtonGroup();
-        group.add(graph); group.add(transTable);
+        group.add(graph);
+        group.add(transTable);
         BorderLayout centerBotLayout = new BorderLayout();
         centerBotPanel = new JPanel();
         centerBotPanel.setLayout(centerBotLayout);
@@ -63,16 +91,64 @@ public class pdaInputGUI extends JFrame {
 
         centerPanel.add(states); centerPanel.add(statesField);
         centerPanel.add(acceptStates); centerPanel.add(acceptStatesField);
-        centerPanel.add(initState); centerPanel.add(initStateField);
+        centerPanel.add(initState);
+        centerPanel.add(initStateField);
         centerPanel.add(centerBotPanel);
 
         next = new JButton("Next");
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "2");
+            }
+        });
         southPanel= new JPanel();
         southPanel.setLayout(new FlowLayout());
         southPanel.add(next);
 
-        add(info, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
-        add(southPanel, BorderLayout.SOUTH);
+        inputPDA.add(info, BorderLayout.NORTH);
+        inputPDA.add(centerPanel, BorderLayout.CENTER);
+        inputPDA.add(southPanel, BorderLayout.SOUTH);
+
+        //==========DEF PDA STARTS HERE===============//
+        defPDA.setLayout(new BorderLayout());
+        centerPanel1 = new JPanel();
+        centerPanel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
+        centerPanel1.setLayout(new GridLayout(2, 2, 0, 10));
+        info3 = new JLabel("Separate characters with a space. There must be no clashes between the stack and the input alphabets.");
+        info3.setBorder(BorderFactory.createEmptyBorder(10,10,0,10));
+
+        stackAlp = new JLabel("Stack Alphabet:");
+        stackField = new JTextField();
+
+        inputAlp = new JLabel("Input Alphabet:");
+        inputField = new JTextField();
+
+        centerPanel1.add(stackAlp); centerPanel1.add(stackField); centerPanel1.add(inputAlp); centerPanel1.add(inputField);
+
+        done = new JButton("Done");
+        previous = new JButton("Previous");
+
+        southPanel1= new JPanel();
+        southPanel1.setLayout(new FlowLayout());
+        southPanel1.add(previous);
+        southPanel1.add(done);
+        previous.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "1");
+            }
+        });
+        //defPDA.add(done);
+        defPDA.add(info3, BorderLayout.NORTH);
+        defPDA.add(centerPanel1, BorderLayout.CENTER);
+        defPDA.add(southPanel1, BorderLayout.SOUTH);
+
+        //==========CARD LAYOUT======================//
+        add(container);
+        container.add(inputPDA, "1");
+        container.add(defPDA, "2");
+        cl.show(container, "1");
+
     }
 }

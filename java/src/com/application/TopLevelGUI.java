@@ -1,6 +1,7 @@
 package com.application;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
@@ -90,6 +91,7 @@ public class TopLevelGUI extends JFrame{
         Object b=createNode(240,150, "b", true);
         addEdge(a, b, "temp trans rule");
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        new mxKeyboardHandler(graphComponent);
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
