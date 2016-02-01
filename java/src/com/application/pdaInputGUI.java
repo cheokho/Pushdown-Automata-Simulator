@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /**
  * Created by CheokHo on 26/01/2016.
@@ -71,6 +73,22 @@ public class pdaInputGUI extends JFrame {
         info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
         states = new JLabel("States:");
         statesField = new JTextField();
+        statesField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                String stateString = statesField.getText();
+                String[] states = stateString.split("\\s+");
+
+                for (String s: states){
+                    System.out.println("STATELOOP:"+s);
+                }
+            }
+        });
 
         acceptStates = new JLabel("Accepting state(s):");
         acceptStatesField = new JTextField();
@@ -95,11 +113,24 @@ public class pdaInputGUI extends JFrame {
         centerPanel.add(initStateField);
         centerPanel.add(centerBotPanel);
 
+
         next = new JButton("Next");
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cl.show(container, "2");
+                if (statesField.equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "States field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                if (acceptStatesField.equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                if (initStateField.equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Initial state field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    cl.show(container, "2");
+                }
             }
         });
         southPanel= new JPanel();
