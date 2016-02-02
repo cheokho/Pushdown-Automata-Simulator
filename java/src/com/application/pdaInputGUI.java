@@ -2,6 +2,9 @@ package com.application;
 
 import javax.smartcardio.Card;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +48,6 @@ public class pdaInputGUI extends JFrame {
     private JButton done;
     private JButton previous;
 
-
     public pdaInputGUI(boolean isNdpda) {
         super("Input PDA");
         createpdaInput();
@@ -73,6 +75,28 @@ public class pdaInputGUI extends JFrame {
         info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
         states = new JLabel("States:");
         statesField = new JTextField();
+//        statesField.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                Document doc = (Document) e.getDocument();
+//                String stateString = doc.toString();
+//                String[] states = stateString.split("\\s+");
+//
+//                for (String s : states) {
+//                    System.out.println("STATELOOP:" + s);
+//                }
+//            }
+//        });
         statesField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -82,9 +106,9 @@ public class pdaInputGUI extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 String stateString = statesField.getText();
-                String[] states = stateString.split("\\s+");
+                String[] statesArray = stateString.split("\\s+");
 
-                for (String s: states){
+                for (String s: statesArray){
                     System.out.println("STATELOOP:"+s);
                 }
             }
@@ -118,14 +142,14 @@ public class pdaInputGUI extends JFrame {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (statesField.equals("")) {
+                if (statesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "States field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
-                if (acceptStatesField.equals("")) {
+                if (acceptStatesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                if (initStateField.equals("")) {
+                if (initStateField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
