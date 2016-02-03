@@ -92,22 +92,22 @@ public class TopLevelGUI extends JFrame{
         //addEdge(a, b, "temp trans rule");
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         new mxKeyboardHandler(graphComponent);
-        graphComponent.getGraphControl().addMouseListener(new MouseAdapter(){
+        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
-                    mxCell cell =(mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                    mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                     if (cell != null) {
                         System.out.println(cell.getValue().toString());
                         JPopupMenu popup = new JPopupMenu();
                         JMenuItem delete = new JMenuItem("Delete");
                         popup.add(delete);
-                        popup.show (e.getComponent(), e.getX(), e.getY()) ;
+                        popup.show(e.getComponent(), e.getX(), e.getY());
                         delete.addActionListener(new ActionListener() {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
-                                graph.removeCells(new Object [] {cell});
+                                graph.removeCells(new Object[]{cell});
                                 repaint();
                             }
                         });
@@ -119,12 +119,12 @@ public class TopLevelGUI extends JFrame{
         getContentPane().add(graphComponent);
     }
 
-    public Object createNode(int x,int y, String state, boolean isFinal) {
+    public Object createNode(int x,int y, String state, boolean isAccepting) {
         graph.getModel().beginUpdate();
         Object node;
         try
         {
-            if (isFinal) {
+            if (isAccepting) {
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse");
             }
             else {

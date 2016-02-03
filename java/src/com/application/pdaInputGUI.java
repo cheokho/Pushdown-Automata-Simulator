@@ -1,20 +1,15 @@
 package com.application;
 
-import javax.smartcardio.Card;
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.*;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by CheokHo on 26/01/2016.
@@ -267,8 +262,19 @@ public class pdaInputGUI extends JFrame {
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                topLevelGUI.createNode(20,20, "a", false);
-
+                //topLevelGUI.createNode(20,20, "a", false);
+                int x=20;
+                int y=20;
+                for (int i=0; i<statesArray.size(); i++) {
+                    if(acceptStatesArray.contains(statesArray.get(i))) {
+                        topLevelGUI.createNode(x,y,statesArray.get(i), true);
+                    } else {
+                        topLevelGUI.createNode(x,y,statesArray.get(i), false);
+                    }
+                    x=x+100;
+                    y=y+100;
+                }
+                dispose();
             }
         });
         previous.addActionListener(new ActionListener() {

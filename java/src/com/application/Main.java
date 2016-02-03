@@ -1,8 +1,5 @@
 package com.application;
 
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.view.mxGraph;
-
 import javax.swing.*;
 
 /**
