@@ -60,10 +60,14 @@ public class pdaInputGUI extends JFrame {
     private ArrayList<String> acceptStatesArray;
     private String initStateStr;
     private boolean isGraph;
+    private boolean isNdpda;
+    private TopLevelGUI topLevelGUI;
 
 
-    public pdaInputGUI(boolean isNdpda) {
+    public pdaInputGUI(boolean isNdpda, TopLevelGUI topLevelGUI) {
         super("Input PDA");
+        this.isNdpda=isNdpda;
+        this.topLevelGUI=topLevelGUI;
         createpdaInput();
         setSize(500, 250);
         setVisible(true);
@@ -221,7 +225,10 @@ public class pdaInputGUI extends JFrame {
                     } else if (transTable.isSelected()) {
                         isGraph = false;
                     }
-                    cl.show(container, "2");
+                    if(!statesArray.contains(initStateStr)){
+                    } else {
+                        cl.show(container,"2");
+                    }
                 }
             }
         });
@@ -256,6 +263,14 @@ public class pdaInputGUI extends JFrame {
         southPanel1.setLayout(new FlowLayout());
         southPanel1.add(previous);
         southPanel1.add(done);
+
+        done.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                topLevelGUI.createNode(20,20, "a", false);
+
+            }
+        });
         previous.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -277,5 +292,17 @@ public class pdaInputGUI extends JFrame {
 
     public boolean isGraph() {
         return isGraph;
+    }
+
+    public ArrayList<String> getStatesArray() {
+        return statesArray;
+    }
+
+    public ArrayList<String> getAcceptStatesArray() {
+        return acceptStatesArray;
+    }
+
+    public String getInitStateStr() {
+        return initStateStr;
     }
 }

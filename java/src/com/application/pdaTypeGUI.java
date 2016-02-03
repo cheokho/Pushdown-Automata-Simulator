@@ -19,9 +19,12 @@ public class pdaTypeGUI extends JFrame {
     private JPanel continuePanel;
     private JButton continueButton;
     private boolean isNdpda;
+    private pdaInputGUI pdaInputGUI;
+    private TopLevelGUI topLevelGUI;
 
-    public pdaTypeGUI() {
+    public pdaTypeGUI(TopLevelGUI topLevelGUI) {
         super("Create new PDA");
+        this.topLevelGUI=topLevelGUI;
         setLayout(new BorderLayout());
         createpdaType();
         setSize(300, 150);
@@ -41,11 +44,11 @@ public class pdaTypeGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (dpda.isSelected()) {
                     isNdpda = false;
-                    pdaInputGUI pdaInputGUI = new pdaInputGUI(isNdpda);
+                    pdaInputGUI = new pdaInputGUI(isNdpda, topLevelGUI);
                     dispose();
                 } else if (ndpda.isSelected()) {
                     isNdpda = true;
-                    pdaInputGUI pdaInputGUI = new pdaInputGUI(isNdpda);
+                    pdaInputGUI = new pdaInputGUI(isNdpda, topLevelGUI);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -71,5 +74,9 @@ public class pdaTypeGUI extends JFrame {
 
     public boolean isNdpda() {
         return isNdpda;
+    }
+
+    public pdaInputGUI getPdaInputGUI() {
+        return pdaInputGUI;
     }
 }

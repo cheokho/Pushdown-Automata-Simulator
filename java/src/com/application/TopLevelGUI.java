@@ -48,7 +48,7 @@ public class TopLevelGUI extends JFrame{
         menuNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pdaTypeGUI pdaTypeGUI = new pdaTypeGUI();
+                pdaTypeGUI pdaTypeGUI = new pdaTypeGUI(getTopLevelGUI());
             }
         });
 
@@ -87,9 +87,9 @@ public class TopLevelGUI extends JFrame{
 //        }
 
         parent = graph.getDefaultParent();
-        Object a=createNode(20,20, "a", false);
-        Object b=createNode(240,150, "b", true);
-        addEdge(a, b, "temp trans rule");
+        //Object a=createNode(20,20, "a", false);
+        //Object b=createNode(240,150, "b", true);
+        //addEdge(a, b, "temp trans rule");
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         new mxKeyboardHandler(graphComponent);
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter(){
@@ -154,7 +154,7 @@ public class TopLevelGUI extends JFrame{
         }
     }
 
-    public void deleteEdge(){
+    public TopLevelGUI getTopLevelGUI() {
+        return this;
     }
-
 }
