@@ -48,7 +48,7 @@ public class TopLevelGUI extends JFrame{
         menuNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pdaTypeGUI pdaTypeGUI = new pdaTypeGUI(getTopLevelGUI());
+                PDAVersionGUI pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
             }
         });
 

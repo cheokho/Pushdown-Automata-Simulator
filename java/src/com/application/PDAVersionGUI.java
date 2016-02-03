@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by CheokHo on 26/01/2016.
  */
-public class pdaTypeGUI extends JFrame {
+public class PDAVersionGUI extends JFrame {
 
     private JLabel label;
     private JRadioButton ndpda;
@@ -19,10 +19,10 @@ public class pdaTypeGUI extends JFrame {
     private JPanel continuePanel;
     private JButton continueButton;
     private boolean isNdpda;
-    private pdaInputGUI pdaInputGUI;
+    private PDAInGUI pdaInputGUI;
     private TopLevelGUI topLevelGUI;
 
-    public pdaTypeGUI(TopLevelGUI topLevelGUI) {
+    public PDAVersionGUI(TopLevelGUI topLevelGUI) {
         super("Create new PDA");
         this.topLevelGUI=topLevelGUI;
         setLayout(new BorderLayout());
@@ -44,11 +44,11 @@ public class pdaTypeGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (dpda.isSelected()) {
                     isNdpda = false;
-                    pdaInputGUI = new pdaInputGUI(isNdpda, topLevelGUI);
+                    pdaInputGUI = new PDAInGUI(isNdpda, topLevelGUI);
                     dispose();
                 } else if (ndpda.isSelected()) {
                     isNdpda = true;
-                    pdaInputGUI = new pdaInputGUI(isNdpda, topLevelGUI);
+                    pdaInputGUI = new PDAInGUI(isNdpda, topLevelGUI);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -76,7 +76,7 @@ public class pdaTypeGUI extends JFrame {
         return isNdpda;
     }
 
-    public pdaInputGUI getPdaInputGUI() {
+    public PDAInGUI getPdaInputGUI() {
         return pdaInputGUI;
     }
 }
