@@ -4,12 +4,17 @@ import javax.smartcardio.Card;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by CheokHo on 26/01/2016.
@@ -19,6 +24,9 @@ public class pdaInputGUI extends JFrame {
     private JPanel inputPDA; //card 1
     private JPanel defPDA; //card 2
     private JPanel container; //container for card
+
+    private String stateString;
+    private String acceptString;
 
     //==input PDA components==//
     private JPanel centerPanel;
@@ -47,6 +55,12 @@ public class pdaInputGUI extends JFrame {
     private JTextField inputField;
     private JButton done;
     private JButton previous;
+
+    private ArrayList<String> statesArray;
+    private ArrayList<String> acceptStatesArray;
+    private String initStateStr;
+    private boolean isGraph;
+
 
     public pdaInputGUI(boolean isNdpda) {
         super("Input PDA");
@@ -105,20 +119,68 @@ public class pdaInputGUI extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-                String stateString = statesField.getText();
-                String[] statesArray = stateString.split("\\s+");
+                stateString = statesField.getText();
+                statesArray= new ArrayList(Arrays.asList(stateString.split("\\s+")));
+                //String[] statesArray = stateString.split("\\s+");
+                for(int i=0;i<statesArray.size();i++)
+                {
+                    System.out.println(" -->"+statesArray.get(i));
+                }
+                Set<String> set = new HashSet<String>(statesArray);
+                if(set.size()<statesArray.size()){ //duplicates found
+                    JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
+                    next.setEnabled(false);
+                } else {
+                    next.setEnabled(true);
+                }
+            }
+        });
+        acceptStates = new JLabel("Accepting state(s):");
+        acceptStatesField = new JTextField();
 
-                for (String s: statesArray){
-                    System.out.println("STATELOOP:"+s);
+        acceptStatesField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                acceptString=acceptStatesField.getText();
+                acceptStatesArray=new ArrayList(Arrays.asList(acceptString.split("\\s+")));
+                if(statesArray.containsAll(acceptStatesArray)) { //checks if subset
+                    next.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
+                    next.setEnabled(false);
                 }
             }
         });
 
-        acceptStates = new JLabel("Accepting state(s):");
-        acceptStatesField = new JTextField();
-
         initState = new JLabel("Initial state:");
         initStateField = new JTextField();
+
+        initStateField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                initStateField.getText().trim();
+                initStateStr = initStateField.getText().replaceAll("\\s+", "");;
+                initStateField.setText(initStateStr);
+                if (statesArray.contains(initStateStr)) {
+                    next.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(new JPanel(), "Initial state is not one of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
+                    next.setEnabled(false);
+                }
+            }
+        });
+
+
 
         info2 = new JLabel("Specify transition rules through:");
         graph = new JRadioButton("Graph");
@@ -126,6 +188,7 @@ public class pdaInputGUI extends JFrame {
         group = new ButtonGroup();
         group.add(graph);
         group.add(transTable);
+        graph.setSelected(true);
         BorderLayout centerBotLayout = new BorderLayout();
         centerBotPanel = new JPanel();
         centerBotPanel.setLayout(centerBotLayout);
@@ -153,6 +216,11 @@ public class pdaInputGUI extends JFrame {
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
+                    if (graph.isSelected()) {
+                        isGraph = true;
+                    } else if (transTable.isSelected()) {
+                        isGraph = false;
+                    }
                     cl.show(container, "2");
                 }
             }
@@ -205,5 +273,9 @@ public class pdaInputGUI extends JFrame {
         container.add(defPDA, "2");
         cl.show(container, "1");
 
+    }
+
+    public boolean isGraph() {
+        return isGraph;
     }
 }
