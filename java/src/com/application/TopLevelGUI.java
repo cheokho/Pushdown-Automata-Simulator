@@ -153,10 +153,17 @@ public class TopLevelGUI extends JFrame{
         return node;
     }
 
+    //Instead of taking in an Object for nodes, pass in Node object instead.
     public void addEdge(Object nodeFrom, Object nodeTo, String transRule){
+        Object edge;
+        Edge newEdge;
+        //Node newNodeFrom = new Node(nodeFrom, ); //need to get the cell name to create this.
+        Node newNodeTo;
         try
         {
-            graph.insertEdge(parent, null, transRule, nodeFrom, nodeTo);
+            edge = graph.insertEdge(parent, null, transRule, nodeFrom, nodeTo);
+            newEdge = new Edge(edge);
+            //newEdge.setEdgeRule();
             graph.setAllowDanglingEdges(false);
             graph.setEdgeLabelsMovable(false);
             graph.setCellsEditable(false);
