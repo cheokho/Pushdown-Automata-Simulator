@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -18,10 +19,12 @@ public class TopLevelGUI extends JFrame{
 
     private Object parent;
     private mxGraph graph;
+    private ArrayList<Node> nodeArray;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
         graph = new mxGraph();
+        nodeArray = new ArrayList<Node>();
         createGraphPane();
         createMenuBar();
 
@@ -97,7 +100,7 @@ public class TopLevelGUI extends JFrame{
                 if (SwingUtilities.isRightMouseButton(e)) {
                     mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                     if (cell != null) {
-                        System.out.println(cell.getValue().toString());
+                        System.out.println("Right Click Cell Value: "+cell.getValue().toString());
                         JPopupMenu popup = new JPopupMenu();
                         JMenuItem delete = new JMenuItem("Delete");
                         popup.add(delete);
@@ -108,6 +111,12 @@ public class TopLevelGUI extends JFrame{
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
                                 graph.removeCells(new Object[]{cell});
+                                for (int i=0; i<nodeArray.size(); i++) {
+                                    if (nodeArray.get(i).getNodeName().equals(cell.getValue().toString())) {
+                                        nodeArray.remove(i);
+                                    }
+                                }
+                                System.out.println("Updated Node Array: "+nodeArray.toString());
                                 repaint();
                             }
                         });
@@ -122,6 +131,7 @@ public class TopLevelGUI extends JFrame{
     public Object createNode(int x,int y, String state, boolean isAccepting) {
         graph.getModel().beginUpdate();
         Object node;
+        Node newNode;
         try
         {
             if (isAccepting) {
@@ -130,6 +140,9 @@ public class TopLevelGUI extends JFrame{
             else {
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse");
             }
+            newNode = new Node(node, state);
+            nodeArray.add(newNode);
+
             graph.setVertexLabelsMovable(false);
             graph.setCellsEditable(false);
         }
@@ -152,6 +165,10 @@ public class TopLevelGUI extends JFrame{
         {
             graph.getModel().endUpdate();
         }
+    }
+
+    public ArrayList<Node> getNodeArray() {
+        return nodeArray;
     }
 
     public TopLevelGUI getTopLevelGUI() {
