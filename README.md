@@ -1,7 +1,7 @@
-PD Automata Tool
+___PD Automata Tool___
 
-TODO
-Complete backend of graphing component.
-Implement algorithm.
-Implement save+load features.
-JUnit testing.
+__TODO__
+* Complete backend of graphing component.
+* Implement algorithm.
+* Implement save+load features.
+* JUnit testing.
