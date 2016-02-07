@@ -3,6 +3,9 @@ package com.application;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxEvent;
+import com.mxgraph.util.mxEventObject;
+import com.mxgraph.util.mxEventSource;
 import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
@@ -27,7 +30,6 @@ public class TopLevelGUI extends JFrame{
         nodeArray = new ArrayList<Node>();
         createGraphPane();
         createMenuBar();
-
     }
 
 
@@ -94,9 +96,28 @@ public class TopLevelGUI extends JFrame{
         //Object b=createNode(240,150, "b", true);
         //addEdge(a, b, "temp trans rule");
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
-        new mxKeyboardHandler(graphComponent);
+
+        //new mxKeyboardHandler(graphComponent); needs to be fixed for backend (keyboard deleting)
+
+        //This handles edge creation handlers.
+        graphComponent.getConnectionHandler().addListener(mxEvent.CONNECT, new mxEventSource.mxIEventListener() {
+            @Override
+            public void invoke(Object sender, mxEventObject evt) {
+                System.out.println("edge: "+evt.getProperty("cell"));
+            }
+        });
+
+
+        //This handles node creation handlers.
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
+                //Left click (maybe not needed)
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                    if (cell!=null) {
+                        System.out.println("Left Click Cell Value: "+cell.getValue().toString());
+                    }
+                }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                     if (cell != null) {
@@ -154,14 +175,14 @@ public class TopLevelGUI extends JFrame{
     }
 
     //Instead of taking in an Object for nodes, pass in Node object instead.
-    public void addEdge(Object nodeFrom, Object nodeTo, String transRule){
+    public void addEdge(Node nodeFrom, Node nodeTo, String transRule){
         Object edge;
         Edge newEdge;
         //Node newNodeFrom = new Node(nodeFrom, ); //need to get the cell name to create this.
         Node newNodeTo;
         try
         {
-            edge = graph.insertEdge(parent, null, transRule, nodeFrom, nodeTo);
+            edge = graph.insertEdge(parent, null, transRule, nodeFrom.getNode(), nodeTo.getNode());
             newEdge = new Edge(edge);
             //newEdge.setEdgeRule();
             graph.setAllowDanglingEdges(false);
