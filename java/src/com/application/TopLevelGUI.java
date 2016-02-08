@@ -1,6 +1,7 @@
 package com.application;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.swing.handler.mxConnectionHandler;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxEvent;
@@ -95,7 +96,26 @@ public class TopLevelGUI extends JFrame{
         //Object a=createNode(20,20, "a", false);
         //Object b=createNode(240,150, "b", true);
         //addEdge(a, b, "temp trans rule");
-        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+
+        mxGraphComponent graphComponent = new mxGraphComponent(graph) {
+            @Override
+            protected mxConnectionHandler createConnectionHandler() {
+                return new mxConnectionHandler(this) {
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        //add code for check here.
+                        mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                        if (cell != null) {
+                            graph.insertEdge(parent, null, "test for now",  );
+                            System.out.println("mouse released.");
+                        }
+                        super.mouseReleased(e);
+                    }
+                };
+            }
+        };
+
+
 
         //new mxKeyboardHandler(graphComponent); needs to be fixed for backend (keyboard deleting)
 
@@ -104,6 +124,7 @@ public class TopLevelGUI extends JFrame{
             @Override
             public void invoke(Object sender, mxEventObject evt) {
                 System.out.println("edge: "+evt.getProperty("cell"));
+                graph.getModel().remove(evt.getProperty("cell"));
             }
         });
 

@@ -150,7 +150,7 @@ public class PDAInGUI extends JFrame {
                 if(statesArray.containsAll(acceptStatesArray)) { //checks if subset
                     next.setEnabled(true);
                 } else {
-                    JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
                     next.setEnabled(false);
                 }
             }
@@ -173,7 +173,7 @@ public class PDAInGUI extends JFrame {
                 if (statesArray.contains(initStateStr)) {
                     next.setEnabled(true);
                 } else {
-                    JOptionPane.showMessageDialog(new JPanel(), "Initial state is not one of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(new JPanel(), "Initial state is not one of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
                     next.setEnabled(false);
                 }
             }
