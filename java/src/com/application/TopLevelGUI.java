@@ -103,12 +103,6 @@ public class TopLevelGUI extends JFrame{
                 return new mxConnectionHandler(this) {
                     @Override
                     public void mouseReleased(MouseEvent e) {
-                        //add code for check here.
-                        mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-                        if (cell != null) {
-                            graph.insertEdge(parent, null, "test for now",  );
-                            System.out.println("mouse released.");
-                        }
                         super.mouseReleased(e);
                     }
                 };
@@ -131,7 +125,9 @@ public class TopLevelGUI extends JFrame{
 
         //This handles node creation handlers.
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+            Object nodePressed;
             public void mousePressed(MouseEvent e) {
+                nodePressed = graphComponent.getCellAt(e.getX(), e.getY());
                 //Left click (maybe not needed)
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
@@ -163,6 +159,14 @@ public class TopLevelGUI extends JFrame{
                             }
                         });
                     }
+                }
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                if (cell != null) {
+                    graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
+                    System.out.println("mouse released: "+graphComponent.getCellAt(e.getX(), e.getY()).toString());
                 }
             }
         });
