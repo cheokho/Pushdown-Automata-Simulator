@@ -124,21 +124,23 @@ public class TopLevelGUI extends JFrame{
 
 
         //This handles node creation handlers.
+        // add double click shit for looping nodes.
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             Object nodePressed;
+            mxCell cellPressed;
             public void mousePressed(MouseEvent e) {
                 nodePressed = graphComponent.getCellAt(e.getX(), e.getY());
                 //Left click (maybe not needed)
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-                    if (cell!=null) {
-                        System.out.println("Left Click Cell Value: "+cell.getValue().toString());
+                    cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                    if (cellPressed!=null) {
+                        System.out.println("Left Click Cell Value: "+cellPressed.getValue().toString());
                     }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
-                    mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-                    if (cell != null) {
-                        System.out.println("Right Click Cell Value: "+cell.getValue().toString());
+                    cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                    if (cellPressed != null) {
+                        System.out.println("Right Click Cell Value: "+cellPressed.getValue().toString());
                         JPopupMenu popup = new JPopupMenu();
                         JMenuItem delete = new JMenuItem("Delete");
                         popup.add(delete);
@@ -148,9 +150,9 @@ public class TopLevelGUI extends JFrame{
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
-                                graph.removeCells(new Object[]{cell});
+                                graph.removeCells(new Object[]{cellPressed});
                                 for (int i = 0; i < nodeArray.size(); i++) {
-                                    if (nodeArray.get(i).toString().equals(cell.getValue().toString())) {
+                                    if (nodeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
                                         nodeArray.remove(i);
                                     }
                                 }
@@ -165,9 +167,8 @@ public class TopLevelGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    if (cell != null && cell.isVertex()) {
+                    if (cell != null && cell.isVertex() && !cellPressed.getValue().equals(cell.getValue())) {
                         graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
-                        System.out.println("mouse released: " + graphComponent.getCellAt(e.getX(), e.getY()).toString());
                     }
                 }
             }
