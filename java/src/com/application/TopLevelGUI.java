@@ -149,12 +149,12 @@ public class TopLevelGUI extends JFrame{
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
                                 graph.removeCells(new Object[]{cell});
-                                for (int i=0; i<nodeArray.size(); i++) {
+                                for (int i = 0; i < nodeArray.size(); i++) {
                                     if (nodeArray.get(i).getNodeName().equals(cell.getValue().toString())) {
                                         nodeArray.remove(i);
                                     }
                                 }
-                                System.out.println("Updated Node Array: "+nodeArray.toString());
+                                System.out.println("Updated Node Array: " + nodeArray.toString());
                                 repaint();
                             }
                         });
@@ -164,9 +164,11 @@ public class TopLevelGUI extends JFrame{
 
             public void mouseReleased(MouseEvent e) {
                 mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-                if (cell != null) {
-                    graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
-                    System.out.println("mouse released: "+graphComponent.getCellAt(e.getX(), e.getY()).toString());
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    if (cell != null && cell.isVertex()) {
+                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
+                        System.out.println("mouse released: " + graphComponent.getCellAt(e.getX(), e.getY()).toString());
+                    }
                 }
             }
         });
