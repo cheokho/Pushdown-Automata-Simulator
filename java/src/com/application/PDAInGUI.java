@@ -266,14 +266,17 @@ public class PDAInGUI extends JFrame {
                 int x=20;
                 int y=20;
                 for (int i=0; i<statesArray.size(); i++) {
-                    if(acceptStatesArray.contains(statesArray.get(i))) {
-                        topLevelGUI.createNode(x,y,statesArray.get(i), true);
-                    } else {
-                        topLevelGUI.createNode(x,y,statesArray.get(i), false);
+                    if(!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
+                        if (acceptStatesArray.contains(statesArray.get(i))) {
+                            topLevelGUI.createNode(x, y, statesArray.get(i), true);
+                        } else {
+                            topLevelGUI.createNode(x, y, statesArray.get(i), false);
+                        }
                     }
                     x=x+100;
                     y=y+100;
                 }
+                System.out.println("Current node array(non delete): "+topLevelGUI.getNodeArray().toString());
                 dispose();
             }
         });

@@ -15,7 +15,7 @@ public class Node {
         this.name=name;
     }
 
-    public String getNodeName() {
+    public String toString() {
         return name;
     }
 

@@ -150,7 +150,7 @@ public class TopLevelGUI extends JFrame{
                                 // TODO Auto-generated method stub
                                 graph.removeCells(new Object[]{cell});
                                 for (int i = 0; i < nodeArray.size(); i++) {
-                                    if (nodeArray.get(i).getNodeName().equals(cell.getValue().toString())) {
+                                    if (nodeArray.get(i).toString().equals(cell.getValue().toString())) {
                                         nodeArray.remove(i);
                                     }
                                 }
