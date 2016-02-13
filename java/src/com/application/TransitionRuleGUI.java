@@ -1,5 +1,7 @@
 package com.application;
 
+import com.mxgraph.view.mxGraph;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -74,10 +76,15 @@ public class TransitionRuleGUI extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //addEdge(graph)
             }
         });
-        add(centerPanel, BorderLayout.CENTER);
-        add(botPanel, BorderLayout.SOUTH);
+        add(centerPanel, BorderLayout.NORTH);
+        add(botPanel, BorderLayout.CENTER);
+        add(okButton, BorderLayout.SOUTH);
+    }
+
+    public void addEdge(mxGraph graph) {
+
     }
 }

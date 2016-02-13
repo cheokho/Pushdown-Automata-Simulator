@@ -24,6 +24,7 @@ public class TopLevelGUI extends JFrame{
     private Object parent;
     private mxGraph graph;
     private ArrayList<Node> nodeArray;
+    private PDAVersionGUI pdaTypeGUI;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
@@ -54,7 +55,7 @@ public class TopLevelGUI extends JFrame{
         menuNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PDAVersionGUI pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
+                pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
             }
         });
 
@@ -167,10 +168,15 @@ public class TopLevelGUI extends JFrame{
                 mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (cell != null && cell.isVertex() && e.getClickCount() == 2) {
-                        //TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.toString(), cell.toString(),);
+                        TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.getValue().toString(), cell.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
                         graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cell);
                     }
                     else if (cell != null && cell.isVertex() && !cellPressed.getValue().equals(cell.getValue())) {
+                        TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.getValue().toString(), cell.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
                         graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
                     }
                 }
@@ -205,26 +211,26 @@ public class TopLevelGUI extends JFrame{
         return node;
     }
 
-    //Instead of taking in an Object for nodes, pass in Node object instead.
-    public void addEdge(Node nodeFrom, Node nodeTo, String transRule){
-        Object edge;
-        Edge newEdge;
-        //Node newNodeFrom = new Node(nodeFrom, ); //need to get the cell name to create this.
-        Node newNodeTo;
-        try
-        {
-            edge = graph.insertEdge(parent, null, transRule, nodeFrom.getNode(), nodeTo.getNode());
-            newEdge = new Edge(edge);
-            //newEdge.setEdgeRule();
-            graph.setAllowDanglingEdges(false);
-            graph.setEdgeLabelsMovable(false);
-            graph.setCellsEditable(false);
-        }
-        finally
-        {
-            graph.getModel().endUpdate();
-        }
-    }
+//    //Instead of taking in an Object for nodes, pass in Node object instead.
+//    public void addEdge(Node nodeFrom, Node nodeTo, String transRule){
+//        Object edge;
+//        Edge newEdge;
+//        //Node newNodeFrom = new Node(nodeFrom, ); //need to get the cell name to create this.
+//        Node newNodeTo;
+//        try
+//        {
+//            edge = graph.insertEdge(parent, null, transRule, nodeFrom.getNode(), nodeTo.getNode());
+//            newEdge = new Edge(edge);
+//            //newEdge.setEdgeRule();
+//            graph.setAllowDanglingEdges(false);
+//            graph.setEdgeLabelsMovable(false);
+//            graph.setCellsEditable(false);
+//        }
+//        finally
+//        {
+//            graph.getModel().endUpdate();
+//        }
+//    }
 
     public ArrayList<Node> getNodeArray() {
         return nodeArray;

@@ -254,7 +254,7 @@ public class PDAInGUI extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 inputString = inputField.getText();
-                inputArray=stackArray= new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                inputArray= new ArrayList(Arrays.asList(inputString.split("\\s+")));
                 System.out.println("Input Array: "+inputArray);
             }
         });
