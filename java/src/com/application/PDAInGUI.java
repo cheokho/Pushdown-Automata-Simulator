@@ -22,6 +22,8 @@ public class PDAInGUI extends JFrame {
 
     private String stateString;
     private String acceptString;
+    private String stackString;
+    private String inputString;
 
     //==input PDA components==//
     private JPanel centerPanel;
@@ -53,6 +55,8 @@ public class PDAInGUI extends JFrame {
 
     private ArrayList<String> statesArray;
     private ArrayList<String> acceptStatesArray;
+    private ArrayList<String> stackArray;
+    private ArrayList<String> inputArray;
     private String initStateStr;
     private boolean isGraph;
     private boolean isNdpda;
@@ -121,10 +125,11 @@ public class PDAInGUI extends JFrame {
                 stateString = statesField.getText();
                 statesArray= new ArrayList(Arrays.asList(stateString.split("\\s+")));
                 //String[] statesArray = stateString.split("\\s+");
-                for(int i=0;i<statesArray.size();i++)
-                {
-                    System.out.println(" -->"+statesArray.get(i));
-                }
+//                for(int i=0;i<statesArray.size();i++)
+//                {
+//                    System.out.println(" -->"+statesArray.get(i));
+//                }
+                System.out.println("States Array: "+statesArray);
                 Set<String> set = new HashSet<String>(statesArray);
                 if(set.size()<statesArray.size()){ //duplicates found
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -168,7 +173,7 @@ public class PDAInGUI extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 initStateField.getText().trim();
-                initStateStr = initStateField.getText().replaceAll("\\s+", "");;
+                initStateStr = initStateField.getText().replaceAll("\\s+", "");
                 initStateField.setText(initStateStr);
                 if (statesArray.contains(initStateStr)) {
                     next.setEnabled(true);
@@ -240,14 +245,40 @@ public class PDAInGUI extends JFrame {
         centerPanel1 = new JPanel();
         centerPanel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel1.setLayout(new GridLayout(2, 2, 0, 10));
-        info3 = new JLabel("Separate characters with a space. There must be no clashes between the stack and the input alphabets.");
+        info3 = new JLabel("Separate characters with a space. Use alphabetical letters for the stack and numbers for the input.");
         info3.setBorder(BorderFactory.createEmptyBorder(10,10,0,10));
 
         stackAlp = new JLabel("Stack Alphabet:");
         stackField = new JTextField();
+        stackField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                stackString = stackField.getText();
+                stackArray= new ArrayList(Arrays.asList(stackString.split("\\s+")));
+                System.out.println("Stack Array: "+stackArray);
+            }
+        });
 
         inputAlp = new JLabel("Input Alphabet:");
         inputField = new JTextField();
+        inputField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                inputString = inputField.getText();
+                inputArray=stackArray= new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                System.out.println("Input Array: "+inputArray);
+            }
+        });
 
         centerPanel1.add(stackAlp); centerPanel1.add(stackField); centerPanel1.add(inputAlp); centerPanel1.add(inputField);
 
@@ -263,21 +294,40 @@ public class PDAInGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //topLevelGUI.createNode(20,20, "a", false);
-                int x=20;
-                int y=20;
-                for (int i=0; i<statesArray.size(); i++) {
-                    if(!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
-                        if (acceptStatesArray.contains(statesArray.get(i))) {
-                            topLevelGUI.createNode(x, y, statesArray.get(i), true);
-                        } else {
-                            topLevelGUI.createNode(x, y, statesArray.get(i), false);
-                        }
-                    }
-                    x=x+100;
-                    y=y+100;
+                Set<String> stackSet = new HashSet<String>(stackArray);
+                Set<String> inputSet = new HashSet<String>(inputArray);
+                if(stackField.getText().equals("") || inputField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "You haven't filled all the information!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                System.out.println("Current node array(non delete): "+topLevelGUI.getNodeArray().toString());
-                dispose();
+                else if(stackSet.size()<stackArray.size()) {
+                    JOptionPane.showMessageDialog(new JPanel(), "You have duplicate stack characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if(inputSet.size()<inputArray.size()) {
+                    JOptionPane.showMessageDialog(new JPanel(), "You have duplicate input characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!stackString.matches("^[a-zA-Z ]+$")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Please use alphabetical letters in your stack only.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!inputString.matches("^[0-9 ]+$")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Please use numbers in your input only.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int x=20;
+                    int y=20;
+                    for (int i=0; i<statesArray.size(); i++) {
+                        if(!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
+                            if (acceptStatesArray.contains(statesArray.get(i))) {
+                                topLevelGUI.createNode(x, y, statesArray.get(i), true);
+                            } else {
+                                topLevelGUI.createNode(x, y, statesArray.get(i), false);
+                            }
+                        }
+                        x=x+100;
+                        y=y+100;
+                    }
+                    System.out.println("Current node array(non delete): "+topLevelGUI.getNodeArray().toString());
+                    dispose();
+                }
             }
         });
         previous.addActionListener(new ActionListener() {
