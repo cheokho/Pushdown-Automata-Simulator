@@ -167,6 +167,7 @@ public class TopLevelGUI extends JFrame{
                 mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (cell != null && cell.isVertex() && e.getClickCount() == 2) {
+                        //TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.toString(), cell.toString(),);
                         graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cell);
                     }
                     else if (cell != null && cell.isVertex() && !cellPressed.getValue().equals(cell.getValue())) {

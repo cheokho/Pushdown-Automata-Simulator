@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -92,28 +93,6 @@ public class PDAInGUI extends JFrame {
         info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
         states = new JLabel("States:");
         statesField = new JTextField();
-//        statesField.getDocument().addDocumentListener(new DocumentListener() {
-//            @Override
-//            public void insertUpdate(DocumentEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void removeUpdate(DocumentEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void changedUpdate(DocumentEvent e) {
-//                Document doc = (Document) e.getDocument();
-//                String stateString = doc.toString();
-//                String[] states = stateString.split("\\s+");
-//
-//                for (String s : states) {
-//                    System.out.println("STATELOOP:" + s);
-//                }
-//            }
-//        });
         statesField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -363,5 +342,13 @@ public class PDAInGUI extends JFrame {
 
     public String getInitStateStr() {
         return initStateStr;
+    }
+
+    public ArrayList<String> getStackArray() {
+        return stackArray;
+    }
+
+    public ArrayList<String> getInputArray() {
+        return inputArray;
     }
 }
