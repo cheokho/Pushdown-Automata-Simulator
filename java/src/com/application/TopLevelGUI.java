@@ -124,7 +124,6 @@ public class TopLevelGUI extends JFrame{
 
 
         //This handles node creation handlers.
-        // add double click shit for looping nodes.
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             Object nodePressed;
             mxCell cellPressed;
