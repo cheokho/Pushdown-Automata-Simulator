@@ -26,6 +26,9 @@ public class TopLevelGUI extends JFrame{
     private ArrayList<Node> nodeArray;
     private PDAVersionGUI pdaTypeGUI;
 
+    private Object nodePressed;
+    private mxCell cellReleased;
+
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
         graph = new mxGraph();
@@ -126,8 +129,8 @@ public class TopLevelGUI extends JFrame{
 
         //This handles node creation handlers.
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
-            Object nodePressed;
             mxCell cellPressed;
+
             public void mousePressed(MouseEvent e) {
                 nodePressed = graphComponent.getCellAt(e.getX(), e.getY());
                 //Left click (maybe not needed)
@@ -165,19 +168,19 @@ public class TopLevelGUI extends JFrame{
             }
 
             public void mouseReleased(MouseEvent e) {
-                mxCell cell = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+                cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    if (cell != null && cell.isVertex() && e.getClickCount() == 2) {
-                        TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.getValue().toString(), cell.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                    if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
+                        TransitionRuleGUI transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cell);
+                        //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     }
-                    else if (cell != null && cell.isVertex() && !cellPressed.getValue().equals(cell.getValue())) {
-                        TransitionRuleGUI transRule = new TransitionRuleGUI(cellPressed.getValue().toString(), cell.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                    else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
+                        TransitionRuleGUI transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cell);
+//                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
                     }
                 }
             }
@@ -236,6 +239,17 @@ public class TopLevelGUI extends JFrame{
         return nodeArray;
     }
 
+    public Object getNodePressed() {
+        return nodePressed;
+    }
+
+    public mxCell getCellReleased() {
+        return cellReleased;
+    }
+
+    public mxGraph getGraph() {
+        return graph;
+    }
     public TopLevelGUI getTopLevelGUI() {
         return this;
     }

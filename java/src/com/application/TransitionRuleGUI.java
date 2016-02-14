@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by Cheeeky on 13/02/2016.
@@ -16,6 +17,7 @@ public class TransitionRuleGUI extends JFrame {
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
+    private TopLevelGUI topLevelGUI;
 
     private JPanel centerPanel;
     private JLabel inputLabel;
@@ -33,11 +35,14 @@ public class TransitionRuleGUI extends JFrame {
 
     private JButton okButton;
 
-    public TransitionRuleGUI(String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
+    public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
         super("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
         this.stackArray=stackArray;
         this.inputArray=inputArray;
+        this.topLevelGUI=topLevelGUI;
         createTransitionGUI();
+        toFront();
+        requestFocus();
         setVisible(true);
         setResizable(false);
         pack();
@@ -67,7 +72,7 @@ public class TransitionRuleGUI extends JFrame {
                     s = "push("+s+")";
                     pushOperation.add(s);
                 }
-                String s = (String)JOptionPane.showInputDialog(null,"", "Select push operation", JOptionPane.PLAIN_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
+                String s = (String)JOptionPane.showInputDialog(null,"", "Select push operation", JOptionPane.QUESTION_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
 
                 if ((s != null) && (s.length() > 0)) {
                     pushButton.setText(s);
@@ -99,7 +104,9 @@ public class TransitionRuleGUI extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //addEdge(graph)
+                addEdge(topLevelGUI.getGraph(), "{"+inputComboBox.getSelectedItem().toString()+", "+stackComboBox.getSelectedItem().toString()+", "+getSelectedButtonText(group)+"}");
+                dispose();
+
             }
         });
         add(centerPanel, BorderLayout.NORTH);
@@ -107,7 +114,23 @@ public class TransitionRuleGUI extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void addEdge(mxGraph graph) {
+    public void addEdge(mxGraph graph, String transRule) {
+        Object parent = graph.getDefaultParent();
+        graph.insertEdge(parent, null, transRule, topLevelGUI.getNodePressed(), (Object) topLevelGUI.getCellReleased());
+        graph.setCellsBendable(false);
+        graph.setCellsDisconnectable(false);
+        graph.setEdgeLabelsMovable(false);
+    }
 
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
     }
 }
