@@ -1,5 +1,8 @@
 package com.application;
 
+import com.mxgraph.layout.mxEdgeLabelLayout;
+import com.mxgraph.layout.mxIGraphLayout;
+import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.handler.mxConnectionHandler;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
@@ -62,7 +65,15 @@ public class TopLevelGUI extends JFrame{
         menuNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
+                if (graph.getChildVertices(graph.getDefaultParent()) != null) {
+                    int reply = JOptionPane.showConfirmDialog(null, "Creating a new PDA will clear the existing.", "Warning", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
+                        nodeArray.clear();
+                        edgeArray.clear();
+                        pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
+                    }
+                }
             }
         });
 
@@ -101,6 +112,9 @@ public class TopLevelGUI extends JFrame{
 //        }
 
         parent = graph.getDefaultParent();
+        mxIGraphLayout layout = new mxParallelEdgeLayout(graph);
+        layout.execute(parent);
+
         //Object a=createNode(20,20, "a", false);
         //Object b=createNode(240,150, "b", true);
         //addEdge(a, b, "temp trans rule");
