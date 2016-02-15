@@ -12,7 +12,7 @@ import java.util.Enumeration;
 /**
  * Created by Cheeeky on 13/02/2016.
  */
-public class TransitionRuleGUI extends JFrame {
+public class TransitionRuleGUI extends JDialog {
 
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
@@ -37,18 +37,19 @@ public class TransitionRuleGUI extends JFrame {
     private JButton okButton;
 
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
-        super("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
+//        super("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
+        setTitle("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
         this.stackArray=stackArray;
         this.inputArray=inputArray;
         this.topLevelGUI=topLevelGUI;
         edgeArray = topLevelGUI.getEdgeArray();
         createTransitionGUI();
-        toFront();
-        requestFocus();
-        setVisible(true);
-        setResizable(false);
         pack();
+        setModal(true);
+        setResizable(false);
         setLocationRelativeTo(null);
+        setVisible(true);
+
     }
 
     public void createTransitionGUI() {
@@ -112,7 +113,7 @@ public class TransitionRuleGUI extends JFrame {
                 for (Node node: topLevelGUI.getNodeArray()) {
                     Node fromNode = null;
                     Node toNode = null;
-                    if (node.toString().equals(topLevelGUI.getNodePressed().getValue().toString())) {
+                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                         fromNode = node;
                     }
                     if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
@@ -132,7 +133,7 @@ public class TransitionRuleGUI extends JFrame {
 
     public void addEdge(mxGraph graph, String transRule) {
         Object parent = graph.getDefaultParent();
-        graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getNodePressed(), (Object) topLevelGUI.getCellReleased());
+        graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getCellPressed(), (Object) topLevelGUI.getCellReleased());
         graph.setCellsBendable(false);
         graph.setCellsDisconnectable(false);
         graph.setEdgeLabelsMovable(false);
