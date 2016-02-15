@@ -24,15 +24,18 @@ public class TopLevelGUI extends JFrame{
     private Object parent;
     private mxGraph graph;
     private ArrayList<Node> nodeArray;
+    private ArrayList<Edge> edgeArray;
     private PDAVersionGUI pdaTypeGUI;
+    private TransitionRuleGUI transRule;
 
-    private Object nodePressed;
+    private mxCell nodePressed;
     private mxCell cellReleased;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
         graph = new mxGraph();
         nodeArray = new ArrayList<Node>();
+        edgeArray = new ArrayList<Edge>();
         createGraphPane();
         createMenuBar();
     }
@@ -132,7 +135,7 @@ public class TopLevelGUI extends JFrame{
             mxCell cellPressed;
 
             public void mousePressed(MouseEvent e) {
-                nodePressed = graphComponent.getCellAt(e.getX(), e.getY());
+                nodePressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 //Left click (maybe not needed)
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
@@ -159,6 +162,12 @@ public class TopLevelGUI extends JFrame{
                                         nodeArray.remove(i);
                                     }
                                 }
+                                for (int i = 0; i < edgeArray.size(); i++) {
+                                    if (edgeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
+                                        edgeArray.remove(i);
+                                    }
+                                }
+                                System.out.println("Updated Edge Array: " + edgeArray.toString());
                                 System.out.println("Updated Node Array: " + nodeArray.toString());
                                 repaint();
                             }
@@ -171,13 +180,13 @@ public class TopLevelGUI extends JFrame{
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
-                        TransitionRuleGUI transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     }
                     else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
-                        TransitionRuleGUI transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(),pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE "+pdaTypeGUI.getPdaInputGUI().getInputArray());
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
@@ -239,7 +248,9 @@ public class TopLevelGUI extends JFrame{
         return nodeArray;
     }
 
-    public Object getNodePressed() {
+    public ArrayList<Edge> getEdgeArray() { return edgeArray; }
+
+    public mxCell getNodePressed() {
         return nodePressed;
     }
 
@@ -253,4 +264,5 @@ public class TopLevelGUI extends JFrame{
     public TopLevelGUI getTopLevelGUI() {
         return this;
     }
+
 }

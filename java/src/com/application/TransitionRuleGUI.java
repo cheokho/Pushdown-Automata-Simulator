@@ -17,6 +17,7 @@ public class TransitionRuleGUI extends JFrame {
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
+    private ArrayList<Edge> edgeArray;
     private TopLevelGUI topLevelGUI;
 
     private JPanel centerPanel;
@@ -40,6 +41,7 @@ public class TransitionRuleGUI extends JFrame {
         this.stackArray=stackArray;
         this.inputArray=inputArray;
         this.topLevelGUI=topLevelGUI;
+        edgeArray = topLevelGUI.getEdgeArray();
         createTransitionGUI();
         toFront();
         requestFocus();
@@ -57,6 +59,7 @@ public class TransitionRuleGUI extends JFrame {
         inputLabel = new JLabel("If input symbol=");
         inputComboBox = new JComboBox<>();
         inputComboBox.setModel(new DefaultComboBoxModel(inputArray.toArray()));
+        pushOperation = new ArrayList<String>();
 
         stackLabel=new JLabel("and top of stack symbol=");
         stackComboBox = new JComboBox<>();
@@ -67,7 +70,6 @@ public class TransitionRuleGUI extends JFrame {
         pushButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pushOperation = new ArrayList<String>();
                 for (String s:stackArray) {
                     s = "push("+s+")";
                     pushOperation.add(s);
@@ -104,9 +106,23 @@ public class TransitionRuleGUI extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addEdge(topLevelGUI.getGraph(), "{"+inputComboBox.getSelectedItem().toString()+", "+stackComboBox.getSelectedItem().toString()+", "+getSelectedButtonText(group)+"}");
+                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
+                addEdge(topLevelGUI.getGraph(), edgeRule);
+                Edge edge = null;
+                for (Node node: topLevelGUI.getNodeArray()) {
+                    Node fromNode = null;
+                    Node toNode = null;
+                    if (node.toString().equals(topLevelGUI.getNodePressed().getValue().toString())) {
+                        fromNode = node;
+                    }
+                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+                        toNode = node;
+                    }
+                    edge = new Edge(fromNode, toNode, edgeRule);
+                }
+                edgeArray.add(edge);
+                System.out.println("Updated edge array: " + edgeArray);
                 dispose();
-
             }
         });
         add(centerPanel, BorderLayout.NORTH);
@@ -116,7 +132,7 @@ public class TransitionRuleGUI extends JFrame {
 
     public void addEdge(mxGraph graph, String transRule) {
         Object parent = graph.getDefaultParent();
-        graph.insertEdge(parent, null, transRule, topLevelGUI.getNodePressed(), (Object) topLevelGUI.getCellReleased());
+        graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getNodePressed(), (Object) topLevelGUI.getCellReleased());
         graph.setCellsBendable(false);
         graph.setCellsDisconnectable(false);
         graph.setEdgeLabelsMovable(false);
@@ -133,4 +149,9 @@ public class TransitionRuleGUI extends JFrame {
 
         return null;
     }
+//
+//    public ArrayList<Edge> getEdgeArray() {
+//        return edgeArray;
+//    }
+
 }
