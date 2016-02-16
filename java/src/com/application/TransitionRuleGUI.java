@@ -119,7 +119,6 @@ public class TransitionRuleGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                 addEdge(topLevelGUI.getGraph(), edgeRule);
-                topLevelGUI.getGraphComponent().repaint();
                 Edge edge = null;
                 for (Node node: topLevelGUI.getNodeArray()) {
                     Node fromNode = null;
@@ -131,6 +130,9 @@ public class TransitionRuleGUI extends JDialog {
                         toNode = node;
                     }
                     edge = new Edge(fromNode, toNode, edgeRule);
+                    edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+                    edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+
                 }
                 edgeArray.add(edge);
                 System.out.println("Updated edge array: " + edgeArray);
