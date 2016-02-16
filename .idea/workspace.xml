@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/src/com/application/Stack.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" afterPath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Edge.java" afterPath="$PROJECT_DIR$/java/src/com/application/Edge.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI$1.class" afterPath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
@@ -88,12 +85,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PDAInGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PDAInGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63820225">
-              <caret line="299" column="74" selection-start-line="299" selection-start-column="74" selection-end-line="299" selection-end-column="74" />
-              <folding />
+            <state vertical-scroll-proportion="-9.269231">
+              <caret line="301" column="93" selection-start-line="301" selection-start-column="93" selection-end-line="301" selection-end-column="93" />
+              <folding>
+                <element signature="e#13175#13176#0" expanded="true" />
+                <element signature="e#13230#13231#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.3076925">
-              <caret line="250" column="136" selection-start-line="250" selection-start-column="136" selection-end-line="250" selection-end-column="136" />
+            <state vertical-scroll-proportion="0.6179775">
+              <caret line="259" column="135" selection-start-line="259" selection-start-column="135" selection-end-line="259" selection-end-column="135" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3750#3751#0" expanded="true" />
@@ -165,8 +165,8 @@
         <option value="$PROJECT_DIR$/java/src/com/application/Edge.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Stack.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       </list>
     </option>
   </component>
@@ -663,7 +663,7 @@
       <workItem from="1455542245189" duration="6060000" />
       <workItem from="1455548835191" duration="3202000" />
       <workItem from="1455563191764" duration="8107000" />
-      <workItem from="1455632433640" duration="11657000" />
+      <workItem from="1455632433640" duration="13876000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1453755019677</created>
@@ -851,11 +851,17 @@
       <option name="project" value="LOCAL" />
       <updated>1455637643441</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="stack added">
+      <created>1455644129939</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1455644129939</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101993000" />
+    <option name="totallyTimeSpent" value="104212000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -899,7 +905,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create PDA GUI" />
     <MESSAGE value="sketch PDA gui" />
     <MESSAGE value="update GUI" />
     <MESSAGE value="layout fixes." />
@@ -924,7 +929,8 @@
     <MESSAGE value="transition rule fixes." />
     <MESSAGE value="overlap temp fix." />
     <MESSAGE value="edge style fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="edge style fixes" />
+    <MESSAGE value="stack added" />
+    <option name="LAST_COMMIT_MESSAGE" value="stack added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -957,7 +963,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,7 +1034,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1093,7 +1105,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1173,7 +1188,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1241,7 +1259,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1446,18 +1467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.3076925">
-          <caret line="250" column="136" selection-start-line="250" selection-start-column="136" selection-end-line="250" selection-end-column="136" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3750#3751#0" expanded="true" />
-            <element signature="e#3794#3795#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/Stack.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1479,9 +1488,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63820225">
-          <caret line="299" column="74" selection-start-line="299" selection-start-column="74" selection-end-line="299" selection-end-column="74" />
-          <folding />
+        <state vertical-scroll-proportion="-9.269231">
+          <caret line="301" column="93" selection-start-line="301" selection-start-column="93" selection-end-line="301" selection-end-column="93" />
+          <folding>
+            <element signature="e#13175#13176#0" expanded="true" />
+            <element signature="e#13230#13231#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6179775">
+          <caret line="259" column="135" selection-start-line="259" selection-start-column="135" selection-end-line="259" selection-end-column="135" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3750#3751#0" expanded="true" />
+            <element signature="e#3794#3795#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

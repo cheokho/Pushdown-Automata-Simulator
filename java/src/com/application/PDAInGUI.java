@@ -295,10 +295,13 @@ public class PDAInGUI extends JFrame {
                     int y=20;
                     for (int i=0; i<statesArray.size(); i++) {
                         if(!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
-                            if (statesArray.get(i).equals(initStateStr)) {
+                            if (statesArray.get(i).equals(initStateStr) && !acceptStatesArray.contains(statesArray.get(i))) {
                                 topLevelGUI.createNode(x, y, statesArray.get(i), false, true);
-                                System.out.println("Init state entered.");
-                            } else if (acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)) {
+                            }
+                            else if (statesArray.get(i).equals(initStateStr) && acceptStatesArray.contains(statesArray.get(i))) {
+                                topLevelGUI.createNode(x, y, statesArray.get(i), true, true);
+                            }
+                            else if (acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)) {
                                 topLevelGUI.createNode(x, y, statesArray.get(i), true, false);
                             } else if (!acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)){
                                 topLevelGUI.createNode(x, y, statesArray.get(i), false, false);

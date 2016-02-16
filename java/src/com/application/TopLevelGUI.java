@@ -243,17 +243,24 @@ public class TopLevelGUI extends JFrame{
 
     public Object createNode(int x,int y, String state, boolean isAccepting, boolean isInitial) {
         graph.getModel().beginUpdate();
-        Object node;
+        Object node=null;
         Node newNode;
         try
         {
-            if (isInitial) {
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter; fillColor=green");
+            if (isInitial && !isAccepting) {
+                System.out.println("init - not accept");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse;perimeter=ellipsePerimeter;fillColor=green");
             }
-            if (isAccepting) {
+            else if (isAccepting && !isInitial) {
+                System.out.println("not init - accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse; perimeter=ellipsePerimeter");
             }
-            else {
+            else if (isAccepting && isInitial) {
+                System.out.println("init - accept");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse;perimeter=ellipsePerimeter;fillColor=green");
+            }
+            else if (!isInitial && !isAccepting) {
+                System.out.println("not init - not accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
             newNode = new Node(node, state);
