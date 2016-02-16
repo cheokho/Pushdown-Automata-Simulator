@@ -1,6 +1,8 @@
 package com.application;
 
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.layout.mxEdgeLabelLayout;
+import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
@@ -26,6 +28,7 @@ public class TopLevelGUI extends JFrame{
 
     private Object parent;
     private mxGraph graph;
+    private mxGraphComponent graphComponent;
     private ArrayList<Node> nodeArray;
     private ArrayList<Edge> edgeArray;
     private PDAVersionGUI pdaTypeGUI;
@@ -87,6 +90,10 @@ public class TopLevelGUI extends JFrame{
 
     }
 
+    public mxGraphComponent getGraphComponent() {
+        return graphComponent;
+    }
+
     public void createGraphPane(){
 //        Edge edge = new Edge(graph);
 //        try
@@ -112,14 +119,14 @@ public class TopLevelGUI extends JFrame{
 //        }
 
         parent = graph.getDefaultParent();
-        mxIGraphLayout layout = new mxParallelEdgeLayout(graph);
-        layout.execute(parent);
+//        mxIGraphLayout layout = new mxParallelEdgeLayout(graph, 30);
+//        layout.execute(parent);
 
         //Object a=createNode(20,20, "a", false);
         //Object b=createNode(240,150, "b", true);
         //addEdge(a, b, "temp trans rule");
 
-        mxGraphComponent graphComponent = new mxGraphComponent(graph) {
+        graphComponent = new mxGraphComponent(graph) {
             @Override
             protected mxConnectionHandler createConnectionHandler() {
                 return new mxConnectionHandler(this) {
@@ -219,10 +226,10 @@ public class TopLevelGUI extends JFrame{
         try
         {
             if (isAccepting) {
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse; perimeter=ellipsePerimeter");
             }
             else {
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
             newNode = new Node(node, state);
             nodeArray.add(newNode);

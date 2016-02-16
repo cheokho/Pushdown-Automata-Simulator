@@ -1,6 +1,8 @@
 package com.application;
 
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.layout.mxEdgeLabelLayout;
+import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.util.mxConstants;
@@ -117,6 +119,7 @@ public class TransitionRuleGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                 addEdge(topLevelGUI.getGraph(), edgeRule);
+                topLevelGUI.getGraphComponent().repaint();
                 Edge edge = null;
                 for (Node node: topLevelGUI.getNodeArray()) {
                     Node fromNode = null;
@@ -141,30 +144,36 @@ public class TransitionRuleGUI extends JDialog {
 
     public void addEdge(mxGraph graph, String transRule) {
         graph.getModel().beginUpdate();
-        Object parent = graph.getDefaultParent();
+        try {
+            Object parent = graph.getDefaultParent();
 
-        mxIGraphLayout layout = new mxParallelEdgeLayout(graph);
-        layout.execute(parent);
+            mxIGraphLayout layout = new mxParallelEdgeLayout(graph, 30);
+            layout.execute(parent);
 
-        Map<String, Object> edgeStyle = new HashMap<String, Object>();
-        edgeStyle.put(mxConstants.STYLE_SHAPE,    mxConstants.SHAPE_CONNECTOR);
-        edgeStyle.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
-        edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#000000");
-        //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");
-        //edgeStyle.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
+            Map<String, Object> edgeStyle = new HashMap<String, Object>();
+            edgeStyle.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
+            edgeStyle.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+            edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+            edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+            edgeStyle.put(mxConstants.STYLE_ROUNDED, true);
+            edgeStyle.put(mxConstants.STYLE_EDGE, mxConstants.EDGESTYLE_SIDETOSIDE);
+            //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");
+            //edgeStyle.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
 
-        mxStylesheet stylesheet = new mxStylesheet();
-        stylesheet.setDefaultEdgeStyle(edgeStyle);
-        graph.setStylesheet(stylesheet);
+            mxStylesheet stylesheet = new mxStylesheet();
+            stylesheet.setDefaultEdgeStyle(edgeStyle);
+            graph.setStylesheet(stylesheet);
 
 
-        graph.setCellsBendable(false);
-        graph.setCellsDisconnectable(false);
-        graph.setEdgeLabelsMovable(false);
+            graph.setCellsBendable(true);
+            graph.setCellsDisconnectable(false);
+            graph.setEdgeLabelsMovable(false);
 
-        graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getCellPressed(), (Object) topLevelGUI.getCellReleased());
-        graph.getModel().endUpdate();
+            graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getCellPressed(), (Object) topLevelGUI.getCellReleased());
+        }
+        finally {
+            graph.getModel().endUpdate();
+        }
     }
 
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
