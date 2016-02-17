@@ -44,7 +44,6 @@ public class TransitionRuleGUI extends JDialog {
     private JButton okButton;
 
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
-//        super("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
         setTitle("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
         this.stackArray=stackArray;
         this.inputArray=inputArray;
@@ -120,6 +119,8 @@ public class TransitionRuleGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
                     JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
+                    JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                 } else {
                     String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                     addEdge(topLevelGUI.getGraph(), edgeRule);
@@ -133,7 +134,9 @@ public class TransitionRuleGUI extends JDialog {
                         if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
                             toNode = node;
                         }
-                        edge = new Edge(fromNode, toNode, edgeRule);
+                        edge = new Edge(edgeRule);
+                        edge.setFromNode(fromNode);
+                        edge.setToNode(toNode);
                         edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
                         edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
 

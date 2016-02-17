@@ -14,9 +14,7 @@ public class Edge {
     String edgeTopStack;
     String transitionOperation;
 
-    public Edge(Node fromNode, Node toNode, String edgeRule) {
-        this.fromNode=fromNode;
-        this.toNode=toNode;
+    public Edge(String edgeRule) {
         this.edgeRule=edgeRule;
     }
 
@@ -40,5 +38,17 @@ public class Edge {
     }
     public String getTransitionOperation() {
         return transitionOperation;
+    }
+    public void setFromNode(Node fromNode) {
+        this.fromNode=fromNode;
+    }
+    public Node getFromNode() {
+        return fromNode;
+    }
+    public void setToNode(Node toNode) {
+        this.toNode=toNode;
+    }
+    public Node getToNode() {
+        return toNode;
     }
 }

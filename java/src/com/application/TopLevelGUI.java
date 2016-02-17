@@ -198,6 +198,12 @@ public class TopLevelGUI extends JFrame{
                                 graph.removeCells(new Object[]{cellPressed});
                                 for (int i = 0; i < nodeArray.size(); i++) {
                                     if (nodeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
+                                        for (int x=0; x < edgeArray.size(); x++) {
+                                            System.out.println("Node Array: "+nodeArray.get(i)+" Edge Array; "+edgeArray.get(x).getFromNode() +" "+edgeArray.get(x).getToNode());
+                                            if (nodeArray.get(i).equals(edgeArray.get(x).getFromNode()) || nodeArray.get(i).equals(edgeArray.get(x).getToNode()))  {
+                                                edgeArray.remove(x);
+                                            }
+                                        }
                                         nodeArray.remove(i);
                                     }
                                 }
