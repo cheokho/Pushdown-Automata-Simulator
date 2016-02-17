@@ -14,10 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Cheeeky on 13/02/2016.
@@ -79,19 +76,23 @@ public class TransitionRuleGUI extends JDialog {
         transitionLabel=new JLabel("then perform the following operation:");
         pushButton = new JRadioButton("push(__)");
         pushButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (String s:stackArray) {
-                    s = "push("+s+")";
-                    pushOperation.add(s);
-                }
-                String s = (String)JOptionPane.showInputDialog(null,"", "Select push operation", JOptionPane.QUESTION_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    for (String s:stackArray) {
+                        if (!s.equals("$")) {
+                            s = "push(" + s + ")";
+                            pushOperation.add(s);
+                        }
+                    }
+                    String s = (String)JOptionPane.showInputDialog(null,"", "Select push operation", JOptionPane.QUESTION_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
 
-                if ((s != null) && (s.length() > 0)) {
-                    pushButton.setText(s);
+                    if ((s != null) && (s.length() > 0)) {
+                        pushButton.setText(s);
+
+                    }
+                    pushOperation.clear();
                 }
-            }
-        });
+            });
 
         popButton = new JRadioButton("pop");
         nothingButton = new JRadioButton("ε (do nothing)");
@@ -117,26 +118,30 @@ public class TransitionRuleGUI extends JDialog {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
-                addEdge(topLevelGUI.getGraph(), edgeRule);
-                Edge edge = null;
-                for (Node node: topLevelGUI.getNodeArray()) {
-                    Node fromNode = null;
-                    Node toNode = null;
-                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                        fromNode = node;
-                    }
-                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
-                        toNode = node;
-                    }
-                    edge = new Edge(fromNode, toNode, edgeRule);
-                    edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-                    edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+                if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
+                    JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
+                    addEdge(topLevelGUI.getGraph(), edgeRule);
+                    Edge edge = null;
+                    for (Node node : topLevelGUI.getNodeArray()) {
+                        Node fromNode = null;
+                        Node toNode = null;
+                        if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+                            fromNode = node;
+                        }
+                        if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+                            toNode = node;
+                        }
+                        edge = new Edge(fromNode, toNode, edgeRule);
+                        edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+                        edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
 
+                    }
+                    edgeArray.add(edge);
+                    System.out.println("Updated edge array: " + edgeArray);
+                    dispose();
                 }
-                edgeArray.add(edge);
-                System.out.println("Updated edge array: " + edgeArray);
-                dispose();
             }
         });
         add(centerPanel, BorderLayout.NORTH);

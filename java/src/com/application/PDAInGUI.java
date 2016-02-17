@@ -239,6 +239,7 @@ public class PDAInGUI extends JFrame {
             public void focusLost(FocusEvent e) {
                 stackString = stackField.getText();
                 stackArray= new ArrayList(Arrays.asList(stackString.split("\\s+")));
+                stackArray.add("$");
                 System.out.println("Stack Array: "+stackArray);
             }
         });
