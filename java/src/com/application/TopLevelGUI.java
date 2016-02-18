@@ -55,6 +55,7 @@ public class TopLevelGUI extends JFrame{
 
         JMenu file = new JMenu("File");
         JMenuItem menuNew = new JMenuItem("New");
+        JMenuItem menuRun = new JMenuItem("Run Simulation");
         JMenuItem menuOpen = new JMenuItem("Open");
         JMenuItem menuSave = new JMenuItem("Save");
         JMenuItem menuClose = new JMenuItem("Close");
@@ -64,7 +65,7 @@ public class TopLevelGUI extends JFrame{
                 System.exit(0);
             }
         });
-        file.add(menuNew); file.add(menuOpen); file.add(menuSave); file.add(menuClose);
+        file.add(menuNew); file.add(menuRun); file.add(menuOpen); file.add(menuSave); file.add(menuClose);
 
         menuNew.addActionListener(new ActionListener() {
             @Override
@@ -78,6 +79,13 @@ public class TopLevelGUI extends JFrame{
                         pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
                     }
                 }
+            }
+        });
+
+        menuRun.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 

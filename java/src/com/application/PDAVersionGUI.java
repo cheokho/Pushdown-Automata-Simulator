@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by CheokHo on 26/01/2016.
  */
-public class PDAVersionGUI extends JFrame {
+public class PDAVersionGUI extends JDialog {
 
     private JLabel label;
     private JRadioButton ndpda;
@@ -23,14 +23,15 @@ public class PDAVersionGUI extends JFrame {
     private TopLevelGUI topLevelGUI;
 
     public PDAVersionGUI(TopLevelGUI topLevelGUI) {
-        super("Create new PDA");
+        setTitle("Create new PDA");
         this.topLevelGUI=topLevelGUI;
         setLayout(new BorderLayout());
         createpdaType();
+        setModal(true);
         setSize(300, 150);
         setResizable(false);
-        setVisible(true);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void createpdaType() {

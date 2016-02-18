@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by CheokHo on 26/01/2016.
  */
-public class PDAInGUI extends JFrame {
+public class PDAInGUI extends JDialog {
 
     private JPanel inputPDA; //card 1
     private JPanel defPDA; //card 2
@@ -65,14 +65,15 @@ public class PDAInGUI extends JFrame {
 
 
     public PDAInGUI(boolean isNdpda, TopLevelGUI topLevelGUI) {
-        super("Input PDA");
+        setTitle("Input PDA");
         this.isNdpda=isNdpda;
         this.topLevelGUI=topLevelGUI;
         createpdaInput();
-        setSize(500, 250);
-        setVisible(true);
         pack();
+        setModal(true);
+        setMinimumSize(new Dimension(500, 300));
         setLocationRelativeTo(null);
+        setVisible(true);
 
     }
 
