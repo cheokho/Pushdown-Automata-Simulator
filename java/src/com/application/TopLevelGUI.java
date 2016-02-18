@@ -185,7 +185,7 @@ public class TopLevelGUI extends JFrame{
                 if (SwingUtilities.isRightMouseButton(e)) {
                     cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                     if (cellPressed != null) {
-                        System.out.println("Right Click Cell Value: " + cellPressed.getValue().toString());
+                        //System.out.println("Right Click Cell Value: " + cellPressed.getValue().toString());
                         JPopupMenu popup = new JPopupMenu();
                         JMenuItem delete = new JMenuItem("Delete");
                         popup.add(delete);
@@ -199,7 +199,6 @@ public class TopLevelGUI extends JFrame{
                                 for (int i = 0; i < nodeArray.size(); i++) {
                                     if (nodeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
                                         for (int x=0; x < edgeArray.size(); x++) {
-                                            System.out.println("Node Array: "+nodeArray.get(i)+" Edge Array; "+edgeArray.get(x).getFromNode() +" "+edgeArray.get(x).getToNode());
                                             if (nodeArray.get(i).equals(edgeArray.get(x).getFromNode()) || nodeArray.get(i).equals(edgeArray.get(x).getToNode()))  {
                                                 edgeArray.remove(x);
                                             }

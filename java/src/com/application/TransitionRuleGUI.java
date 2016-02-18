@@ -125,23 +125,25 @@ public class TransitionRuleGUI extends JDialog {
                     String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                     addEdge(topLevelGUI.getGraph(), edgeRule);
                     Edge edge = null;
+                    Node fromNode = null;
+                    Node toNode = null;
                     for (Node node : topLevelGUI.getNodeArray()) {
-                        Node fromNode = null;
-                        Node toNode = null;
                         if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                             fromNode = node;
                         }
                         if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
                             toNode = node;
                         }
-                        edge = new Edge(edgeRule);
-                        edge.setFromNode(fromNode);
-                        edge.setToNode(toNode);
-                        edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-                        edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
 
                     }
+                    edge = new Edge(edgeRule);
+                    edge.setFromNode(fromNode);
+                    edge.setToNode(toNode);
+                    edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+                    edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+
                     edgeArray.add(edge);
+                    System.out.println("Edge from: "+edge.getFromNode() +" Edge to: "+edge.getToNode());
                     System.out.println("Updated edge array: " + edgeArray);
                     dispose();
                 }
