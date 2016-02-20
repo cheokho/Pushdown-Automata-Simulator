@@ -1,6 +1,7 @@
 package com.application;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -16,7 +17,7 @@ public class Main
     {
         TopLevelGUI frame = new TopLevelGUI();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setMinimumSize(new Dimension(850, 500));
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }

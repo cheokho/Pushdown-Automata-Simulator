@@ -10,6 +10,7 @@ import com.mxgraph.view.mxGraph;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -17,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -46,6 +48,7 @@ public class TopLevelGUI extends JFrame{
         stackArray.add("$");
         createGraphPane();
         createStackGUI(stackArray);
+        createConsoleGUI();
         createMenuBar();
     }
 
@@ -128,9 +131,19 @@ public class TopLevelGUI extends JFrame{
         add(stackPanel, BorderLayout.EAST);
     }
 
+    //http://www.codejava.net/java-se/swing/redirect-standard-output-streams-to-jtextarea
     public void createConsoleGUI() {
         JPanel consolePanel = new JPanel();
-        JTextArea consoleArea = new JTextArea();
+        JLabel title = new JLabel("Console:");
+        JTextArea consoleArea = new JTextArea(8, 70);
+        JScrollPane scrollPane = new JScrollPane(consoleArea);
+        consolePanel.add(title, BorderLayout.NORTH);
+        consolePanel.add(scrollPane, BorderLayout.CENTER);
+        add(consolePanel, BorderLayout.SOUTH);
+        PrintStream printStream = new PrintStream(new CustomOutput(consoleArea));
+        PrintStream standardOut = System.out;
+        System.setOut(printStream);
+        System.setErr(printStream);
     }
 
     public void createGraphPane(){
