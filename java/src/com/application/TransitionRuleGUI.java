@@ -25,6 +25,7 @@ public class TransitionRuleGUI extends JDialog {
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
     private ArrayList<Edge> edgeArray;
+    private ArrayList<Node> nodeArray;
     private TopLevelGUI topLevelGUI;
 
     private JPanel centerPanel;
@@ -49,6 +50,7 @@ public class TransitionRuleGUI extends JDialog {
         this.inputArray=inputArray;
         this.topLevelGUI=topLevelGUI;
         edgeArray = topLevelGUI.getEdgeArray();
+        nodeArray = topLevelGUI.getNodeArray();
         createTransitionGUI();
         pack();
         setModal(true);

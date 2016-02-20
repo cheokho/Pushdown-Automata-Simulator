@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -136,6 +137,7 @@ public class TopLevelGUI extends JFrame{
         JPanel consolePanel = new JPanel();
         JLabel title = new JLabel("Console:");
         JTextArea consoleArea = new JTextArea(8, 70);
+        consoleArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(consoleArea);
         consolePanel.add(title, BorderLayout.NORTH);
         consolePanel.add(scrollPane, BorderLayout.CENTER);
@@ -145,6 +147,7 @@ public class TopLevelGUI extends JFrame{
         System.setOut(printStream);
         System.setErr(printStream);
     }
+
 
     public void createGraphPane(){
 //        Edge edge = new Edge(graph);
@@ -257,6 +260,9 @@ public class TopLevelGUI extends JFrame{
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
                     if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
+                        if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
+
+                        }
                         transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
@@ -280,19 +286,19 @@ public class TopLevelGUI extends JFrame{
         try
         {
             if (isInitial && !isAccepting) {
-                System.out.println("init - not accept");
+                //System.out.println("init - not accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse;perimeter=ellipsePerimeter;fillColor=green");
             }
             else if (isAccepting && !isInitial) {
-                System.out.println("not init - accept");
+                //System.out.println("not init - accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse; perimeter=ellipsePerimeter");
             }
             else if (isAccepting && isInitial) {
-                System.out.println("init - accept");
+                //System.out.println("init - accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse;perimeter=ellipsePerimeter;fillColor=green");
             }
             else if (!isInitial && !isAccepting) {
-                System.out.println("not init - not accept");
+                //System.out.println("not init - not accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
             newNode = new Node(node, state);

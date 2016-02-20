@@ -9,6 +9,7 @@ public class Node {
 
     Object node;
     String name;
+    String input;
 
     public Node(Object node, String name) {
         this.node=node;
@@ -21,6 +22,14 @@ public class Node {
 
     public Object getNode() {
         return node;
+    }
+
+    public void setOutgoingInput(String input) {
+        this.input=input;
+    }
+
+    public String getOutgoingInput() {
+        return input;
     }
 }
 
