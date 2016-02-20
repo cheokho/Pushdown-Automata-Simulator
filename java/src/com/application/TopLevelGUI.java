@@ -7,6 +7,7 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.view.mxGraph;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -85,7 +86,13 @@ public class TopLevelGUI extends JFrame{
         menuRun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (pdaTypeGUI == null) {
+                    JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                    runSimGUI.showRunSimGUI();
+                    System.out.println(runSimGUI.getInput());
+                }
             }
         });
 
@@ -119,6 +126,11 @@ public class TopLevelGUI extends JFrame{
         scrollPane.setPreferredSize(new Dimension(150, 530));
         stackPanel.add(scrollPane);
         add(stackPanel, BorderLayout.EAST);
+    }
+
+    public void createConsoleGUI() {
+        JPanel consolePanel = new JPanel();
+        JTextArea consoleArea = new JTextArea();
     }
 
     public void createGraphPane(){
