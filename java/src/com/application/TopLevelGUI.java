@@ -267,7 +267,10 @@ public class TopLevelGUI extends JFrame{
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
                         for (Node n: nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
-                                n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                if (transRule.getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                }
                             }
                         }
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
@@ -279,12 +282,15 @@ public class TopLevelGUI extends JFrame{
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
                         for (Node n: nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
-                                n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                if (transRule.getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                }
                             }
                         }
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
                     }
-                    System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs());
+                    //System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs()+"    "+nodeArray.get(0).getOutGoingTopStacks());
                 }
             }
         });

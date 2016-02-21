@@ -21,6 +21,7 @@ import java.util.*;
  */
 public class TransitionRuleGUI extends JDialog {
 
+    private AllComboArray allComboArray;
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
@@ -53,6 +54,7 @@ public class TransitionRuleGUI extends JDialog {
         this.topLevelGUI=topLevelGUI;
         edgeArray = topLevelGUI.getEdgeArray();
         nodeArray = topLevelGUI.getNodeArray();
+        allComboArray = new AllComboArray();
         createTransitionGUI();
         pack();
         setModal(true);
@@ -117,6 +119,9 @@ public class TransitionRuleGUI extends JDialog {
         buttonPanel.setLayout(new FlowLayout());
         okButton = new JButton("OK");
         buttonPanel.add(okButton);
+        ArrayList<String> stackInputCombo = allComboArray.getAllCombinations(inputArray, stackArray);
+        System.out.println("Stack Input combinations: "+stackInputCombo);
+
         //create Edge object here with transition rule defined.
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -146,7 +151,7 @@ public class TransitionRuleGUI extends JDialog {
                     edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
 
                     edgeArray.add(edge);
-                    System.out.println("Edge from: "+edge.getFromNode() +" Edge to: "+edge.getToNode());
+                    System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
                     System.out.println("Updated edge array: " + edgeArray);
                     dispose();
                 }
