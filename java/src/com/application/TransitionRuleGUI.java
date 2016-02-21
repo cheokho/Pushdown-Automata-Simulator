@@ -44,6 +44,8 @@ public class TransitionRuleGUI extends JDialog {
 
     private JButton okButton;
 
+    private Edge edge = null;
+
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
         setTitle("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
         this.stackArray=stackArray;
@@ -126,7 +128,6 @@ public class TransitionRuleGUI extends JDialog {
                 } else {
                     String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                     addEdge(topLevelGUI.getGraph(), edgeRule);
-                    Edge edge = null;
                     Node fromNode = null;
                     Node toNode = null;
                     for (Node node : topLevelGUI.getNodeArray()) {
@@ -200,6 +201,10 @@ public class TransitionRuleGUI extends JDialog {
         }
 
         return null;
+    }
+
+    public Edge getEdge() {
+        return edge;
     }
 //
 //    public ArrayList<Edge> getEdgeArray() {

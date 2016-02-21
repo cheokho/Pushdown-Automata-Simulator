@@ -71,7 +71,7 @@ public class PDAInGUI extends JDialog {
         createpdaInput();
         pack();
         setModal(true);
-        setMinimumSize(new Dimension(500, 300));
+        setMinimumSize(new Dimension(500, 500));
         setLocationRelativeTo(null);
         setVisible(true);
 
