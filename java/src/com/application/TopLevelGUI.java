@@ -244,6 +244,21 @@ public class TopLevelGUI extends JFrame{
                                 }
                                 for (int i = 0; i < edgeArray.size(); i++) {
                                     if (edgeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
+                                        for (Node n: nodeArray) {
+                                                for (String s: n.getOutGoingTopStacks()) {
+                                                    if (s.equals(edgeArray.get(i).getEdgeTopStack())) {
+                                                        n.getOutGoingTopStacks().remove(s);
+                                                        break;
+                                                    }
+                                                }
+                                                for (String s1: n.getOutgoingInputs()) {
+                                                    if (s1.equals(edgeArray.get(i).getEdgeTopInput())) {
+                                                        n.getOutgoingInputs().remove(s1);
+                                                        break;
+                                                    }
+                                                }
+                                                System.out.println("Node inputs: "+n.getOutgoingInputs()+"  Node stacks: "+n.getOutGoingTopStacks());
+                                        }
                                         edgeArray.remove(i);
                                     }
                                 }
@@ -287,6 +302,8 @@ public class TopLevelGUI extends JFrame{
                                     n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
                                 }
                             }
+//                            System.out.println("LOL"+n.getOutgoingInputs());
+//                            System.out.println("LOL1"+n.getOutGoingTopStacks());
                         }
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
                     }

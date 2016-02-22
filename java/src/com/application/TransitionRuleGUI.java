@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -81,23 +82,23 @@ public class TransitionRuleGUI extends JDialog {
         transitionLabel=new JLabel("then perform the following operation:");
         pushButton = new JRadioButton("push(__)");
         pushButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    for (String s:stackArray) {
-                        if (!s.equals("$")) {
-                            s = "push(" + s + ")";
-                            pushOperation.add(s);
-                        }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String s : stackArray) {
+                    if (!s.equals("$")) {
+                        s = "push(" + s + ")";
+                        pushOperation.add(s);
                     }
-                    String s = (String)JOptionPane.showInputDialog(null,"", "Select push operation", JOptionPane.QUESTION_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
-
-                    if ((s != null) && (s.length() > 0)) {
-                        pushButton.setText(s);
-
-                    }
-                    pushOperation.clear();
                 }
-            });
+                String s = (String) JOptionPane.showInputDialog(null, "", "Select push operation", JOptionPane.QUESTION_MESSAGE, null, pushOperation.toArray(), pushOperation.get(0));
+
+                if ((s != null) && (s.length() > 0)) {
+                    pushButton.setText(s);
+
+                }
+                pushOperation.clear();
+            }
+        });
 
         popButton = new JRadioButton("pop");
         nothingButton = new JRadioButton("ε (do nothing)");
@@ -120,7 +121,7 @@ public class TransitionRuleGUI extends JDialog {
         okButton = new JButton("OK");
         buttonPanel.add(okButton);
         ArrayList<String> stackInputCombo = allComboArray.getAllCombinations(inputArray, stackArray);
-        System.out.println("Stack Input combinations: "+stackInputCombo);
+        System.out.println("Stack Input combinations: " + stackInputCombo);
 
         //create Edge object here with transition rule defined.
         okButton.addActionListener(new ActionListener() {
@@ -131,6 +132,17 @@ public class TransitionRuleGUI extends JDialog {
                 } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
                     JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                 } else {
+                    ArrayList<String> nodeOutgoingCombo=null;
+                    ArrayList<String> nodeOutgoingStacks=null;
+                    ArrayList<String> nodeOutgoingInputs=null;
+                    for (Node n: topLevelGUI.getNodeArray()) {
+                        if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+                            nodeOutgoingInputs = n.getOutgoingInputs();
+                            nodeOutgoingStacks = n.getOutGoingTopStacks();
+                            nodeOutgoingCombo = allComboArray.getAllCombinations(nodeOutgoingInputs, nodeOutgoingStacks);
+                            System.out.println("Node outgoing combo: " +nodeOutgoingCombo);
+                        }
+                    }
                     String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
                     addEdge(topLevelGUI.getGraph(), edgeRule);
                     Node fromNode = null;
