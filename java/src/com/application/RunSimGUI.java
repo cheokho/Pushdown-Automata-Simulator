@@ -30,8 +30,6 @@ public class RunSimGUI {
             if (!input.matches("[" + restrictor + "]*")) {
                 JOptionPane.showMessageDialog(component, "Your input: \"" + input + "\" must only use characters from your alphabet: " + inputArray.toString() + ".\nPlease try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 showRunSimGUI();
-            } else {
-                System.out.println("Input matched alphabet... run simulation.");
             }
         }
         return input;

@@ -97,9 +97,9 @@ public class TopLevelGUI extends JFrame{
                     testRunnable=true;
                 }
                 ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
-                System.out.println("All input stack combo: "+allInputStackCombo);
+                //System.out.println("All input stack combo: "+allInputStackCombo);
                 for (Node n: nodeArray) {
-                    System.out.println("Current input-stack combo: "+n.getOutGoingCombo());
+                    //System.out.println("Current input-stack combo: "+n.getOutGoingCombo());
                     if(n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())){
                         testRunnable=true;
                         break;
@@ -111,7 +111,15 @@ public class TopLevelGUI extends JFrame{
                 else if (testRunnable==true){
                     RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                     runSimGUI.showRunSimGUI();
-                    System.out.println(runSimGUI.getInput());
+                    System.out.println("Running simulation on: "+runSimGUI.getInput());
+
+                    /**TODO - Get initial state for starting point.
+                            - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
+                            - When matched, get 'toNode' value of specified edge and specify that as node to move to.
+                            - Delete leftmost input string now it is consumed and update stack according to edge transition rule.
+                            - When input string is empty algorithm has finished, determine if the state we are on is accepting.
+                     **/
+
                 }
                 else {
                     JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.", "Error", JOptionPane.ERROR_MESSAGE);
