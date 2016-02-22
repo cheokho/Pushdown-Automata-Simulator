@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Node.java" afterPath="$PROJECT_DIR$/java/src/com/application/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -71,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransitionRuleGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TransitionRuleGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="142" column="67" selection-start-line="142" selection-start-column="67" selection-end-line="142" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.24683544">
+              <caret line="196" column="163" selection-start-line="196" selection-start-column="163" selection-end-line="196" selection-end-column="163" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6455696">
-              <caret line="263" column="62" selection-start-line="263" selection-start-column="62" selection-end-line="263" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="287" column="72" selection-start-line="287" selection-start-column="72" selection-end-line="287" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#18806#18807#0" expanded="true" />
@@ -193,8 +192,8 @@
         <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/AllComboArray.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Node.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
       </list>
     </option>
   </component>
@@ -699,7 +698,7 @@
       <workItem from="1455811926492" duration="3747000" />
       <workItem from="1456069998977" duration="150000" />
       <workItem from="1456075529181" duration="7898000" />
-      <workItem from="1456146465408" duration="12022000" />
+      <workItem from="1456146465408" duration="13006000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1453755019677</created>
@@ -947,11 +946,17 @@
       <option name="project" value="LOCAL" />
       <updated>1456153421325</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="more fixes">
+      <created>1456159314180</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1456159314180</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134799000" />
+    <option name="totallyTimeSpent" value="135783000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -995,7 +1000,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Node creation with accepting states configured." />
     <MESSAGE value="Node backend implementation updated." />
     <MESSAGE value="Edge creation handlers implemented." />
     <MESSAGE value="edge stuffs" />
@@ -1020,7 +1024,8 @@
     <MESSAGE value="updated node backend" />
     <MESSAGE value="updated node backend v2" />
     <MESSAGE value="fixed some shit" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some shit" />
+    <MESSAGE value="more fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="more fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1572,14 +1577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/AllComboArray.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1604,20 +1601,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="67" selection-start-line="142" selection-start-column="67" selection-end-line="142" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6455696">
-          <caret line="263" column="62" selection-start-line="263" selection-start-column="62" selection-end-line="263" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="287" column="72" selection-start-line="287" selection-start-column="72" selection-end-line="287" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#18806#18807#0" expanded="true" />
@@ -1630,6 +1625,16 @@
             <element signature="e#19110#19111#0" expanded="true" />
             <element signature="e#19152#19153#0" expanded="true" />
             <element signature="e#19179#19180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24683544">
+          <caret line="196" column="163" selection-start-line="196" selection-start-column="163" selection-end-line="196" selection-end-column="163" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

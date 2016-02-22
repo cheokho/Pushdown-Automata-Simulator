@@ -49,10 +49,10 @@ public class TransitionRuleGUI extends JDialog {
     private Edge edge = null;
 
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
-        setTitle("Transition rule from '"+fromNode+"' to '"+toNode+"'.");
-        this.stackArray=stackArray;
-        this.inputArray=inputArray;
-        this.topLevelGUI=topLevelGUI;
+        setTitle("Transition rule from '" + fromNode + "' to '" + toNode + "'.");
+        this.stackArray = stackArray;
+        this.inputArray = inputArray;
+        this.topLevelGUI = topLevelGUI;
         edgeArray = topLevelGUI.getEdgeArray();
         nodeArray = topLevelGUI.getNodeArray();
         allComboArray = new AllComboArray();
@@ -67,7 +67,7 @@ public class TransitionRuleGUI extends JDialog {
 
     public void createTransitionGUI() {
         setLayout(new BorderLayout());
-        centerPanel=new JPanel();
+        centerPanel = new JPanel();
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel.setLayout(new GridLayout(4, 2, 0, 10));
         inputLabel = new JLabel("If input symbol=");
@@ -75,11 +75,11 @@ public class TransitionRuleGUI extends JDialog {
         inputComboBox.setModel(new DefaultComboBoxModel(inputArray.toArray()));
         pushOperation = new ArrayList<String>();
 
-        stackLabel=new JLabel("and top of stack symbol=");
+        stackLabel = new JLabel("and top of stack symbol=");
         stackComboBox = new JComboBox<>();
         stackComboBox.setModel(new DefaultComboBoxModel(stackArray.toArray()));
 
-        transitionLabel=new JLabel("then perform the following operation:");
+        transitionLabel = new JLabel("then perform the following operation:");
         pushButton = new JRadioButton("push(__)");
         pushButton.addActionListener(new ActionListener() {
             @Override
@@ -103,20 +103,26 @@ public class TransitionRuleGUI extends JDialog {
         popButton = new JRadioButton("pop");
         nothingButton = new JRadioButton("ε (do nothing)");
         group = new ButtonGroup();
-        group.add(pushButton); group.add(popButton); group.add(nothingButton);
+        group.add(pushButton);
+        group.add(popButton);
+        group.add(nothingButton);
         nothingButton.setSelected(true);
 
         FlowLayout botLayout = new FlowLayout();
         botPanel = new JPanel();
         botPanel.setLayout(botLayout);
-        botPanel.add(pushButton); botPanel.add(popButton); botPanel.add(nothingButton);
+        botPanel.add(pushButton);
+        botPanel.add(popButton);
+        botPanel.add(nothingButton);
 
-        centerPanel.add(inputLabel); centerPanel.add(inputComboBox);
-        centerPanel.add(stackLabel); centerPanel.add(stackComboBox);
+        centerPanel.add(inputLabel);
+        centerPanel.add(inputComboBox);
+        centerPanel.add(stackLabel);
+        centerPanel.add(stackComboBox);
         centerPanel.add(transitionLabel);
         centerPanel.add(botPanel);
 
-        JPanel buttonPanel=new JPanel();
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         okButton = new JButton("OK");
         buttonPanel.add(okButton);
@@ -138,62 +144,62 @@ public class TransitionRuleGUI extends JDialog {
 //                        System.out.println("Node outgoing combo: " +nodeOutgoingCombo);
 //                    }
 //                }
+                String selectedCombo = inputComboBox.getSelectedItem().toString()+stackComboBox.getSelectedItem().toString();
+                System.out.println("Selected input-stack combo: "+selectedCombo);
                 for (Node n : topLevelGUI.getNodeArray()) {
                     if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                        System.out.println("Node outgoing combo: "+n.getOutGoingCombo());
+                        //System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
+                        if (!n.getOutGoingCombo().contains(selectedCombo)) {
+                            if (pushButton.getText().
+
+                                    equals("push(__)")
+
+                                    && pushButton.isSelected())
+
+                            {
+                                JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                            } else if (popButton.isSelected() && stackComboBox.getSelectedItem().
+
+                                    equals("$")
+
+                                    )
+
+                            {
+                                JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                            } else
+
+                            {
+                                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
+                                addEdge(topLevelGUI.getGraph(), edgeRule);
+                                Node fromNode = null;
+                                Node toNode = null;
+                                for (Node node : topLevelGUI.getNodeArray()) {
+                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+                                        fromNode = node;
+                                    }
+                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+                                        toNode = node;
+                                    }
+
+                                }
+                                edge = new Edge(edgeRule);
+                                edge.setFromNode(fromNode);
+                                edge.setToNode(toNode);
+                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+
+                                edgeArray.add(edge);
+                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
+                                System.out.println("Updated edge array: " + edgeArray);
+                                dispose();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(getContentPane(), "For deterministic PDA, you must specify one rule for each input/stack combination only.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 }
             }
-
-
-            if(pushButton.getText().
-
-            equals("push(__)")
-
-            &&pushButton.isSelected())
-
-            {
-                JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
-            }
-
-            else if(popButton.isSelected()&&stackComboBox.getSelectedItem().
-
-            equals("$")
-
-            )
-
-            {
-                JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
-            }
-
-            else
-
-            {
-                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
-                addEdge(topLevelGUI.getGraph(), edgeRule);
-                Node fromNode = null;
-                Node toNode = null;
-                for (Node node : topLevelGUI.getNodeArray()) {
-                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                        fromNode = node;
-                    }
-                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
-                        toNode = node;
-                    }
-
-                }
-                edge = new Edge(edgeRule);
-                edge.setFromNode(fromNode);
-                edge.setToNode(toNode);
-                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
-
-                edgeArray.add(edge);
-                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
-                System.out.println("Updated edge array: " + edgeArray);
-                dispose();
-            }
-        }
-    });
+        });
         add(centerPanel, BorderLayout.NORTH);
         add(botPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
@@ -227,14 +233,13 @@ public class TransitionRuleGUI extends JDialog {
             graph.setEdgeLabelsMovable(false);
 
             graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getCellPressed(), (Object) topLevelGUI.getCellReleased());
-        }
-        finally {
+        } finally {
             graph.getModel().endUpdate();
         }
     }
 
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
