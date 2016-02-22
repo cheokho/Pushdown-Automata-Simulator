@@ -60,13 +60,11 @@ public class PDAInGUI extends JDialog {
     private ArrayList<String> inputArray;
     private String initStateStr;
     private boolean isGraph;
-    private boolean isNdpda;
     private TopLevelGUI topLevelGUI;
 
 
-    public PDAInGUI(boolean isNdpda, TopLevelGUI topLevelGUI) {
+    public PDAInGUI(TopLevelGUI topLevelGUI) {
         setTitle("Input PDA");
-        this.isNdpda=isNdpda;
         this.topLevelGUI=topLevelGUI;
         createpdaInput();
         pack();

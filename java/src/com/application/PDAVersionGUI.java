@@ -18,7 +18,7 @@ public class PDAVersionGUI extends JDialog {
     private JPanel buttonPanel;
     private JPanel continuePanel;
     private JButton continueButton;
-    private boolean isNdpda;
+    public static boolean isNdpda;
     private PDAInGUI pdaInputGUI;
     private TopLevelGUI topLevelGUI;
 
@@ -45,11 +45,11 @@ public class PDAVersionGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (dpda.isSelected()) {
                     isNdpda = false;
-                    pdaInputGUI = new PDAInGUI(isNdpda, topLevelGUI);
+                    pdaInputGUI = new PDAInGUI(topLevelGUI);
                     dispose();
                 } else if (ndpda.isSelected()) {
                     isNdpda = true;
-                    pdaInputGUI = new PDAInGUI(isNdpda, topLevelGUI);
+                    pdaInputGUI = new PDAInGUI(topLevelGUI);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);

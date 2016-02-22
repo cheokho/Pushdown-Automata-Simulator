@@ -92,11 +92,16 @@ public class TopLevelGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 AllComboArray allComboArray = new AllComboArray();
-                boolean testRunnable=true;
+                boolean testRunnable=false;
+                if (PDAVersionGUI.isNdpda) {
+                    testRunnable=true;
+                }
                 ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
+                System.out.println("All input stack combo: "+allInputStackCombo);
                 for (Node n: nodeArray) {
-                    if(!n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())){
-                        testRunnable=false;
+                    System.out.println("Current input-stack combo: "+n.getOutGoingCombo());
+                    if(n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())){
+                        testRunnable=true;
                         break;
                     }
                 }
@@ -278,7 +283,7 @@ public class TopLevelGUI extends JFrame{
                                                         break;
                                                     }
                                                 }
-                                                //System.out.println("Node inputs: "+n.getOutgoingInputs()+"  Node stacks: "+n.getOutGoingTopStacks());
+                                                //System.out.println("COMBO   :"+n.getOutGoingCombo());
                                         }
                                         edgeArray.remove(i);
                                     }
