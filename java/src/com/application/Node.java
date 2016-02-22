@@ -13,12 +13,14 @@ public class Node {
     String name;
     ArrayList<String> outGoingInputs;
     ArrayList<String> outGoingTopStacks;
+    ArrayList<String> outGoingCombo;
 
     public Node(Object node, String name) {
         this.node=node;
         this.name=name;
         outGoingInputs = new ArrayList<String>();
         outGoingTopStacks = new ArrayList<String>();
+        outGoingCombo = new ArrayList<String>();
     }
 
     public String toString() {
@@ -41,6 +43,10 @@ public class Node {
     }
     public ArrayList<String> getOutGoingTopStacks() {
         return outGoingTopStacks;
+    }
+    public void addOutgoingCombo(String combo) {outGoingCombo.add(combo); }
+    public ArrayList<String> getOutGoingCombo() {
+        return outGoingCombo;
     }
 }
 

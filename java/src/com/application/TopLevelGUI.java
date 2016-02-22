@@ -252,12 +252,19 @@ public class TopLevelGUI extends JFrame{
                                                     }
                                                 }
                                                 for (String s1: n.getOutgoingInputs()) {
-                                                    if (s1.equals(edgeArray.get(i).getEdgeTopInput())) {
+                                                    int value=Integer.parseInt(s1);
+                                                    if (value == edgeArray.get(i).getEdgeTopInput()) {
                                                         n.getOutgoingInputs().remove(s1);
                                                         break;
                                                     }
                                                 }
-                                                System.out.println("Node inputs: "+n.getOutgoingInputs()+"  Node stacks: "+n.getOutGoingTopStacks());
+                                                for (String s2: n.getOutGoingCombo()) {
+                                                    if(s2.equals(edgeArray.get(i).getEdgeTopInput()+edgeArray.get(i).getEdgeTopStack())) {
+                                                        n.getOutGoingCombo().remove(s2);
+                                                        break;
+                                                    }
+                                                }
+                                                //System.out.println("Node inputs: "+n.getOutgoingInputs()+"  Node stacks: "+n.getOutGoingTopStacks());
                                         }
                                         edgeArray.remove(i);
                                     }
@@ -276,36 +283,44 @@ public class TopLevelGUI extends JFrame{
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
                     if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
                         if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                        }
-                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        for (Node n: nodeArray) {
-                            if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (transRule.getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                            System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
+                            System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                            for (Node n: nodeArray) {
+                                if (n.toString().equals(cellPressed.getValue().toString())) {
+                                    if (transRule.getEdge() != null) {
+                                        n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                        n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                        n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                    }
                                 }
                             }
+                        } else { //NDPDA stuffs
+
+
                         }
+
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     } else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
                         if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                        }
-                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
-                        for (Node n: nodeArray) {
-                            if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (transRule.getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                            System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
+                            System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                            for (Node n: nodeArray) {
+                                if (n.toString().equals(cellPressed.getValue().toString())) {
+                                    if (transRule.getEdge() != null) {
+                                        n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                        n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                        n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                    }
                                 }
-                            }
 //                            System.out.println("LOL"+n.getOutgoingInputs());
 //                            System.out.println("LOL1"+n.getOutGoingTopStacks());
-                        }
+                            }
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
+                        } else { //------------ NDPDA STUFF
+
+                        }
                     }
                     //System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs()+"    "+nodeArray.get(0).getOutGoingTopStacks());
                 }
