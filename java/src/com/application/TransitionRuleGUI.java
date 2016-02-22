@@ -22,7 +22,6 @@ import java.util.*;
  */
 public class TransitionRuleGUI extends JDialog {
 
-    private AllComboArray allComboArray;
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
@@ -55,7 +54,6 @@ public class TransitionRuleGUI extends JDialog {
         this.topLevelGUI = topLevelGUI;
         edgeArray = topLevelGUI.getEdgeArray();
         nodeArray = topLevelGUI.getNodeArray();
-        allComboArray = new AllComboArray();
         createTransitionGUI();
         pack();
         setModal(true);
@@ -126,24 +124,11 @@ public class TransitionRuleGUI extends JDialog {
         buttonPanel.setLayout(new FlowLayout());
         okButton = new JButton("OK");
         buttonPanel.add(okButton);
-        ArrayList<String> stackInputCombo = allComboArray.getAllCombinations(inputArray, stackArray);
-        System.out.println("Stack Input combinations: " + stackInputCombo);
 
         //create Edge object here with transition rule defined.
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                ArrayList<String> nodeOutgoingCombo=null;
-//                ArrayList<String> nodeOutgoingStacks=null;
-//                ArrayList<String> nodeOutgoingInputs=null;
-//                for (Node n: topLevelGUI.getNodeArray()) {
-//                    if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-//                        nodeOutgoingInputs = n.getOutgoingInputs();
-//                        nodeOutgoingStacks = n.getOutGoingTopStacks();
-//                        nodeOutgoingCombo = allComboArray.getAllCombinations(nodeOutgoingInputs, nodeOutgoingStacks);
-//                        System.out.println("Node outgoing combo: " +nodeOutgoingCombo);
-//                    }
-//                }
                 String selectedCombo = inputComboBox.getSelectedItem().toString()+stackComboBox.getSelectedItem().toString();
                 System.out.println("Selected input-stack combo: "+selectedCombo);
                 for (Node n : topLevelGUI.getNodeArray()) {

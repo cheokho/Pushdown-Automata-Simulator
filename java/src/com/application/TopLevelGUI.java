@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -90,12 +91,25 @@ public class TopLevelGUI extends JFrame{
         menuRun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                AllComboArray allComboArray = new AllComboArray();
+                boolean testRunnable=true;
+                ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
+                for (Node n: nodeArray) {
+                    if(!n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())){
+                        testRunnable=false;
+                        break;
+                    }
+                }
                 if (pdaTypeGUI == null) {
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                }
+                else if (testRunnable==true){
                     RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                     runSimGUI.showRunSimGUI();
                     System.out.println(runSimGUI.getInput());
+                }
+                else {
+                    JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

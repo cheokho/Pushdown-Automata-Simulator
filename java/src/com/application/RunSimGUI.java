@@ -14,12 +14,13 @@ public class RunSimGUI {
     private Component component;
     private ArrayList<String> inputArray;
 
-    public RunSimGUI(Component component, ArrayList inputArray) {
+    public RunSimGUI(Component component, ArrayList<String> inputArray) {
         this.component=component;
         this.inputArray=inputArray;
     }
 
     public void showRunSimGUI() {
+
         restrictor = String.join("", inputArray);
         input = (String) JOptionPane.showInputDialog(component, "Please enter an input for the simulation.", "Run simulation", JOptionPane.QUESTION_MESSAGE);
     }
