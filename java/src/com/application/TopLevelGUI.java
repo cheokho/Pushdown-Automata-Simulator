@@ -121,7 +121,53 @@ public class TopLevelGUI extends JFrame{
                         runSimGUI.showRunSimGUI();
                         System.out.println("Running simulation on: " + runSimGUI.getInput());
 
+                        //setup all information required for algorithm here.
+                        Node node = null;
+                        for (Node n: nodeArray) {
+                            if (n.isInitial) {
+                                node=n;
+                                break;
+                            }
+                        }
+                        String inputElements = runSimGUI.getInput();
                         String topStackElement = stackArray.get(0);
+                        String edgeTopInputAndStack="";
+                        Edge transitionEdge=null;
+
+
+                       //while (inputElements !=null && !inputElements.equals("") && node!=null) {
+                           String topInputElement = inputElements.substring(0, 1);
+                           String topInputAndStack = topInputElement + topStackElement;
+//                            for (Edge edge : edgeArray) {
+//                                edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
+//                                if (edgeTopInputAndStack.equals(topInputAndStack)) {
+//                                    transitionEdge = edge;
+//                                    inputElements = inputElements.substring(1);
+//                                    break;
+//                                }
+//                            }
+                        //while (inputElements != null && !inputElements.equals("") && node!=null) {
+                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
+                                for (Edge edge : edgeArray) {
+                                    //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
+                                    if (node.toString().equals(edge.getFromNode().toString())) {
+                                        for (String topStack: stackArray) {
+                                            if (edge.getEdgeTopStack().equals(topStack)) {
+                                                System.out.println("chosen edge rule from a: "+edge.toString());
+                                            }
+                                        }
+//                                        transitionEdge = edge;
+//                                        inputElements = inputElements.substring(1);
+//                                        topInputElement = inputElements.substring(0, 1);
+//                                        topInputAndStack = topInputElement + topStackElement;
+//                                        node = edge.getToNode();
+//                                        break;
+                                    }
+                            //}
+//                            System.out.println("Moving to node: '"+transitionEdge.getToNode() + "' through transition rule: "+transitionEdge.toString());
+//                            System.out.println("Stack transition operation: "+transitionEdge.getTransitionOperation());
+//                            System.out.println("Current input string: "+inputElements);
+                        }
 
                         /**TODO - Get initial state for starting point.
                          - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.

@@ -172,6 +172,7 @@ public class TransitionRuleGUI extends JDialog {
                                 edge.setToNode(toNode);
                                 edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
                                 edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+                                edge.setTransitionOperation(getSelectedButtonText(group));
 
                                 edgeArray.add(edge);
                                 System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
