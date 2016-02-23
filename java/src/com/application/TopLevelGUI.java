@@ -92,37 +92,49 @@ public class TopLevelGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 AllComboArray allComboArray = new AllComboArray();
-                boolean testRunnable=false;
-                if (PDAVersionGUI.isNdpda) {
-                    testRunnable=true;
-                }
-                ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
-                //System.out.println("All input stack combo: "+allInputStackCombo);
-                for (Node n: nodeArray) {
-                    //System.out.println("Current input-stack combo: "+n.getOutGoingCombo());
-                    if(n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())){
-                        testRunnable=true;
-                        break;
-                    }
-                }
+                boolean testRunnable = false;
+                boolean containsInitial = false;
+                boolean containsAccept = false;
                 if (pdaTypeGUI == null) {
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if (testRunnable==true){
-                    RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
-                    runSimGUI.showRunSimGUI();
-                    System.out.println("Running simulation on: "+runSimGUI.getInput());
+                } else {
+                    ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
+                    System.out.println("All input stack combo: " + allInputStackCombo);
+                    for (Node n : nodeArray) {
+                        System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
+                        if (n.isInitial) {
+                            containsInitial = true;
+                        }
+                        if (n.isAccept) {
+                            containsAccept = true;
+                        }
+                        if (n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())) {
+                            testRunnable = true;
+                        } else {
+                            testRunnable = false;
+                        }
+                    }
+                    if (PDAVersionGUI.isNdpda) {
+                        testRunnable = true;
+                    } else if (testRunnable == true && containsAccept == true && containsInitial == true) {
+                        RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        runSimGUI.showRunSimGUI();
+                        System.out.println("Running simulation on: " + runSimGUI.getInput());
 
-                    /**TODO - Get initial state for starting point.
-                            - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
-                            - When matched, get 'toNode' value of specified edge and specify that as node to move to.
-                            - Delete leftmost input string now it is consumed and update stack according to edge transition rule.
-                            - When input string is empty algorithm has finished, determine if the state we are on is accepting.
-                     **/
+                        String topStackElement = stackArray.get(0);
 
-                }
-                else {
-                    JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.", "Error", JOptionPane.ERROR_MESSAGE);
+                        /**TODO - Get initial state for starting point.
+                         - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
+                         - When matched, get 'toNode' value of specified edge and specify that as node to move to.
+                         - Delete leftmost input string now it is consumed and update stack according to edge transition rule.
+                         - When input string is empty algorithm has finished, determine if the state we are on is accepting.
+                         **/
+
+                    } else if (containsAccept == false || containsInitial == false) {
+                        JOptionPane.showMessageDialog(getFocusOwner(), "There is no initial and/or accepting state in your PDA.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -159,7 +171,6 @@ public class TopLevelGUI extends JFrame{
         add(stackPanel, BorderLayout.EAST);
     }
 
-    //http://www.codejava.net/java-se/swing/redirect-standard-output-streams-to-jtextarea
     public void createConsoleGUI() {
         JPanel consolePanel = new JPanel();
         JLabel title = new JLabel("Console:");
@@ -227,7 +238,7 @@ public class TopLevelGUI extends JFrame{
         graphComponent.getConnectionHandler().addListener(mxEvent.CONNECT, new mxEventSource.mxIEventListener() {
             @Override
             public void invoke(Object sender, mxEventObject evt) {
-                System.out.println("edge: " + evt.getProperty("cell"));
+                //System.out.println("edge: " + evt.getProperty("cell"));
                 graph.getModel().remove(evt.getProperty("cell"));
             }
         });
@@ -378,7 +389,7 @@ public class TopLevelGUI extends JFrame{
                 //System.out.println("not init - not accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
-            newNode = new Node(node, state);
+            newNode = new Node(node, state, isInitial, isAccepting);
             nodeArray.add(newNode);
 
             graph.setVertexLabelsMovable(false);

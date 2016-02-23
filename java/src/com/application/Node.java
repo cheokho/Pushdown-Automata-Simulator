@@ -11,13 +11,17 @@ public class Node {
 
     Object node;
     String name;
+    boolean isInitial;
+    boolean isAccept;
     ArrayList<String> outGoingInputs;
     ArrayList<String> outGoingTopStacks;
     ArrayList<String> outGoingCombo;
 
-    public Node(Object node, String name) {
+    public Node(Object node, String name, boolean isInitial, boolean isAccept) {
         this.node=node;
         this.name=name;
+        this.isInitial=isInitial;
+        this.isAccept=isAccept;
         outGoingInputs = new ArrayList<String>();
         outGoingTopStacks = new ArrayList<String>();
         outGoingCombo = new ArrayList<String>();
@@ -47,6 +51,12 @@ public class Node {
     public void addOutgoingCombo(String combo) {outGoingCombo.add(combo); }
     public ArrayList<String> getOutGoingCombo() {
         return outGoingCombo;
+    }
+    public boolean isInitial() {
+        return isInitial;
+    }
+    public boolean isAccept() {
+        return isAccept;
     }
 }
 
