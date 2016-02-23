@@ -136,8 +136,8 @@ public class TopLevelGUI extends JFrame{
 
 
                        //while (inputElements !=null && !inputElements.equals("") && node!=null) {
-                           String topInputElement = inputElements.substring(0, 1);
-                           String topInputAndStack = topInputElement + topStackElement;
+//                           String topInputElement = inputElements.substring(0, 1);
+//                           String topInputAndStack = topInputElement + topStackElement;
 //                            for (Edge edge : edgeArray) {
 //                                edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
 //                                if (edgeTopInputAndStack.equals(topInputAndStack)) {
@@ -146,14 +146,18 @@ public class TopLevelGUI extends JFrame{
 //                                    break;
 //                                }
 //                            }
-                        //while (inputElements != null && !inputElements.equals("") && node!=null) {
+                        while (inputElements != null && !inputElements.equals("") && node!=null) {
                                 System.out.println("node outgoing combos: "+node.getOutGoingCombo());
                                 for (Edge edge : edgeArray) {
                                     //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
                                     if (node.toString().equals(edge.getFromNode().toString())) {
+                                        System.out.println("Outgoing edges from:" +node.toString());
+                                        System.out.println("Edges:"+edge.toString());
                                         for (String topStack: stackArray) {
                                             if (edge.getEdgeTopStack().equals(topStack)) {
                                                 System.out.println("chosen edge rule from a: "+edge.toString());
+                                                transitionEdge = edge;
+                                                break;
                                             }
                                         }
 //                                        transitionEdge = edge;
@@ -161,12 +165,12 @@ public class TopLevelGUI extends JFrame{
 //                                        topInputElement = inputElements.substring(0, 1);
 //                                        topInputAndStack = topInputElement + topStackElement;
 //                                        node = edge.getToNode();
-//                                        break;
                                     }
-                            //}
-//                            System.out.println("Moving to node: '"+transitionEdge.getToNode() + "' through transition rule: "+transitionEdge.toString());
-//                            System.out.println("Stack transition operation: "+transitionEdge.getTransitionOperation());
-//                            System.out.println("Current input string: "+inputElements);
+                                }
+                            node = transitionEdge.getToNode();
+                            inputElements = inputElements.substring(1);
+                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+" through transition rule: "+transitionEdge.toString());
+                            System.out.println("Current input elements: "+inputElements);
                         }
 
                         /**TODO - Get initial state for starting point.
