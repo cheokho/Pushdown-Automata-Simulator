@@ -22,6 +22,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Vector;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -32,9 +33,10 @@ public class TopLevelGUI extends JFrame{
     private mxGraph graph;
     private ArrayList<Node> nodeArray;
     private ArrayList<Edge> edgeArray;
-    private ArrayList<String> stackArray;
+    //private ArrayList<String> stackArray;
     private PDAVersionGUI pdaTypeGUI;
     private TransitionRuleGUI transRule;
+    private DefaultTableModel model;
 
     //private mxCell nodePressed;
     private mxCell cellReleased;
@@ -46,10 +48,10 @@ public class TopLevelGUI extends JFrame{
         graph = new mxGraph();
         nodeArray = new ArrayList<Node>();
         edgeArray = new ArrayList<Edge>();
-        stackArray = new ArrayList<String>();
-        stackArray.add("$");
+//        stackArray = new ArrayList<String>();
+//        stackArray.add("$");
         createGraphPane();
-        createStackGUI(stackArray);
+        createStackGUI();
         createConsoleGUI();
         createMenuBar();
     }
@@ -116,7 +118,11 @@ public class TopLevelGUI extends JFrame{
                     }
                     if (PDAVersionGUI.isNdpda) {
                         testRunnable = true;
-                    } else if (testRunnable == true && containsAccept == true && containsInitial == true) {
+                    }
+                    if (testRunnable == true && containsAccept == true && containsInitial == true) {
+                        model.setRowCount(0);
+                        model.addRow(new String[]{"$"});
+                        model.fireTableDataChanged();
                         RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         runSimGUI.showRunSimGUI();
                         System.out.println("Running simulation on: " + runSimGUI.getInput());
@@ -130,36 +136,25 @@ public class TopLevelGUI extends JFrame{
                             }
                         }
                         String inputElements = runSimGUI.getInput();
-                        String topStackElement = stackArray.get(0);
-                        String edgeTopInputAndStack="";
+                        //String topStackElement = stackArray.get(0);
                         Edge transitionEdge=null;
 
-
-                       //while (inputElements !=null && !inputElements.equals("") && node!=null) {
-//                           String topInputElement = inputElements.substring(0, 1);
-//                           String topInputAndStack = topInputElement + topStackElement;
-//                            for (Edge edge : edgeArray) {
-//                                edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
-//                                if (edgeTopInputAndStack.equals(topInputAndStack)) {
-//                                    transitionEdge = edge;
-//                                    inputElements = inputElements.substring(1);
-//                                    break;
-//                                }
-//                            }
                         while (inputElements != null && !inputElements.equals("") && node!=null) {
-                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
+                            ArrayList<String> stackArray = new ArrayList<String>();
+                            for (int q=0; q<model.getRowCount(); q++) {
+                                stackArray.add(model.getValueAt(q, 0).toString());
+                            }
+                            String input = inputElements.substring(0,1);
+//                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
                                 for (Edge edge : edgeArray) {
                                     //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
                                     if (node.toString().equals(edge.getFromNode().toString())) {
-                                        System.out.println("Outgoing edges from:" +node.toString());
-                                        System.out.println("Edges:"+edge.toString());
-                                        for (String topStack: stackArray) {
-                                            if (edge.getEdgeTopStack().equals(topStack)) {
-                                                System.out.println("chosen edge rule from a: "+edge.toString());
+//                                        System.out.println("Outgoing edges from:" +node.toString());
+//                                        System.out.println("Edges:"+edge.toString());
+                                            if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput()==Integer.parseInt(input)) {
                                                 transitionEdge = edge;
                                                 break;
                                             }
-                                        }
 //                                        transitionEdge = edge;
 //                                        inputElements = inputElements.substring(1);
 //                                        topInputElement = inputElements.substring(0, 1);
@@ -167,9 +162,23 @@ public class TopLevelGUI extends JFrame{
 //                                        node = edge.getToNode();
                                     }
                                 }
+                            String transitionOperation = transitionEdge.getTransitionOperation();
+                            if (transitionOperation.contains("push")) {
+                                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
+                                model.insertRow(0, new String[]{stackCharacter});
+                                model.fireTableDataChanged();
+
+                            } else if (transitionOperation.contains("pop")) {
+                                //stackArray.remove(0);
+                                model.removeRow(0);
+                                model.fireTableDataChanged();
+
+                            } else if (transitionOperation.contains("do nothing")) {
+                                //do nothing lol
+                            }
                             node = transitionEdge.getToNode();
                             inputElements = inputElements.substring(1);
-                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+" through transition rule: "+transitionEdge.toString());
+                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString());
                             System.out.println("Current input elements: "+inputElements);
                         }
 
@@ -199,16 +208,18 @@ public class TopLevelGUI extends JFrame{
 
     }
 
-    public void createStackGUI(ArrayList<String> stackArray) {
+    public void createStackGUI() {
         JPanel stackPanel = new JPanel();
         stackPanel.setLayout(new FlowLayout());
-        DefaultTableModel model = new DefaultTableModel(){
+        Object columnName[] = {"Stack"};
+        model = new DefaultTableModel(columnName, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        model.addColumn("Stack", stackArray.toArray());
+        //model.addColumn("Stack", stackArray.toArray());
+        model.addRow(new String[] {"$"});
 
         JTable stackTable = new JTable(model);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -219,6 +230,10 @@ public class TopLevelGUI extends JFrame{
         scrollPane.setPreferredSize(new Dimension(150, 530));
         stackPanel.add(scrollPane);
         add(stackPanel, BorderLayout.EAST);
+    }
+
+    public DefaultTableModel getModel() {
+        return model;
     }
 
     public void createConsoleGUI() {
