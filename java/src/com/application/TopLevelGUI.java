@@ -127,60 +127,61 @@ public class TopLevelGUI extends JFrame{
                         runSimGUI.showRunSimGUI();
                         System.out.println("Running simulation on: " + runSimGUI.getInput());
 
-                        //setup all information required for algorithm here.
-                        Node node = null;
-                        for (Node n: nodeArray) {
-                            if (n.isInitial) {
-                                node=n;
-                                break;
-                            }
-                        }
-                        String inputElements = runSimGUI.getInput();
-                        //String topStackElement = stackArray.get(0);
-                        Edge transitionEdge=null;
+                        //MOVE THIS STUFF TO ALGORITHM RUNNER ----------------------------
 
-                        while (inputElements != null && !inputElements.equals("") && node!=null) {
-                            ArrayList<String> stackArray = new ArrayList<String>();
-                            for (int q=0; q<model.getRowCount(); q++) {
-                                stackArray.add(model.getValueAt(q, 0).toString());
-                            }
-                            String input = inputElements.substring(0,1);
-//                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
-                                for (Edge edge : edgeArray) {
-                                    //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
-                                    if (node.toString().equals(edge.getFromNode().toString())) {
-//                                        System.out.println("Outgoing edges from:" +node.toString());
-//                                        System.out.println("Edges:"+edge.toString());
-                                            if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput()==Integer.parseInt(input)) {
-                                                transitionEdge = edge;
-                                                break;
-                                            }
-//                                        transitionEdge = edge;
-//                                        inputElements = inputElements.substring(1);
-//                                        topInputElement = inputElements.substring(0, 1);
-//                                        topInputAndStack = topInputElement + topStackElement;
-//                                        node = edge.getToNode();
-                                    }
-                                }
-                            String transitionOperation = transitionEdge.getTransitionOperation();
-                            if (transitionOperation.contains("push")) {
-                                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
-                                model.insertRow(0, new String[]{stackCharacter});
-                                model.fireTableDataChanged();
+                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray);
+                        algorithmRunner.runAlgorithm();
+//                        Node node = null;
+//                        for (Node n: nodeArray) {
+//                            if (n.isInitial) {
+//                                node=n;
+//                                break;
+//                            }
+//                        }
+//                        String inputElements = runSimGUI.getInput();
+//                        Edge transitionEdge=null;
+//
+//                        while (inputElements != null && !inputElements.equals("") && node!=null) {
+//                            ArrayList<String> stackArray = new ArrayList<String>();
+//                            for (int q=0; q<model.getRowCount(); q++) {
+//                                stackArray.add(model.getValueAt(q, 0).toString());
+//                            }
+//                            String input = inputElements.substring(0,1);
+////                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
+//                                for (Edge edge : edgeArray) {
+//                                    //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
+//                                    if (node.toString().equals(edge.getFromNode().toString())) {
+////                                        System.out.println("Outgoing edges from:" +node.toString());
+////                                        System.out.println("Edges:"+edge.toString());
+//                                            if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput()==Integer.parseInt(input)) {
+//                                                transitionEdge = edge;
+//                                                break;
+//                                            }
+//                                    }
+//                                }
+//                            String transitionOperation="";
+//                            if (transitionEdge != null) {
+//                                 transitionOperation = transitionEdge.getTransitionOperation();
+//                            }
+//                            if (transitionOperation.contains("push")) {
+//                                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
+//                                model.insertRow(0, new String[]{stackCharacter});
+//                                model.fireTableDataChanged();
+//
+//                            } else if (transitionOperation.contains("pop")) {
+//                                model.removeRow(0);
+//                                model.fireTableDataChanged();
+//
+//                            } else if (transitionOperation.contains("do nothing")) {
+//                                //do nothing lol
+//                            }
+//                            node = transitionEdge.getToNode();
+//                            inputElements = inputElements.substring(1);
+//                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString());
+//                            System.out.println("Current input elements: "+inputElements);
+//                        }
 
-                            } else if (transitionOperation.contains("pop")) {
-                                //stackArray.remove(0);
-                                model.removeRow(0);
-                                model.fireTableDataChanged();
-
-                            } else if (transitionOperation.contains("do nothing")) {
-                                //do nothing lol
-                            }
-                            node = transitionEdge.getToNode();
-                            inputElements = inputElements.substring(1);
-                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString());
-                            System.out.println("Current input elements: "+inputElements);
-                        }
+                        //----------------------------------
 
                         /**TODO - Get initial state for starting point.
                          - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
