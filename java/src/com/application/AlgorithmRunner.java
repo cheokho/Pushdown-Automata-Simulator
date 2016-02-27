@@ -40,8 +40,9 @@ public class AlgorithmRunner {
                 }
                 String inputElements = runSimGUI.getInput();
                 Edge transitionEdge=null;
+                boolean isStuck=false;
                 ArrayList<Edge> transitionEdges=new ArrayList<Edge>(); //used for NDPDA
-                while (inputElements != null && !inputElements.equals("") && node!=null) {
+                while (inputElements != null && !inputElements.equals("") && node!=null && !isStuck) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q=0; q<model.getRowCount(); q++) {
                         stackArray.add(model.getValueAt(q, 0).toString());
@@ -62,6 +63,7 @@ public class AlgorithmRunner {
                         }
                         // TODO make NDPDA work.
                     } else if (isNdpda) {
+                        System.out.println("Entered NDPDA if statement.");
                             for (Edge edge : edgeArray) {
                                 if (node.toString().equals(edge.getFromNode().toString())) {
                                     if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
@@ -69,10 +71,16 @@ public class AlgorithmRunner {
                                     }
                                 }
                             }
-                            if (transitionEdges.size() == 1) {
-                                transitionEdge = transitionEdges.get(0);
-                            } else {
-                                //more than one option available here.
+                            if (transitionEdges.size() >= 1) {
+                                if (transitionEdges.size() ==1) { //only one path found
+                                    transitionEdge = transitionEdges.remove(0);
+                                } else {
+                                    textArea.append("Choice point found. Selecting first path found.\n");
+                                }
+                            } else if (transitionEdges.isEmpty() ) {
+                                textArea.append("RESULT: FAILURE. Simulation stuck at node: '"+node.toString()+"', no transition path found.\n");
+                                isStuck = true;
+                                break;
                             }
 
                     }

@@ -128,11 +128,11 @@ public class TopLevelGUI extends JFrame{
                         model.fireTableDataChanged();
                         RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         runSimGUI.showRunSimGUI();
-                        System.out.println("Running simulation on: " + runSimGUI.getInput());
+                        getTextArea().append("\nRunning simulation on: " + runSimGUI.getInput()+"\n");
                         if (PDAVersionGUI.isNdpda) {
-                            getTextArea().append("Preparing to run simulation. Specified graph is: Non Deterministic");
+                            getTextArea().append("Preparing to run simulation. Specified graph is: Non Deterministic\n");
                         } else {
-                            getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic");
+                            getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic\n");
                         }
 
                         SwingWorker<Void, Void> worker = null;

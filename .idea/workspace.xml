@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Node.java" afterPath="$PROJECT_DIR$/java/src/com/application/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
     <ignored path="mxgraph.iws" />
@@ -98,12 +93,12 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="135" column="25" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+              <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4075#4083#0" expanded="true" />
-                <element signature="e#9393#9394#0" expanded="true" />
-                <element signature="e#9427#9428#0" expanded="true" />
+                <element signature="e#9406#9407#0" expanded="true" />
+                <element signature="e#9440#9441#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,12 +107,12 @@
       <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56632656">
-              <caret line="74" column="70" selection-start-line="74" selection-start-column="70" selection-end-line="74" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.5177665">
+              <caret line="74" column="87" selection-start-line="74" selection-start-column="87" selection-end-line="74" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1365#1371#0" expanded="true" />
-                <element signature="e#1547#1555#0" expanded="true" />
+                <element signature="e#1404#1410#0" expanded="true" />
+                <element signature="e#1598#1606#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -698,12 +693,6 @@
       <workItem from="1456318271637" duration="8956000" />
       <workItem from="1456411583685" duration="3115000" />
     </task>
-    <task id="LOCAL-00003" summary="Node shape fixes">
-      <created>1453758677133</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1453758677133</updated>
-    </task>
     <task id="LOCAL-00004" summary="Node shape fixes">
       <created>1453759317943</created>
       <option name="number" value="00004" />
@@ -992,7 +981,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456583928288</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="working on NDPDA stuff inn progress.">
+      <created>1456597205671</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1456597205671</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1009,11 +1004,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32606325" sideWeight="0.50238097" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32497275" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32497275" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1040,7 +1035,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="push operation implemented." />
     <MESSAGE value="edge creation." />
     <MESSAGE value="edge deletion problem fixed." />
     <MESSAGE value="overlap temp fix." />
@@ -1065,7 +1059,8 @@
     <MESSAGE value="algorithm works without stack! :D" />
     <MESSAGE value="algorithm works with stack! :D" />
     <MESSAGE value="fixed swingworker." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed swingworker." />
+    <MESSAGE value="working on NDPDA stuff inn progress." />
+    <option name="LAST_COMMIT_MESSAGE" value="working on NDPDA stuff inn progress." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1128,8 +1123,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1191,8 +1186,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1233,8 +1228,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1296,8 +1291,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1359,8 +1354,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1401,8 +1396,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1460,14 +1455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/AllComboArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1554,27 +1541,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/AllComboArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60714287">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="25" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+          <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4075#4083#0" expanded="true" />
-            <element signature="e#9393#9394#0" expanded="true" />
-            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9406#9407#0" expanded="true" />
+            <element signature="e#9440#9441#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56632656">
-          <caret line="74" column="70" selection-start-line="74" selection-start-column="70" selection-end-line="74" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.5177665">
+          <caret line="74" column="87" selection-start-line="74" selection-start-column="87" selection-end-line="74" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1365#1371#0" expanded="true" />
-            <element signature="e#1547#1555#0" expanded="true" />
+            <element signature="e#1404#1410#0" expanded="true" />
+            <element signature="e#1598#1606#0" expanded="true" />
           </folding>
         </state>
       </provider>
