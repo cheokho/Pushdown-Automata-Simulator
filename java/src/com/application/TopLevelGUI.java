@@ -33,6 +33,7 @@ public class TopLevelGUI extends JFrame{
     private mxGraph graph;
     private ArrayList<Node> nodeArray;
     private ArrayList<Edge> edgeArray;
+    private JTextArea consoleArea;
     //private ArrayList<String> stackArray;
     private PDAVersionGUI pdaTypeGUI;
     private TransitionRuleGUI transRule;
@@ -129,7 +130,9 @@ public class TopLevelGUI extends JFrame{
 
                         //MOVE THIS STUFF TO ALGORITHM RUNNER ----------------------------
 
-                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray);
+                        SwingWorker<Void, Void> worker = null;
+
+                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
                         algorithmRunner.runAlgorithm();
 //                        Node node = null;
 //                        for (Node n: nodeArray) {
@@ -240,16 +243,20 @@ public class TopLevelGUI extends JFrame{
     public void createConsoleGUI() {
         JPanel consolePanel = new JPanel();
         JLabel title = new JLabel("Console:");
-        JTextArea consoleArea = new JTextArea(8, 70);
+        consoleArea = new JTextArea(8, 70);
         consoleArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(consoleArea);
         consolePanel.add(title, BorderLayout.NORTH);
         consolePanel.add(scrollPane, BorderLayout.CENTER);
         add(consolePanel, BorderLayout.SOUTH);
-        PrintStream printStream = new PrintStream(new CustomOutput(consoleArea));
-        PrintStream standardOut = System.out;
-        System.setOut(printStream);
-        System.setErr(printStream);
+//        PrintStream printStream = new PrintStream(new CustomOutput(consoleArea));
+//        PrintStream standardOut = System.out;
+//        System.setOut(printStream);
+//        System.setErr(printStream);
+    }
+
+    public JTextArea getTextArea() {
+        return consoleArea;
     }
 
 
