@@ -16,6 +16,7 @@ public class Node {
     ArrayList<String> outGoingInputs;
     ArrayList<String> outGoingTopStacks;
     ArrayList<String> outGoingCombo;
+    ArrayList<String> outGoingEdgeRule;
 
     public Node(Object node, String name, boolean isInitial, boolean isAccept) {
         this.node=node;
@@ -25,6 +26,7 @@ public class Node {
         outGoingInputs = new ArrayList<String>();
         outGoingTopStacks = new ArrayList<String>();
         outGoingCombo = new ArrayList<String>();
+        outGoingEdgeRule = new ArrayList<String>();
     }
 
     public String toString() {
@@ -52,6 +54,8 @@ public class Node {
     public ArrayList<String> getOutGoingCombo() {
         return outGoingCombo;
     }
+    public void addOutgoingEdgeRule(String edgeRule) { outGoingEdgeRule.add(edgeRule); }
+    public ArrayList<String> getOutGoingEdgeRule() {return outGoingEdgeRule; }
     public boolean isInitial() {
         return isInitial;
     }

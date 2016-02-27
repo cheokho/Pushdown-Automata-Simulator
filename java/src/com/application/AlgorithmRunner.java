@@ -25,7 +25,7 @@ public class AlgorithmRunner {
         this.worker=worker;
     }
 
-    public void runAlgorithm() {
+    public void runAlgorithm(boolean isNdpda) {
 
         worker = new SwingWorker<Void, Void>() {
             @Override
@@ -40,6 +40,7 @@ public class AlgorithmRunner {
                 }
                 String inputElements = runSimGUI.getInput();
                 Edge transitionEdge=null;
+                ArrayList<Edge> transitionEdges=new ArrayList<Edge>(); //used for NDPDA
                 while (inputElements != null && !inputElements.equals("") && node!=null) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q=0; q<model.getRowCount(); q++) {
@@ -47,16 +48,33 @@ public class AlgorithmRunner {
                     }
                     String input = inputElements.substring(0,1);
 //                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
-                    for (Edge edge : edgeArray) {
-                        //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
-                        if (node.toString().equals(edge.getFromNode().toString())) {
+                    if (!isNdpda) {
+                        for (Edge edge : edgeArray) {
+                            //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
+                            if (node.toString().equals(edge.getFromNode().toString())) {
 //                                        System.out.println("Outgoing edges from:" +node.toString());
 //                                        System.out.println("Edges:"+edge.toString());
-                            if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput()==Integer.parseInt(input)) {
-                                transitionEdge = edge;
-                                break;
+                                if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
+                                    transitionEdge = edge;
+                                    break;
+                                }
                             }
                         }
+                        // TODO make NDPDA work.
+                    } else if (isNdpda) {
+                            for (Edge edge : edgeArray) {
+                                if (node.toString().equals(edge.getFromNode().toString())) {
+                                    if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
+                                        transitionEdges.add(edge);
+                                    }
+                                }
+                            }
+                            if (transitionEdges.size() == 1) {
+                                transitionEdge = transitionEdges.get(0);
+                            } else {
+                                //more than one option available here.
+                            }
+
                     }
                     String transitionOperation="";
                     if (transitionEdge != null) {
@@ -77,6 +95,7 @@ public class AlgorithmRunner {
                     node = transitionEdge.getToNode();
                     inputElements = inputElements.substring(1);
                     Thread.sleep(1000);
+                    textArea.setCaretPosition(textArea.getDocument().getLength());
                     textArea.append("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString()+"\n");
                     if (inputElements.equals("")) {
                         textArea.append("Simulation finished at node: '"+transitionEdge.getToNode()+"'.\n");

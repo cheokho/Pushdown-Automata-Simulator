@@ -28,6 +28,7 @@ public class TransitionRuleGUI extends JDialog {
     private ArrayList<Edge> edgeArray;
     private ArrayList<Node> nodeArray;
     private TopLevelGUI topLevelGUI;
+    private boolean isNdpda;
 
     private JPanel centerPanel;
     private JLabel inputLabel;
@@ -47,11 +48,12 @@ public class TransitionRuleGUI extends JDialog {
 
     private Edge edge = null;
 
-    public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray) {
+    public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray, boolean isNdpda) {
         setTitle("Transition rule from '" + fromNode + "' to '" + toNode + "'.");
         this.stackArray = stackArray;
         this.inputArray = inputArray;
         this.topLevelGUI = topLevelGUI;
+        this.isNdpda = isNdpda;
         edgeArray = topLevelGUI.getEdgeArray();
         nodeArray = topLevelGUI.getNodeArray();
         createTransitionGUI();
@@ -126,35 +128,59 @@ public class TransitionRuleGUI extends JDialog {
         buttonPanel.add(okButton);
 
         //create Edge object here with transition rule defined.
+
+        //TODO loop through Edge array (get from top level GUI) and match with the edge rule that is trying to be created for NPDA.
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCombo = inputComboBox.getSelectedItem().toString()+stackComboBox.getSelectedItem().toString();
-                System.out.println("Selected input-stack combo: "+selectedCombo);
+                String selectedCombo = inputComboBox.getSelectedItem().toString() + stackComboBox.getSelectedItem().toString();
+                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
+
+                System.out.println("Selected input-stack combo: " + selectedCombo);
                 for (Node n : topLevelGUI.getNodeArray()) {
                     if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                         //System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
-                        if (!n.getOutGoingCombo().contains(selectedCombo)) {
-                            if (pushButton.getText().
 
-                                    equals("push(__)")
+                      if (!n.getOutGoingEdgeRule().contains(edgeRule) && isNdpda) {
+                          if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
+                              JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                          } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
+                              JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
+                          } else {
+                              addEdge(topLevelGUI.getGraph(), edgeRule);
+                              Node fromNode = null;
+                              Node toNode = null;
+                              for (Node node : topLevelGUI.getNodeArray()) {
+                                  if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+                                      fromNode = node;
+                                  }
+                                  if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+                                      toNode = node;
+                                  }
 
-                                    && pushButton.isSelected())
+                              }
+                              edge = new Edge(edgeRule);
+                              edge.setFromNode(fromNode);
+                              edge.setToNode(toNode);
+                              edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+                              edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+                              edge.setTransitionOperation(getSelectedButtonText(group));
 
-                            {
+                              edgeArray.add(edge);
+                              System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
+                              System.out.println("Updated edge array: " + edgeArray);
+                              dispose();
+                          }
+                      } else if (isNdpda) {
+                          JOptionPane.showMessageDialog(getContentPane(), "You have already specified this rule!", "Error", JOptionPane.ERROR_MESSAGE);
+                      }
+
+                        if (!n.getOutGoingCombo().contains(selectedCombo) && !isNdpda) {
+                            if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
                                 JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
-                            } else if (popButton.isSelected() && stackComboBox.getSelectedItem().
-
-                                    equals("$")
-
-                                    )
-
-                            {
+                            } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
-                            } else
-
-                            {
-                                String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
+                            } else {
                                 addEdge(topLevelGUI.getGraph(), edgeRule);
                                 Node fromNode = null;
                                 Node toNode = null;
@@ -179,7 +205,7 @@ public class TransitionRuleGUI extends JDialog {
                                 System.out.println("Updated edge array: " + edgeArray);
                                 dispose();
                             }
-                        } else {
+                        } else if (!isNdpda) {
                             JOptionPane.showMessageDialog(getContentPane(), "For deterministic PDA, you must specify one rule for each input/stack combination only.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }

@@ -31,15 +31,15 @@ public class PDAInGUI extends JDialog {
     private JPanel southPanel;
     private JPanel centerBotPanel;
     private JLabel info;
-    private JLabel info2;
+    //private JLabel info2;
     private JLabel states;
     private JTextField statesField;
     private JLabel acceptStates;
     private JTextField acceptStatesField;
     private JLabel initState;
     private JTextField initStateField;
-    private JRadioButton graph;
-    private JRadioButton transTable;
+   // private JRadioButton graph;
+   // private JRadioButton transTable;
     private ButtonGroup group;
     private JButton next;
 
@@ -59,7 +59,7 @@ public class PDAInGUI extends JDialog {
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private String initStateStr;
-    private boolean isGraph;
+    //private boolean isGraph;
     private TopLevelGUI topLevelGUI;
 
 
@@ -69,14 +69,13 @@ public class PDAInGUI extends JDialog {
         createpdaInput();
         pack();
         setModal(true);
-        setMinimumSize(new Dimension(500, 500));
+        setMinimumSize(new Dimension(700, 300));
         setLocationRelativeTo(null);
         setVisible(true);
 
     }
 
     public void createpdaInput(){
-        //setLayout(new BorderLayout());
         container = new JPanel();
         CardLayout cl = new CardLayout();
         container.setLayout(cl);
@@ -87,7 +86,7 @@ public class PDAInGUI extends JDialog {
         inputPDA.setLayout(new BorderLayout());
         centerPanel = new JPanel();
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
-        centerPanel.setLayout(new GridLayout(4, 2, 0, 10));
+        centerPanel.setLayout(new GridLayout(3, 2, 0, 10));
         info = new JLabel("Separate a list of states using a space between each state.");
         info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
         states = new JLabel("States:");
@@ -102,19 +101,7 @@ public class PDAInGUI extends JDialog {
             public void focusLost(FocusEvent e) {
                 stateString = statesField.getText();
                 statesArray= new ArrayList(Arrays.asList(stateString.split("\\s+")));
-                //String[] statesArray = stateString.split("\\s+");
-//                for(int i=0;i<statesArray.size();i++)
-//                {
-//                    System.out.println(" -->"+statesArray.get(i));
-//                }
                 System.out.println("States Array: "+statesArray);
-                Set<String> set = new HashSet<String>(statesArray);
-                if(set.size()<statesArray.size()){ //duplicates found
-                    JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
-                    next.setEnabled(false);
-                } else {
-                    next.setEnabled(true);
-                }
             }
         });
         acceptStates = new JLabel("Accepting state(s):");
@@ -130,12 +117,6 @@ public class PDAInGUI extends JDialog {
             public void focusLost(FocusEvent e) {
                 acceptString=acceptStatesField.getText();
                 acceptStatesArray=new ArrayList(Arrays.asList(acceptString.split("\\s+")));
-                if(statesArray.containsAll(acceptStatesArray)) { //checks if subset
-                    next.setEnabled(true);
-                } else {
-                    //JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
-                    next.setEnabled(false);
-                }
             }
         });
 
@@ -153,56 +134,59 @@ public class PDAInGUI extends JDialog {
                 initStateField.getText().trim();
                 initStateStr = initStateField.getText().replaceAll("\\s+", "");
                 initStateField.setText(initStateStr);
-                if (statesArray.contains(initStateStr)) {
-                    next.setEnabled(true);
-                } else {
-                    //JOptionPane.showMessageDialog(new JPanel(), "Initial state is not one of your defined states.", "Error", JOptionPane.ERROR_MESSAGE);
-                    next.setEnabled(false);
-                }
             }
         });
 
 
 
-        info2 = new JLabel("Specify transition rules through:");
-        graph = new JRadioButton("Graph");
-        transTable = new JRadioButton("Transition table");
-        group = new ButtonGroup();
-        group.add(graph);
-        group.add(transTable);
-        graph.setSelected(true);
-        BorderLayout centerBotLayout = new BorderLayout();
-        centerBotPanel = new JPanel();
-        centerBotPanel.setLayout(centerBotLayout);
-        centerBotPanel.add(info2, BorderLayout.NORTH); centerBotPanel.add(graph, BorderLayout.CENTER); centerBotPanel.add(transTable, BorderLayout.SOUTH);
+        //info2 = new JLabel("Specify transition rules through:");
+        //graph = new JRadioButton("Graph");
+        //transTable = new JRadioButton("Transition table");
+//        group = new ButtonGroup();
+//        group.add(graph);
+//        group.add(transTable);
+//        graph.setSelected(true);
+//        BorderLayout centerBotLayout = new BorderLayout();
+//        centerBotPanel = new JPanel();
+//        centerBotPanel.setLayout(centerBotLayout);
+//        centerBotPanel.add(info2, BorderLayout.NORTH); centerBotPanel.add(graph, BorderLayout.CENTER); centerBotPanel.add(transTable, BorderLayout.SOUTH);
 
         centerPanel.add(states); centerPanel.add(statesField);
         centerPanel.add(acceptStates); centerPanel.add(acceptStatesField);
         centerPanel.add(initState);
         centerPanel.add(initStateField);
-        centerPanel.add(centerBotPanel);
+        //centerPanel.add(centerBotPanel);
 
 
         next = new JButton("Next");
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Set<String> set = new HashSet<String>(statesArray);
                 if (statesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "States field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-
-                if (acceptStatesField.getText().equals("")) {
+                else if(set.size()<statesArray.size() && !statesField.getText().equals("")){ //duplicates found
+                    JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if (acceptStatesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                if (initStateField.getText().equals("")) {
+                else if (!statesArray.containsAll(acceptStatesArray) && !acceptStatesField.getText().equals("") && !statesField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if (initStateField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+                else if(!statesArray.contains(initStateStr) && !initStateField.getText().equals("")) { //initial state not in states array
+                    JOptionPane.showMessageDialog(new JPanel(), "Initial state needs to be part of your defined states", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
-                    if (graph.isSelected()) {
-                        isGraph = true;
-                    } else if (transTable.isSelected()) {
-                        isGraph = false;
-                    }
+//                    if (graph.isSelected()) {
+//                        isGraph = true;
+//                    } else if (transTable.isSelected()) {
+//                        isGraph = false;
+//                    }
                     if(!statesArray.contains(initStateStr)){
                     } else {
                         cl.show(container,"2");
@@ -284,10 +268,10 @@ public class PDAInGUI extends JDialog {
                 else if(inputSet.size()<inputArray.size()) {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate input characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else if(!stackString.matches("^[a-zA-Z ]+$")) {
+                else if(!stackString.matches("^[a-zA-Z ]+$") && !stackField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use alphabetical letters in your stack only.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else if(!inputString.matches("^[0-9 ]+$")) {
+                else if(!inputString.matches("^[0-9 ]+$") && !inputField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use numbers in your input only.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
@@ -334,9 +318,9 @@ public class PDAInGUI extends JDialog {
 
     }
 
-    public boolean isGraph() {
-        return isGraph;
-    }
+//    public boolean isGraph() {
+//        return isGraph;
+//    }
 
     public ArrayList<String> getStatesArray() {
         return statesArray;

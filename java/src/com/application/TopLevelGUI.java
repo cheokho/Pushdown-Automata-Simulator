@@ -7,6 +7,7 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.view.mxGraph;
+import javafx.animation.Transition;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
@@ -102,6 +103,7 @@ public class TopLevelGUI extends JFrame{
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
+                    ArrayList<String> missingCombos = new ArrayList<String>();
                     System.out.println("All input stack combo: " + allInputStackCombo);
                     for (Node n : nodeArray) {
                         System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
@@ -127,64 +129,17 @@ public class TopLevelGUI extends JFrame{
                         RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
                         runSimGUI.showRunSimGUI();
                         System.out.println("Running simulation on: " + runSimGUI.getInput());
-
-                        //MOVE THIS STUFF TO ALGORITHM RUNNER ----------------------------
+                        if (PDAVersionGUI.isNdpda) {
+                            getTextArea().append("Preparing to run simulation. Specified graph is: Non Deterministic");
+                        } else {
+                            getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic");
+                        }
 
                         SwingWorker<Void, Void> worker = null;
 
                         AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
-                        algorithmRunner.runAlgorithm();
-//                        Node node = null;
-//                        for (Node n: nodeArray) {
-//                            if (n.isInitial) {
-//                                node=n;
-//                                break;
-//                            }
-//                        }
-//                        String inputElements = runSimGUI.getInput();
-//                        Edge transitionEdge=null;
-//
-//                        while (inputElements != null && !inputElements.equals("") && node!=null) {
-//                            ArrayList<String> stackArray = new ArrayList<String>();
-//                            for (int q=0; q<model.getRowCount(); q++) {
-//                                stackArray.add(model.getValueAt(q, 0).toString());
-//                            }
-//                            String input = inputElements.substring(0,1);
-////                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
-//                                for (Edge edge : edgeArray) {
-//                                    //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
-//                                    if (node.toString().equals(edge.getFromNode().toString())) {
-////                                        System.out.println("Outgoing edges from:" +node.toString());
-////                                        System.out.println("Edges:"+edge.toString());
-//                                            if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput()==Integer.parseInt(input)) {
-//                                                transitionEdge = edge;
-//                                                break;
-//                                            }
-//                                    }
-//                                }
-//                            String transitionOperation="";
-//                            if (transitionEdge != null) {
-//                                 transitionOperation = transitionEdge.getTransitionOperation();
-//                            }
-//                            if (transitionOperation.contains("push")) {
-//                                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
-//                                model.insertRow(0, new String[]{stackCharacter});
-//                                model.fireTableDataChanged();
-//
-//                            } else if (transitionOperation.contains("pop")) {
-//                                model.removeRow(0);
-//                                model.fireTableDataChanged();
-//
-//                            } else if (transitionOperation.contains("do nothing")) {
-//                                //do nothing lol
-//                            }
-//                            node = transitionEdge.getToNode();
-//                            inputElements = inputElements.substring(1);
-//                            System.out.println("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString());
-//                            System.out.println("Current input elements: "+inputElements);
-//                        }
+                        algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
 
-                        //----------------------------------
 
                         /**TODO - Get initial state for starting point.
                          - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
@@ -393,8 +348,8 @@ public class TopLevelGUI extends JFrame{
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
                     if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
-                        if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
+                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
                             System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
                             System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
                             for (Node n: nodeArray) {
@@ -403,18 +358,15 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
                                         n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                        n.addOutgoingEdgeRule(transRule.getEdge().toString());
                                     }
                                 }
                             }
-                        } else { //NDPDA stuffs
-
-
-                        }
 
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     } else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
-                        if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
+                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
                             System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
                             System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
                             for (Node n: nodeArray) {
@@ -423,15 +375,13 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
                                         n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                        n.addOutgoingEdgeRule(transRule.getEdge().toString());
                                     }
                                 }
 //                            System.out.println("LOL"+n.getOutgoingInputs());
 //                            System.out.println("LOL1"+n.getOutGoingTopStacks());
                             }
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
-                        } else { //------------ NDPDA STUFF
-
-                        }
                     }
                     //System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs()+"    "+nodeArray.get(0).getOutGoingTopStacks());
                 }
