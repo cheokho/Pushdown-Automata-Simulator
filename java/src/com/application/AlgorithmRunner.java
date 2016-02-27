@@ -15,6 +15,7 @@ public class AlgorithmRunner {
     private DefaultTableModel model;
     private JTextArea textArea;
     private SwingWorker<Void, Void> worker;
+    private boolean choicePointFound;
 
     public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<Node> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
         this.runSimGUI=runSimGUI;
@@ -23,8 +24,10 @@ public class AlgorithmRunner {
         this.edgeArray=edgeArray;
         this.textArea=textArea;
         this.worker=worker;
+        choicePointFound=false;
     }
 
+    //basically I need a check which can detect that there is a choice point in the algorithm. If there is, the runalgorithm method needs to be recalled using the 2nd choice.
     public void runAlgorithm(boolean isNdpda) {
 
         worker = new SwingWorker<Void, Void>() {
@@ -41,7 +44,6 @@ public class AlgorithmRunner {
                 String inputElements = runSimGUI.getInput();
                 Edge transitionEdge=null;
                 boolean isStuck=false;
-                ArrayList<Edge> transitionEdges=new ArrayList<Edge>(); //used for NDPDA
                 while (inputElements != null && !inputElements.equals("") && node!=null && !isStuck) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q=0; q<model.getRowCount(); q++) {
@@ -64,6 +66,7 @@ public class AlgorithmRunner {
                         // TODO make NDPDA work.
                     } else if (isNdpda) {
                         System.out.println("Entered NDPDA if statement.");
+                        ArrayList<Edge> transitionEdges=new ArrayList<Edge>(); //used for NDPDA
                             for (Edge edge : edgeArray) {
                                 if (node.toString().equals(edge.getFromNode().toString())) {
                                     if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
@@ -72,11 +75,11 @@ public class AlgorithmRunner {
                                 }
                             }
                             if (transitionEdges.size() >= 1) {
-                                if (transitionEdges.size() ==1) { //only one path found
-                                    transitionEdge = transitionEdges.remove(0);
-                                } else {
+                                if (transitionEdges.size() > 1) { //choice point.
                                     textArea.append("Choice point found. Selecting first path found.\n");
+                                    choicePointFound=true;
                                 }
+                                transitionEdge = transitionEdges.remove(0);
                             } else if (transitionEdges.isEmpty() ) {
                                 textArea.append("RESULT: FAILURE. Simulation stuck at node: '"+node.toString()+"', no transition path found.\n");
                                 isStuck = true;
@@ -122,5 +125,9 @@ public class AlgorithmRunner {
             }
         };
         worker.execute();
+    }
+
+    public boolean choicePointFound() {
+        return choicePointFound;
     }
 }
