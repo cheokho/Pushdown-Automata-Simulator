@@ -135,11 +135,25 @@ public class TopLevelGUI extends JFrame{
                             getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic\n");
                         }
 
-                        SwingWorker<Void, Void> worker = null;
+                        SwingWorker<Boolean, Void> worker = null;
 
                         AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
-                        algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
+                        if (PDAVersionGUI.isNdpda) {
+                            Node node=null;
+                            for (Node n: nodeArray) {
+                                if (n.isInitial) {
+                                    node=n;
+                                    break;
+                                }
+                            }
+                            StringBuilder path=new StringBuilder();
+                            path.append(node.toString());
+                            algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, path);
 
+                            System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerator());
+                        } else {
+                            algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
+                        }
 
                         /**TODO - Get initial state for starting point.
                          - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.

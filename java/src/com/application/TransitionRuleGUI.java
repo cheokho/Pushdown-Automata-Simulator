@@ -49,6 +49,7 @@ public class TransitionRuleGUI extends JDialog {
     private Edge edge = null;
 
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNode, String toNode, ArrayList<String> stackArray, ArrayList<String> inputArray, boolean isNdpda) {
+
         setTitle("Transition rule from '" + fromNode + "' to '" + toNode + "'.");
         this.stackArray = stackArray;
         this.inputArray = inputArray;
