@@ -167,8 +167,9 @@ public class AlgorithmRunner {
             stackArray.add(model.getValueAt(q, 0).toString());
         }
 
-        if (!inputElements.equals("") && node!=null) {
+        if (inputElements!=null && !inputElements.equals("") && node!=null) {
             String input=inputElements.substring(0,1);
+            inputElements = inputElements.substring(1);
 
             for (Edge edge : edgeArray) {
                 //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
@@ -178,40 +179,42 @@ public class AlgorithmRunner {
                     if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
                         transitionEdges.add(edge);
                     }
-                    if (transitionEdges.size() == 1) {
-                        System.out.println("Single outgoing edge");
-                        transitionEdge = transitionEdges.get(0);
-
-                    } else {
-                        System.out.println("Many outgoing edge");
-                        for (int i = 0; i < transitionEdges.size(); i++) {
-                            transitionEdge = transitionEdges.get(i);
-                            node = transitionEdge.getToNode();
-
-                            pathGenerator.add((path + node.toString()));
-
-                            String transitionOperation="";
-                            if (transitionEdge != null) {
-                                transitionOperation = transitionEdge.getTransitionOperation();
-                            }
-                            if (transitionOperation.contains("push")) {
-                                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
-                                model.insertRow(0, new String[]{stackCharacter});
-                                model.fireTableDataChanged();
-
-                            } else if (transitionOperation.contains("pop")) {
-                                model.removeRow(0);
-                                model.fireTableDataChanged();
-
-                            } else if (transitionOperation.contains("do nothing")) {
-                                //do nothing lol
-                            }
-                            inputElements = inputElements.substring(1);
-                            ndpdaAlgorithm(inputElements, node, path);
-                        }
-                    }
                 }
             }
+
+            if (transitionEdges.size() == 1) {
+                System.out.println("Single outgoing edge");
+                transitionEdge = transitionEdges.get(0);
+
+            } else {
+                System.out.println("Many outgoing edge");
+
+                for (int i = 0; i < transitionEdges.size(); i++) {
+                    transitionEdge = transitionEdges.get(i);
+                    node = transitionEdge.getToNode();
+
+                    pathGenerator.add((path + node.toString()));
+
+                    String transitionOperation="";
+                    if (transitionEdge != null) {
+                        transitionOperation = transitionEdge.getTransitionOperation();
+                    }
+                    if (transitionOperation.contains("push")) {
+                        String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
+                        model.insertRow(0, new String[]{stackCharacter});
+                        model.fireTableDataChanged();
+
+                    } else if (transitionOperation.contains("pop")) {
+                        model.removeRow(0);
+                        model.fireTableDataChanged();
+
+                    } else if (transitionOperation.contains("do nothing")) {
+                        //do nothing lol
+                    }
+                    ndpdaAlgorithm(inputElements, node, path);
+                }
+            }
+
             String transitionOperation="";
             if (transitionEdge != null) {
                 transitionOperation = transitionEdge.getTransitionOperation();
@@ -229,14 +232,16 @@ public class AlgorithmRunner {
                 //do nothing lol
             }
 
-            node = transitionEdge.getToNode();
-            path.append(node.toString());
-            inputElements = inputElements.substring(1);
-            ndpdaAlgorithm(inputElements, node, path);
-
+            if (transitionEdge!=null) {
+                node = transitionEdge.getToNode();
+                path.append(node.toString());
+                ndpdaAlgorithm(inputElements, node, path);
+            }
 
         }
-        pathGenerator.add(path.toString());
+        if (!pathGenerator.contains(path.toString())) {
+            pathGenerator.add(path.toString());
+        }
 
 
 //        Thread.sleep(1000);
