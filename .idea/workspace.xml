@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
@@ -88,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+              <caret line="152" column="108" selection-start-line="152" selection-start-column="108" selection-end-line="152" selection-end-column="108" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,14 +100,12 @@
       <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.0">
-              <caret line="171" column="54" selection-start-line="171" selection-start-column="54" selection-end-line="171" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.6758475">
+              <caret line="268" column="17" selection-start-line="268" selection-start-column="17" selection-end-line="268" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7450#7456#0" expanded="true" />
-                <element signature="e#7512#7520#0" expanded="true" />
-                <element signature="e#12094#12095#0" expanded="true" />
-                <element signature="e#12130#12131#0" expanded="true" />
+                <element signature="e#7467#7473#0" expanded="true" />
+                <element signature="e#7529#7537#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -686,13 +685,7 @@
       <workItem from="1456752277761" duration="13619000" />
       <workItem from="1456841838618" duration="1935000" />
       <workItem from="1456844258628" duration="5209000" />
-      <workItem from="1456927710714" duration="8389000" />
-    </task>
-    <task id="LOCAL-00006" summary="update GUI">
-      <created>1453835366012</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1453835366012</updated>
+      <workItem from="1456927710714" duration="11737000" />
     </task>
     <task id="LOCAL-00007" summary="update GUI">
       <created>1453835555369</created>
@@ -982,15 +975,21 @@
       <option name="project" value="LOCAL" />
       <updated>1456939431119</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="NDPDA new idea revamp testing. 1.1">
+      <created>1456940741692</created>
+      <option name="number" value="00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1456940741692</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208911000" />
+    <option name="totallyTimeSpent" value="212259000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1000,7 +999,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32793522" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32793522" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1030,7 +1029,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="overlap temp fix." />
     <MESSAGE value="edge style fixes" />
     <MESSAGE value="stack added" />
     <MESSAGE value="state colours fixed." />
@@ -1055,7 +1053,8 @@
     <MESSAGE value="working on NDPDA stuff inn progress." />
     <MESSAGE value="working on NDPDA stuff in progress v2." />
     <MESSAGE value="NDPDA new idea revamp testing." />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing." />
+    <MESSAGE value="NDPDA new idea revamp testing. 1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1485,7 +1484,7 @@
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+          <caret line="152" column="108" selection-start-line="152" selection-start-column="108" selection-end-line="152" selection-end-column="108" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1494,14 +1493,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0">
-          <caret line="171" column="54" selection-start-line="171" selection-start-column="54" selection-end-line="171" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.6758475">
+          <caret line="268" column="17" selection-start-line="268" selection-start-column="17" selection-end-line="268" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7450#7456#0" expanded="true" />
-            <element signature="e#7512#7520#0" expanded="true" />
-            <element signature="e#12094#12095#0" expanded="true" />
-            <element signature="e#12130#12131#0" expanded="true" />
+            <element signature="e#7467#7473#0" expanded="true" />
+            <element signature="e#7529#7537#0" expanded="true" />
           </folding>
         </state>
       </provider>
