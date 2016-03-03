@@ -156,12 +156,21 @@ public class AlgorithmRunner {
         worker.execute();
     }
 
+
+    //TODO IMPLEMENT THIS
+    // instead of storing strings, store objects which also contain the stack array at each point.
+    // pass in PathGenerator object into ndpdaAlgorithm instead of StringBuilder
+    // check length of path string to see if path is valid.
+
+    //TODO BUGS TO FIX
+    // allow same edge rule to be created from outgoing node if it is not going to the same node.
+    // when edge is deleted, you can't create the same edge rule from that node. needs fixing.
+
     public void ndpdaAlgorithm(String inputElements, Node node, StringBuilder path) {
 
         ArrayList<Edge> transitionEdges = new ArrayList<Edge>();
         ArrayList<String> stackArray = new ArrayList<String>();
         Edge transitionEdge=null;
-        //isStuck = false;
 
 
         for (int q=0; q<model.getRowCount(); q++) {
