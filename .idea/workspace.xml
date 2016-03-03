@@ -89,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64830506">
-              <caret line="155" column="33" selection-start-line="155" selection-start-column="33" selection-end-line="155" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,14 +101,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="263" column="68" selection-start-line="263" selection-start-column="68" selection-end-line="263" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.7838983">
+              <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12250#12251#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,8 +170,8 @@
         <option value="$PROJECT_DIR$/java/src/com/application/Node.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PathFinder.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
       </list>
     </option>
   </component>
@@ -689,13 +688,7 @@
       <workItem from="1456841838618" duration="1935000" />
       <workItem from="1456844258628" duration="5209000" />
       <workItem from="1456927710714" duration="11779000" />
-      <workItem from="1457017174077" duration="2678000" />
-    </task>
-    <task id="LOCAL-00008" summary="update GUI">
-      <created>1453835823305</created>
-      <option name="number" value="00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1453835823305</updated>
+      <workItem from="1457017174077" duration="3836000" />
     </task>
     <task id="LOCAL-00009" summary="layout fixes.">
       <created>1453836167437</created>
@@ -985,11 +978,17 @@
       <option name="project" value="LOCAL" />
       <updated>1456944539126</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="NDPDA new idea revamp testing. 1.1.2">
+      <created>1457019869611</created>
+      <option name="number" value="00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1457019869614</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214979000" />
+    <option name="totallyTimeSpent" value="216137000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1033,7 +1032,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="stack added" />
     <MESSAGE value="state colours fixed." />
     <MESSAGE value="transition rule fixes." />
     <MESSAGE value="delete backend needs fixing." />
@@ -1058,7 +1056,8 @@
     <MESSAGE value="NDPDA new idea revamp testing." />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.1" />
+    <MESSAGE value="NDPDA new idea revamp testing. 1.1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1489,21 +1488,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="263" column="68" selection-start-line="263" selection-start-column="68" selection-end-line="263" selection-end-column="68" />
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12250#12251#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64830506">
-          <caret line="155" column="33" selection-start-line="155" selection-start-column="33" selection-end-line="155" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.7838983">
+          <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

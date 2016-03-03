@@ -262,6 +262,15 @@ public class AlgorithmRunner {
     }
 
     public ArrayList<String> getPathGenerator(RunSimGUI runSimGUI) {
+        ArrayList<String> toRemove = new ArrayList<>();
+        for (String s: pathGenerator) {
+            if ((s.length()) != (runSimGUI.getInput().length()+1)) {
+                toRemove.add(s);
+            }
+        }
+
+        pathGenerator.removeAll(toRemove);
+
         return pathGenerator;
     }
 
