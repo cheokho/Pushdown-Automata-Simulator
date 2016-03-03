@@ -156,12 +156,12 @@ public class AlgorithmRunner {
         worker.execute();
     }
 
-    public void ndpdaAlgorithm(String inputElements, Node node, StringBuilder path, boolean isStuck) {
+    public void ndpdaAlgorithm(String inputElements, Node node, StringBuilder path) {
 
         ArrayList<Edge> transitionEdges = new ArrayList<Edge>();
         ArrayList<String> stackArray = new ArrayList<String>();
         Edge transitionEdge=null;
-        isStuck = false;
+        //isStuck = false;
 
 
         for (int q=0; q<model.getRowCount(); q++) {
@@ -211,7 +211,7 @@ public class AlgorithmRunner {
                     } else if (transitionOperation.contains("do nothing")) {
                         //do nothing lol
                     }
-                    ndpdaAlgorithm(inputElements, node, new StringBuilder().append(path+node.toString()), isStuck);
+                    ndpdaAlgorithm(inputElements, node, new StringBuilder().append(path+node.toString()));
                 }
             }
 
@@ -235,7 +235,7 @@ public class AlgorithmRunner {
             if (transitionEdge!=null) {
                 node = transitionEdge.getToNode();
                 path.append(node.toString());
-                ndpdaAlgorithm(inputElements, node, path, isStuck);
+                ndpdaAlgorithm(inputElements, node, path);
             }
 
         }
@@ -262,14 +262,6 @@ public class AlgorithmRunner {
     }
 
     public ArrayList<String> getPathGenerator(RunSimGUI runSimGUI) {
-        for (int i=0; i<pathGenerator.size(); i++) {
-            if (runSimGUI.getInput().length() == 1 && pathGenerator.get(i).length() ==2) {
-
-            }
-            else if (pathGenerator.get(i).length()+1 != runSimGUI.getInput().length()) {
-                pathGenerator.remove(i);
-            }
-        }
         return pathGenerator;
     }
 

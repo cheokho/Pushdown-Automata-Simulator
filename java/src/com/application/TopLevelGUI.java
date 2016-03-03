@@ -148,8 +148,13 @@ public class TopLevelGUI extends JFrame{
                             }
                             StringBuilder path=new StringBuilder();
                             path.append(node.toString());
-                            algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, path, false);
+                            algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, path);
 
+                            for (String s: algorithmRunner.getPathGenerator(runSimGUI)) {
+                                if ((s.length()) != (runSimGUI.getInput().length()+1)) {
+                                    algorithmRunner.getPathGenerator(runSimGUI).remove(s);
+                                }
+                            }
                             System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerator(runSimGUI));
                         } else {
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
