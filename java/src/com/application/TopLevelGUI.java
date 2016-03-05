@@ -20,10 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -160,9 +157,28 @@ public class TopLevelGUI extends JFrame{
                             algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, pathGenerator);
 
                             //System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerators(runSimGUI));
-                            for (PathGenerator p: algorithmRunner.getPathGenerators(runSimGUI)) {
-                                System.out.println("path: "+p.getPath().toString());
-                                System.out.println("stackarray at end: "+p.getStackArray()+" | transition operations:"+p.getStackOperations());
+
+                            Set<String> temp = new HashSet<String>();
+                            ArrayList<PathGenerator> paths = new ArrayList<PathGenerator>();
+                            if (runSimGUI.getInput() != null && runSimGUI.getInput().length() > 0) {
+                                for (PathGenerator p : algorithmRunner.getPathGenerators(runSimGUI)) {
+                                    if (temp.add(p.getPath().toString())) {
+                                        paths.add(p);
+                                    }
+                                    //System.out.println("stackarray at end: "+p.getStackArray()+" | transition operations:"+p.getStackOperations());
+                                }
+                            }
+                            System.out.println("paths:"+paths.toString());
+                            if (paths.isEmpty() == false) {
+                                Object[] possibilities = paths.toArray();
+                                String result = (String) JOptionPane.showInputDialog(getFocusOwner(), "Non-stuck paths found are shown below. Please select which you would like to run.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
+
+                                if (result !=null && result.length() >0) {
+                                    //TODO run algorithm stuffs here.
+                                }
+
+                            } else if (runSimGUI.getInput() !=null && runSimGUI.getInput().length() > 0){
+                                JOptionPane.showMessageDialog(getContentPane(), "No non-stuck path found. This means that all possible routes lead to the a state where the automaton becomes stuck.", "Simulation failed", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);

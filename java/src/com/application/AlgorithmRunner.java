@@ -217,8 +217,7 @@ public class AlgorithmRunner {
                     //newPath.getPath().append(node.toString());
                     newPath.setStringBuilder(new StringBuilder(currentPath+node.toString()));
                     newPath.setStackArray(newStack);
-                    newPath.addToStackOperations(transitionEdge.getTransitionOperation());
-                    pathGenerators.add(newPath);
+
 
                     String transitionOperation="";
                     if (transitionEdge != null) {
@@ -234,6 +233,9 @@ public class AlgorithmRunner {
                     } else if (transitionOperation.contains("do nothing")) {
                         //do nothing lol
                     }
+                    newPath.addToStackOperations(transitionOperation);
+
+                    pathGenerators.add(newPath);
 
                     ndpdaAlgorithm(inputElements, node, newPath);
                 }
@@ -300,9 +302,9 @@ public class AlgorithmRunner {
     public Set<PathGenerator> getPathGenerators(RunSimGUI runSimGUI) {
         Set<PathGenerator> toRemove = new LinkedHashSet<>();
         for (PathGenerator s: pathGenerators) {
-            if ((s.getPath().toString().length()) != (runSimGUI.getInput().length()+1)) {
-                toRemove.add(s);
-            }
+                if ((s.getPath().toString().length()) != (runSimGUI.getInput().length() + 1)) {
+                    toRemove.add(s);
+                }
         }
 
         pathGenerators.removeAll(toRemove);

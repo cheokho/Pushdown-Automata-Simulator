@@ -23,6 +23,10 @@ public class PathGenerator {
         return path;
     }
 
+    public String toString() {
+        return path.toString();
+    }
+
     public ArrayList<String> getStackArray() {
         return stackArray;
     }
