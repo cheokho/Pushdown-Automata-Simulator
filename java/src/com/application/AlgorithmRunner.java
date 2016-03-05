@@ -3,6 +3,8 @@ package com.application;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -18,7 +20,7 @@ public class AlgorithmRunner {
     private SwingWorker<Boolean, Void> worker;
     private boolean choicePointFound;
 
-    ArrayList<String> pathGenerator;
+    private Set<PathGenerator> pathGenerators;
 
     public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<Node> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Boolean, Void> worker) {
         this.runSimGUI=runSimGUI;
@@ -28,7 +30,7 @@ public class AlgorithmRunner {
         this.textArea=textArea;
         this.worker=worker;
 
-        pathGenerator = new ArrayList<String>();
+        pathGenerators = new LinkedHashSet<PathGenerator>();
     }
 
     //same rule but different TONODE needs fixing too.
@@ -166,16 +168,17 @@ public class AlgorithmRunner {
     // allow same edge rule to be created from outgoing node if it is not going to the same node.
     // when edge is deleted, you can't create the same edge rule from that node. needs fixing.
 
-    public void ndpdaAlgorithm(String inputElements, Node node, StringBuilder path) {
+    public void ndpdaAlgorithm(String inputElements, Node node, PathGenerator pathGenerator) {
 
         ArrayList<Edge> transitionEdges = new ArrayList<Edge>();
-        ArrayList<String> stackArray = new ArrayList<String>();
         Edge transitionEdge=null;
 
 
-        for (int q=0; q<model.getRowCount(); q++) {
-            stackArray.add(model.getValueAt(q, 0).toString());
-        }
+//        for (int q=0; q<model.getRowCount(); q++) {
+//            stackArray.add(model.getValueAt(q, 0).toString());
+//        }
+
+
 
         if (inputElements!=null && !inputElements.equals("") && node!=null) {
             String input=inputElements.substring(0,1);
@@ -186,7 +189,7 @@ public class AlgorithmRunner {
                 if (node.toString().equals(edge.getFromNode().toString())) {
 //                                        System.out.println("Outgoing edges from:" +node.toString());
 //                                        System.out.println("Edges:"+edge.toString());
-                    if (edge.getEdgeTopStack().equals(stackArray.get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
+                    if (edge.getEdgeTopStack().equals(pathGenerator.getStackArray().get(0)) && edge.getEdgeTopInput() == Integer.parseInt(input)) {
                         transitionEdges.add(edge);
                     }
                 }
@@ -199,10 +202,22 @@ public class AlgorithmRunner {
             } else if (transitionEdges.size() > 1){
                 System.out.println("Many outgoing edge");
 
+
                 for (int i = 0; i < transitionEdges.size(); i++) {
                     transitionEdge = transitionEdges.get(i);
                     node = transitionEdge.getToNode();
-                    pathGenerator.add((path + node.toString()));
+                    //pathGenerators.add((path + node.toString()));
+
+                    String currentPath = pathGenerator.getPath().toString();
+                    ArrayList<String> currentStack = pathGenerator.getStackArray();
+                    ArrayList<String> newStack = new ArrayList<String>();
+                    newStack.addAll(currentStack);
+                    PathGenerator newPath = new PathGenerator();
+                    System.out.println("test"+currentPath);
+                    //newPath.getPath().append(node.toString());
+                    newPath.setStringBuilder(new StringBuilder(currentPath+node.toString()));
+                    newPath.setStackArray(newStack);
+                    pathGenerators.add(newPath);
 
                     String transitionOperation="";
                     if (transitionEdge != null) {
@@ -210,48 +225,58 @@ public class AlgorithmRunner {
                     }
                     if (transitionOperation.contains("push")) {
                         String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
-                        model.insertRow(0, new String[]{stackCharacter});
-                        model.fireTableDataChanged();
+                        newPath.getStackArray().add(0, stackCharacter);
 
                     } else if (transitionOperation.contains("pop")) {
-                        model.removeRow(0);
-                        model.fireTableDataChanged();
+                        newPath.getStackArray().remove(0);
 
                     } else if (transitionOperation.contains("do nothing")) {
                         //do nothing lol
                     }
-                    ndpdaAlgorithm(inputElements, node, new StringBuilder().append(path+node.toString()));
+
+                    ndpdaAlgorithm(inputElements, node, newPath);
                 }
             }
 
             String transitionOperation="";
             if (transitionEdge != null) {
                 transitionOperation = transitionEdge.getTransitionOperation();
-            }
-            if (transitionOperation.contains("push")) {
-                String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
-                model.insertRow(0, new String[]{stackCharacter});
-                model.fireTableDataChanged();
 
-            } else if (transitionOperation.contains("pop")) {
-                model.removeRow(0);
-                model.fireTableDataChanged();
+                if (transitionOperation.contains("push")) {
+                    String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(") + 1, transitionOperation.lastIndexOf(")"));
+//                model.insertRow(0, new String[]{stackCharacter});
+//                model.fireTableDataChanged();
+                    pathGenerator.getStackArray().add(0, stackCharacter);
 
-            } else if (transitionOperation.contains("do nothing")) {
-                //do nothing lol
-            }
+                } else if (transitionOperation.contains("pop")) {
+//                model.removeRow(0);
+//                model.fireTableDataChanged();
+                    pathGenerator.getStackArray().remove(0);
 
-            if (transitionEdge!=null) {
+                } else if (transitionOperation.contains("do nothing")) {
+                    //do nothing lol
+                }
+
                 node = transitionEdge.getToNode();
-                path.append(node.toString());
-                ndpdaAlgorithm(inputElements, node, path);
+//                path.append(node.toString());
+//                ndpdaAlgorithm(inputElements, node, path);
+                pathGenerator.getPath().append(node.toString());
+                ndpdaAlgorithm(inputElements, node, pathGenerator);
+
             }
-
         }
-        if (!pathGenerator.contains(path.toString())) {
-            pathGenerator.add(path.toString());
-        }
+        if (pathGenerators.isEmpty() == false) {
+            ArrayList<String> allPaths = new ArrayList<String>();
+            for (PathGenerator p : pathGenerators) {
+                allPaths.add(p.getPath().toString());
 
+            }
+            if (!allPaths.contains(pathGenerator.getPath().toString())) {
+                pathGenerators.add(pathGenerator);
+            }
+        } else {
+            pathGenerators.add(pathGenerator);
+        }
 
 //        Thread.sleep(1000);
 //        textArea.setCaretPosition(textArea.getDocument().getLength());
@@ -270,17 +295,17 @@ public class AlgorithmRunner {
 //        }
     }
 
-    public ArrayList<String> getPathGenerator(RunSimGUI runSimGUI) {
-        ArrayList<String> toRemove = new ArrayList<>();
-        for (String s: pathGenerator) {
-            if ((s.length()) != (runSimGUI.getInput().length()+1)) {
+    public Set<PathGenerator> getPathGenerators(RunSimGUI runSimGUI) {
+        Set<PathGenerator> toRemove = new LinkedHashSet<>();
+        for (PathGenerator s: pathGenerators) {
+            if ((s.getPath().toString().length()) != (runSimGUI.getInput().length()+1)) {
                 toRemove.add(s);
             }
         }
 
-        pathGenerator.removeAll(toRemove);
+        pathGenerators.removeAll(toRemove);
 
-        return pathGenerator;
+        return pathGenerators;
     }
 
     public boolean choicePointFound() {

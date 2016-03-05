@@ -146,11 +146,24 @@ public class TopLevelGUI extends JFrame{
                                     break;
                                 }
                             }
+
+                            //create $ stack array here.
+
+                            PathGenerator pathGenerator = new PathGenerator();
+                            ArrayList<String> stackArray = new ArrayList<String>();
+                            stackArray.add(0, "$");
+                            pathGenerator.setStackArray(stackArray);
                             StringBuilder path=new StringBuilder();
                             path.append(node.toString());
-                            algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, path);
+                            pathGenerator.setStringBuilder(path);
 
-                            System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerator(runSimGUI));
+                            algorithmRunner.ndpdaAlgorithm(runSimGUI.getInput(),node, pathGenerator);
+
+                            //System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerators(runSimGUI));
+                            for (PathGenerator p: algorithmRunner.getPathGenerators(runSimGUI)) {
+                                System.out.println("path: "+p.getPath().toString());
+                                System.out.println("stackarray: "+p.getStackArray());
+                            }
                         } else {
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
                         }
@@ -344,6 +357,18 @@ public class TopLevelGUI extends JFrame{
                                                         break;
                                                     }
                                                 }
+                                                for (String s3: n.getOutGoingEdgeRule()) {
+                                                    if (s3.equals(edgeArray.get(i).toString())) {
+                                                        n.getOutGoingEdgeRule().remove(s3);
+                                                        break;
+                                                    }
+                                                }
+                                                for (String s4: n.getToFromCombo()) {
+                                                    if (s4.equals(edgeArray.get(i).getToNode().toString()+edgeArray.get(i).getFromNode().toString())) {
+                                                        n.getToFromCombo().remove(s4);
+                                                        break;
+                                                    }
+                                                }
                                                 //System.out.println("COMBO   :"+n.getOutGoingCombo());
                                         }
                                         edgeArray.remove(i);
@@ -373,6 +398,7 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                        n.addToFromCombo(cellReleased.getValue().toString()+cellPressed.getValue().toString());
                                     }
                                 }
                             }
@@ -390,6 +416,7 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
                                         n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                        n.addToFromCombo(cellReleased.getValue().toString()+cellPressed.getValue().toString());
                                     }
                                 }
 //                            System.out.println("LOL"+n.getOutgoingInputs());
