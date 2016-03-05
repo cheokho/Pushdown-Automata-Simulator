@@ -162,7 +162,7 @@ public class TopLevelGUI extends JFrame{
                             //System.out.println("PATH GENERATOR: "+algorithmRunner.getPathGenerators(runSimGUI));
                             for (PathGenerator p: algorithmRunner.getPathGenerators(runSimGUI)) {
                                 System.out.println("path: "+p.getPath().toString());
-                                System.out.println("stackarray: "+p.getStackArray());
+                                System.out.println("stackarray at end: "+p.getStackArray()+" | transition operations:"+p.getStackOperations());
                             }
                         } else {
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);

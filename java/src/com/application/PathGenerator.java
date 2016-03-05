@@ -9,8 +9,10 @@ public class PathGenerator {
 
     StringBuilder path;
     ArrayList<String> stackArray;
+    ArrayList<String> stackOperations;
 
     public PathGenerator() {
+        stackOperations=new ArrayList<String>();
     }
 
     public void setStringBuilder (StringBuilder path) {
@@ -26,6 +28,17 @@ public class PathGenerator {
     }
 
     public void setStackArray (ArrayList<String> stackArray) { this.stackArray = stackArray; }
+
+    public void addToStackOperations(String stackOperation) {
+        stackOperations.add(stackOperation);
+    }
+
+    public ArrayList<String> getStackOperations() {
+        return stackOperations;
+    }
 }
+
+
+
 
 

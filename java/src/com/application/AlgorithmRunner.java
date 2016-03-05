@@ -213,10 +213,11 @@ public class AlgorithmRunner {
                     ArrayList<String> newStack = new ArrayList<String>();
                     newStack.addAll(currentStack);
                     PathGenerator newPath = new PathGenerator();
-                    System.out.println("test"+currentPath);
+                    //System.out.println("test"+currentPath);
                     //newPath.getPath().append(node.toString());
                     newPath.setStringBuilder(new StringBuilder(currentPath+node.toString()));
                     newPath.setStackArray(newStack);
+                    newPath.addToStackOperations(transitionEdge.getTransitionOperation());
                     pathGenerators.add(newPath);
 
                     String transitionOperation="";
@@ -241,6 +242,7 @@ public class AlgorithmRunner {
             String transitionOperation="";
             if (transitionEdge != null) {
                 transitionOperation = transitionEdge.getTransitionOperation();
+                pathGenerator.addToStackOperations(transitionOperation);
 
                 if (transitionOperation.contains("push")) {
                     String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(") + 1, transitionOperation.lastIndexOf(")"));
