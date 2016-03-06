@@ -100,7 +100,6 @@ public class TopLevelGUI extends JFrame{
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
-                    ArrayList<String> missingCombos = new ArrayList<String>();
                     System.out.println("All input stack combo: " + allInputStackCombo);
                     for (Node n : nodeArray) {
                         System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
@@ -132,7 +131,7 @@ public class TopLevelGUI extends JFrame{
                             getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic\n");
                         }
 
-                        SwingWorker<Boolean, Void> worker = null;
+                        SwingWorker<Void, Void> worker = null;
 
                         AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
                         if (PDAVersionGUI.isNdpda) {
@@ -175,6 +174,7 @@ public class TopLevelGUI extends JFrame{
 
                                 if (result !=null && result.toString().length() >0) {
                                     //TODO run algorithm stuffs here. n.b there can be same paths with multiple routes.
+                                    algorithmRunner.runNDPDAPath(result);
                                 }
 
                             } else if (runSimGUI.getInput() !=null && runSimGUI.getInput().length() > 0){

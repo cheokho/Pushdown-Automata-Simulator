@@ -5,7 +5,6 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by CheokHo on 23/02/2016.
@@ -17,12 +16,12 @@ public class AlgorithmRunner {
     private ArrayList<Edge> edgeArray;
     private DefaultTableModel model;
     private JTextArea textArea;
-    private SwingWorker<Boolean, Void> worker;
+    private SwingWorker<Void, Void> worker;
     private boolean choicePointFound;
 
     private Set<PathGenerator> pathGenerators;
 
-    public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<Node> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Boolean, Void> worker) {
+    public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<Node> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
         this.runSimGUI=runSimGUI;
         this.model=model;
         this.nodeArray=nodeArray;
@@ -37,22 +36,22 @@ public class AlgorithmRunner {
     //basically I need a check which can detect that there is a choice point in the algorithm. If there is, the runalgorithm method needs to be recalled using the 2nd choice.
     public void runAlgorithm(boolean isNdpda) {
 
-        worker = new SwingWorker<Boolean, Void>() {
+        worker = new SwingWorker<Void, Void>() {
             @Override
-            protected Boolean doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
 
                 StringBuilder totalPath = new StringBuilder();
                 Node node = null;
-                for (Node n: nodeArray) {
+                for (Node n : nodeArray) {
                     if (n.isInitial) {
-                        node=n;
+                        node = n;
                         totalPath.append(n.toString());
                         break;
                     }
                 }
                 String inputElements = runSimGUI.getInput();
-                Edge transitionEdge=null;
-                boolean isStuck=false;
+                Edge transitionEdge = null;
+                boolean isStuck = false;
 
                 PathFinder pathFinder = new PathFinder();
                 pathFinder.setCurrentInput(inputElements);
@@ -63,15 +62,15 @@ public class AlgorithmRunner {
                 pathFinders.add(pathFinder);
 
 
-                while (inputElements != null && !inputElements.equals("") && node!=null && !isStuck && !pathFinders.isEmpty()) {
+                while (inputElements != null && !inputElements.equals("") && node != null && !isStuck && !pathFinders.isEmpty()) {
                     ArrayList<String> stackArray = new ArrayList<String>();
-                    for (int q=0; q<model.getRowCount(); q++) {
+                    for (int q = 0; q < model.getRowCount(); q++) {
                         stackArray.add(model.getValueAt(q, 0).toString());
                     }
-                    String input = pathFinders.get(0).getCurrentInput().substring(0, 1);
+                    String input;
 //                                System.out.println("node outgoing combos: "+node.getOutGoingCombo());
                     if (!isNdpda) {
-                        input=inputElements.substring(0,1);
+                        input = inputElements.substring(0, 1);
                         for (Edge edge : edgeArray) {
                             //edgeTopInputAndStack = edge.getEdgeTopInput() + edge.getEdgeTopStack();
                             if (node.toString().equals(edge.getFromNode().toString())) {
@@ -83,12 +82,12 @@ public class AlgorithmRunner {
                                 }
                             }
                         }
-                        String transitionOperation="";
+                        String transitionOperation = "";
                         if (transitionEdge != null) {
                             transitionOperation = transitionEdge.getTransitionOperation();
                         }
                         if (transitionOperation.contains("push")) {
-                            String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(")+1, transitionOperation.lastIndexOf(")"));
+                            String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(") + 1, transitionOperation.lastIndexOf(")"));
                             model.insertRow(0, new String[]{stackCharacter});
                             model.fireTableDataChanged();
 
@@ -104,17 +103,16 @@ public class AlgorithmRunner {
 
                         Thread.sleep(1000);
                         textArea.setCaretPosition(textArea.getDocument().getLength());
-                        textArea.append("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString()+"\n");
+                        textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
                         totalPath.append(transitionEdge.getToNode());
                         if (inputElements.equals("")) {
-                            textArea.append("Simulation finished at node: '"+transitionEdge.getToNode()+"'.\nPath taken: '"+totalPath.toString()+"'.\n");
-                            if(transitionEdge.getToNode().isAccept()) {
-                                textArea.append("RESULT: SUCCESS. '"+transitionEdge.getToNode()+"' is an accepting state.\n");
+                            textArea.append("Simulation finished at node: '" + transitionEdge.getToNode() + "'.\nPath taken: '" + totalPath.toString() + "'.\n");
+                            if (transitionEdge.getToNode().isAccept()) {
+                                textArea.append("RESULT: SUCCESS. '" + transitionEdge.getToNode() + "' is an accepting state.\n");
                             } else {
-                                textArea.append("RESULT: FAILURE. '"+transitionEdge.getToNode()+"' is not an accepting state.\n");
+                                textArea.append("RESULT: FAILURE. '" + transitionEdge.getToNode() + "' is not an accepting state.\n");
                             }
-                        }
-                        else {
+                        } else {
                             textArea.append("Current input elements: " + inputElements + "\n");
                         }
 
@@ -125,35 +123,10 @@ public class AlgorithmRunner {
                         // Run transitionEdge calculator on all transitionEdges it finds. (transitionEdge.get(i)
                         // update this for all PathFinder objects.
 
-
-                    } else if (isNdpda) {
-                        //System.out.println("Entered NDPDA if statement.");
-
                     }
                 }
-
-                return choicePointFound;
+                return null;
             }
-
-            @Override
-
-            protected void done() {
-
-                //recursion for swingworker.
-                try {
-                    Boolean status = get();
-                    if(status) {
-                        //runAlgorithm(PDAVersionGUI.isNdpda);
-                    }
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-
         };
         worker.execute();
     }
@@ -310,6 +283,90 @@ public class AlgorithmRunner {
         pathGenerators.removeAll(toRemove);
 
         return pathGenerators;
+    }
+
+    public void runNDPDAPath(PathGenerator selectedPath) {
+
+        worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+
+                String route = selectedPath.toString();
+                String startNode=route.substring(0,1);
+                route=route.substring(1);
+                String inputElements = runSimGUI.getInput();
+
+                for (Node n : nodeArray) {
+                    if (n.isInitial) {
+                        startNode = n.toString();
+                        break;
+                    }
+                }
+
+                while (inputElements != null && !inputElements.equals("") && startNode != null && route != null) {
+
+                    ArrayList<String> stackArray = new ArrayList<String>();
+                    for (int q = 0; q < model.getRowCount(); q++) {
+                        stackArray.add(model.getValueAt(q, 0).toString());
+                    }
+
+                    String input = inputElements.substring(0, 1);
+
+                    String nextNode = route.substring(0,1);
+                    route=route.substring(1);
+
+                    System.out.println(startNode +"     "+ nextNode +"\n"+ input);
+
+                    Edge transitionEdge = null;
+
+                    for (Edge e : edgeArray) {
+                        if (e.getFromNode().toString().equals(startNode) && e.getToNode().toString().equals(nextNode) && e.getEdgeTopStack().equals(stackArray.get(0)) && e.getEdgeTopInput() == Integer.parseInt(input)) {
+                            transitionEdge = e;
+                            break;
+                        }
+                    }
+
+                    System.out.println(transitionEdge);
+
+                    String transitionOperation = "";
+                    if (transitionEdge != null) {
+                        transitionOperation = transitionEdge.getTransitionOperation();
+                    }
+                    if (transitionOperation.contains("push")) {
+                        String stackCharacter = transitionOperation.substring(transitionOperation.lastIndexOf("(") + 1, transitionOperation.lastIndexOf(")"));
+                        model.insertRow(0, new String[]{stackCharacter});
+                        model.fireTableDataChanged();
+
+                    } else if (transitionOperation.contains("pop")) {
+                        model.removeRow(0);
+                        model.fireTableDataChanged();
+
+                    } else if (transitionOperation.contains("do nothing")) {
+                        //do nothing lol
+                    }
+
+                    inputElements = inputElements.substring(1);
+                    startNode=nextNode;
+
+                    Thread.sleep(1000);
+                    textArea.setCaretPosition(textArea.getDocument().getLength());
+                    textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
+                    if (inputElements.equals("")) {
+                        textArea.append("Simulation finished at node: '" + transitionEdge.getToNode() + "'.\n");
+                        if (transitionEdge.getToNode().isAccept()) {
+                            textArea.append("RESULT: SUCCESS. '" + transitionEdge.getToNode() + "' is an accepting state.\n");
+                        } else {
+                            textArea.append("RESULT: FAILURE. '" + transitionEdge.getToNode() + "' is not an accepting state.\n");
+                        }
+                    } else {
+                        textArea.append("Current input elements: " + inputElements + "\n");
+                    }
+                }
+
+                return null;
+            }
+        };
+        worker.execute();
     }
 
     public boolean choicePointFound() {
