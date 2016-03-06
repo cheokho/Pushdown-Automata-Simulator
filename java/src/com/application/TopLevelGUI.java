@@ -36,6 +36,8 @@ public class TopLevelGUI extends JFrame{
     private PDAVersionGUI pdaTypeGUI;
     private TransitionRuleGUI transRule;
     private DefaultTableModel model;
+    private JPanel topPanel;
+    private JSplitPane splitPane;
 
     //private mxCell nodePressed;
     private mxCell cellReleased;
@@ -49,10 +51,16 @@ public class TopLevelGUI extends JFrame{
         edgeArray = new ArrayList<Edge>();
 //        stackArray = new ArrayList<String>();
 //        stackArray.add("$");
+        topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
         createGraphPane();
         createStackGUI();
-        createConsoleGUI();
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPanel, createConsoleGUI());
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setResizeWeight(0.7);
         createMenuBar();
+
+        add(splitPane, BorderLayout.CENTER);
     }
 
 
@@ -231,26 +239,22 @@ public class TopLevelGUI extends JFrame{
         JScrollPane scrollPane= new JScrollPane(stackTable);
         scrollPane.setPreferredSize(new Dimension(150, 530));
         stackPanel.add(scrollPane);
-        add(stackPanel, BorderLayout.EAST);
+        topPanel.add(stackPanel, BorderLayout.EAST);
     }
 
     public DefaultTableModel getModel() {
         return model;
     }
 
-    public void createConsoleGUI() {
+    public JPanel createConsoleGUI() {
         JPanel consolePanel = new JPanel();
-        JLabel title = new JLabel("Console:");
-        consoleArea = new JTextArea(8, 70);
+        consolePanel.setLayout(new BorderLayout());
+        consoleArea = new JTextArea();
         consoleArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(consoleArea);
-        consolePanel.add(title, BorderLayout.NORTH);
         consolePanel.add(scrollPane, BorderLayout.CENTER);
-        add(consolePanel, BorderLayout.SOUTH);
-//        PrintStream printStream = new PrintStream(new CustomOutput(consoleArea));
-//        PrintStream standardOut = System.out;
-//        System.setOut(printStream);
-//        System.setErr(printStream);
+        //add(consolePanel, BorderLayout.SOUTH);
+        return consolePanel;
     }
 
     public JTextArea getTextArea() {
@@ -444,7 +448,7 @@ public class TopLevelGUI extends JFrame{
                 }
             }
         });
-        add(getContentPane().add(graphComponent), BorderLayout.CENTER);
+        topPanel.add(graphComponent, BorderLayout.CENTER);
     }
 
     public Object createNode(int x,int y, String state, boolean isAccepting, boolean isInitial) {
@@ -482,26 +486,6 @@ public class TopLevelGUI extends JFrame{
         return node;
     }
 
-//    //Instead of taking in an Object for nodes, pass in Node object instead.
-//    public void addEdge(Node nodeFrom, Node nodeTo, String transRule){
-//        Object edge;
-//        Edge newEdge;
-//        //Node newNodeFrom = new Node(nodeFrom, ); //need to get the cell name to create this.
-//        Node newNodeTo;
-//        try
-//        {
-//            edge = graph.insertEdge(parent, null, transRule, nodeFrom.getNode(), nodeTo.getNode());
-//            newEdge = new Edge(edge);
-//            //newEdge.setEdgeRule();
-//            graph.setAllowDanglingEdges(false);
-//            graph.setEdgeLabelsMovable(false);
-//            graph.setCellsEditable(false);
-//        }
-//        finally
-//        {
-//            graph.getModel().endUpdate();
-//        }
-//    }
 
     public ArrayList<Node> getNodeArray() {
         return nodeArray;
