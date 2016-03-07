@@ -318,21 +318,6 @@ public class PDAInGUI extends JDialog {
 
     }
 
-//    public boolean isGraph() {
-//        return isGraph;
-//    }
-
-    public ArrayList<String> getStatesArray() {
-        return statesArray;
-    }
-
-    public ArrayList<String> getAcceptStatesArray() {
-        return acceptStatesArray;
-    }
-
-    public String getInitStateStr() {
-        return initStateStr;
-    }
 
     public ArrayList<String> getStackArray() {
         return stackArray;

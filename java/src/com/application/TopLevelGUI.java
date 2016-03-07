@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -208,6 +209,28 @@ public class TopLevelGUI extends JFrame{
             }
         });
 
+        menuSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showSaveDialog(TopLevelGUI.this) == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    // save to file
+                }
+            }
+        });
+
+        menuOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showOpenDialog(TopLevelGUI.this) == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    // load from file
+                }
+            }
+        });
+
         JMenu edit = new JMenu("Edit");
         JMenuItem menuUndo = new JMenuItem("Undo");
         JMenuItem menuRedo = new JMenuItem("Redo");
@@ -319,7 +342,24 @@ public class TopLevelGUI extends JFrame{
         });
 
 
+        JPopupMenu popup = new JPopupMenu();
+        JMenuItem delete = new JMenuItem("Delete");
+        JMenu newstuff = new JMenu("New");
+        JMenuItem initialNode = new JMenuItem("Initial Node");
+        JMenuItem normalNode = new JMenuItem("Normal Node");
+        JMenuItem acceptingNode = new JMenuItem("Accepting Node");
+
+        newstuff.add(initialNode);
+        newstuff.add(normalNode);
+        newstuff.add(acceptingNode);
+
+        popup.add(delete);
+        popup.add(newstuff);
+
+
+
         //This handles node creation handlers.
+
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
@@ -332,12 +372,18 @@ public class TopLevelGUI extends JFrame{
                     }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
+
+                    popup.show(e.getComponent(), e.getX(), e.getY());
+                    newstuff.setEnabled(true);
+                    delete.setEnabled(false);
+
                     cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
+
+
                     if (cellPressed != null) {
                         //System.out.println("Right Click Cell Value: " + cellPressed.getValue().toString());
-                        JPopupMenu popup = new JPopupMenu();
-                        JMenuItem delete = new JMenuItem("Delete");
-                        popup.add(delete);
+                        delete.setEnabled(true);
+                        newstuff.setEnabled(false);
                         popup.show(e.getComponent(), e.getX(), e.getY());
                         delete.addActionListener(new ActionListener() {
 
@@ -347,8 +393,8 @@ public class TopLevelGUI extends JFrame{
                                 graph.removeCells(new Object[]{cellPressed});
                                 for (int i = 0; i < nodeArray.size(); i++) {
                                     if (nodeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
-                                        for (int x=0; x < edgeArray.size(); x++) {
-                                            if (nodeArray.get(i).equals(edgeArray.get(x).getFromNode()) || nodeArray.get(i).equals(edgeArray.get(x).getToNode()))  {
+                                        for (int x = 0; x < edgeArray.size(); x++) {
+                                            if (nodeArray.get(i).equals(edgeArray.get(x).getFromNode()) || nodeArray.get(i).equals(edgeArray.get(x).getToNode())) {
                                                 edgeArray.remove(x);
                                             }
                                         }
@@ -357,39 +403,39 @@ public class TopLevelGUI extends JFrame{
                                 }
                                 for (int i = 0; i < edgeArray.size(); i++) {
                                     if (edgeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
-                                        for (Node n: nodeArray) {
-                                                for (String s: n.getOutGoingTopStacks()) {
-                                                    if (s.equals(edgeArray.get(i).getEdgeTopStack())) {
-                                                        n.getOutGoingTopStacks().remove(s);
-                                                        break;
-                                                    }
+                                        for (Node n : nodeArray) {
+                                            for (String s : n.getOutGoingTopStacks()) {
+                                                if (s.equals(edgeArray.get(i).getEdgeTopStack())) {
+                                                    n.getOutGoingTopStacks().remove(s);
+                                                    break;
                                                 }
-                                                for (String s1: n.getOutgoingInputs()) {
-                                                    int value=Integer.parseInt(s1);
-                                                    if (value == edgeArray.get(i).getEdgeTopInput()) {
-                                                        n.getOutgoingInputs().remove(s1);
-                                                        break;
-                                                    }
+                                            }
+                                            for (String s1 : n.getOutgoingInputs()) {
+                                                int value = Integer.parseInt(s1);
+                                                if (value == edgeArray.get(i).getEdgeTopInput()) {
+                                                    n.getOutgoingInputs().remove(s1);
+                                                    break;
                                                 }
-                                                for (String s2: n.getOutGoingCombo()) {
-                                                    if(s2.equals(edgeArray.get(i).getEdgeTopInput()+edgeArray.get(i).getEdgeTopStack())) {
-                                                        n.getOutGoingCombo().remove(s2);
-                                                        break;
-                                                    }
+                                            }
+                                            for (String s2 : n.getOutGoingCombo()) {
+                                                if (s2.equals(edgeArray.get(i).getEdgeTopInput() + edgeArray.get(i).getEdgeTopStack())) {
+                                                    n.getOutGoingCombo().remove(s2);
+                                                    break;
                                                 }
-                                                for (String s3: n.getOutGoingEdgeRule()) {
-                                                    if (s3.equals(edgeArray.get(i).toString())) {
-                                                        n.getOutGoingEdgeRule().remove(s3);
-                                                        break;
-                                                    }
+                                            }
+                                            for (String s3 : n.getOutGoingEdgeRule()) {
+                                                if (s3.equals(edgeArray.get(i).toString())) {
+                                                    n.getOutGoingEdgeRule().remove(s3);
+                                                    break;
                                                 }
-                                                for (String s4: n.getToFromCombo()) {
-                                                    if (s4.equals(edgeArray.get(i).getToNode().toString()+edgeArray.get(i).getFromNode().toString())) {
-                                                        n.getToFromCombo().remove(s4);
-                                                        break;
-                                                    }
+                                            }
+                                            for (String s4 : n.getToFromCombo()) {
+                                                if (s4.equals(edgeArray.get(i).getToNode().toString() + edgeArray.get(i).getFromNode().toString())) {
+                                                    n.getToFromCombo().remove(s4);
+                                                    break;
                                                 }
-                                                //System.out.println("COMBO   :"+n.getOutGoingCombo());
+                                            }
+                                            //System.out.println("COMBO   :"+n.getOutGoingCombo());
                                         }
                                         edgeArray.remove(i);
                                     }
@@ -408,40 +454,40 @@ public class TopLevelGUI extends JFrame{
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
                     if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
-                            System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                            System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
-                            for (Node n: nodeArray) {
-                                if (n.toString().equals(cellPressed.getValue().toString())) {
-                                    if (transRule.getEdge() != null) {
-                                        n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                        n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
-                                        n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
-                                        n.addOutgoingEdgeRule(transRule.getEdge().toString());
-                                        n.addToFromCombo(cellReleased.getValue().toString()+cellPressed.getValue().toString());
-                                    }
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        for (Node n : nodeArray) {
+                            if (n.toString().equals(cellPressed.getValue().toString())) {
+                                if (transRule.getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                    n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                    n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                    n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
                                 }
                             }
+                        }
 
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     } else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                            transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
-                            System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                            System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
-                            for (Node n: nodeArray) {
-                                if (n.toString().equals(cellPressed.getValue().toString())) {
-                                    if (transRule.getEdge() != null) {
-                                        n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                        n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
-                                        n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
-                                        n.addOutgoingEdgeRule(transRule.getEdge().toString());
-                                        n.addToFromCombo(cellReleased.getValue().toString()+cellPressed.getValue().toString());
-                                    }
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        for (Node n : nodeArray) {
+                            if (n.toString().equals(cellPressed.getValue().toString())) {
+                                if (transRule.getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
+                                    n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
+                                    n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                    n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
                                 }
+                            }
 //                            System.out.println("LOL"+n.getOutgoingInputs());
 //                            System.out.println("LOL1"+n.getOutGoingTopStacks());
-                            }
+                        }
 //                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
                     }
                     //System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs()+"    "+nodeArray.get(0).getOutGoingTopStacks());
