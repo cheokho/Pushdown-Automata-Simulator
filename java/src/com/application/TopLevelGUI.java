@@ -92,7 +92,7 @@ public class TopLevelGUI extends JFrame{
                         graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
                         nodeArray.clear();
                         edgeArray.clear();
-                        pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI());
+                        pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI(), true);
                     }
                 }
             }
@@ -232,10 +232,15 @@ public class TopLevelGUI extends JFrame{
         });
 
         JMenu edit = new JMenu("Edit");
-        JMenuItem menuUndo = new JMenuItem("Undo");
-        JMenuItem menuRedo = new JMenuItem("Redo");
+        JMenuItem menuPDAType = new JMenuItem("PDA Type");
+        menuPDAType.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PDAVersionGUI(getTopLevelGUI(), false);
+            }
+        });
         JMenuItem menuDelete = new JMenuItem("Delete");
-        edit.add(menuUndo); edit.add(menuRedo); edit.add(menuDelete);
+        edit.add(menuPDAType); edit.add(menuDelete);
 
         menuBar.add(file); menuBar.add(edit);
 
@@ -348,10 +353,18 @@ public class TopLevelGUI extends JFrame{
         JMenuItem initialNode = new JMenuItem("Initial Node");
         JMenuItem normalNode = new JMenuItem("Normal Node");
         JMenuItem acceptingNode = new JMenuItem("Accepting Node");
+        JMenuItem bothNode = new JMenuItem("Accept & Initial Node");
+
+        initialNode.addActionListener(new NewNodeGUI(true, false, getTopLevelGUI()));
+        normalNode.addActionListener(new NewNodeGUI(false, false, getTopLevelGUI()));
+        acceptingNode.addActionListener(new NewNodeGUI(false, true, getTopLevelGUI()));
+        bothNode.addActionListener(new NewNodeGUI(true, true, getTopLevelGUI()));
+
 
         newstuff.add(initialNode);
         newstuff.add(normalNode);
         newstuff.add(acceptingNode);
+        newstuff.add(bothNode);
 
         popup.add(delete);
         popup.add(newstuff);
@@ -360,11 +373,10 @@ public class TopLevelGUI extends JFrame{
 
         //This handles node creation handlers.
 
+        NewNodeGUI newNodeGUI;
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
-                //nodePressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-                //Left click (maybe not needed)
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                     if (cellPressed != null) {
@@ -372,14 +384,12 @@ public class TopLevelGUI extends JFrame{
                     }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
-
                     popup.show(e.getComponent(), e.getX(), e.getY());
                     newstuff.setEnabled(true);
                     delete.setEnabled(false);
+                    NewNodeGUI.setCoord(e.getX(), e.getY());
 
                     cellPressed = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
-
-
                     if (cellPressed != null) {
                         //System.out.println("Right Click Cell Value: " + cellPressed.getValue().toString());
                         delete.setEnabled(true);
