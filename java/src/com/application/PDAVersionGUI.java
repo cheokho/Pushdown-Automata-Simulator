@@ -66,11 +66,11 @@ public class PDAVersionGUI extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     if (dpda.isSelected()) {
                         isNdpda = false;
-                        pdaInputGUI = new PDAInGUI(topLevelGUI);
+                        pdaInputGUI = new PDAInGUI(topLevelGUI, false);
                         dispose();
                     } else if (ndpda.isSelected()) {
                         isNdpda = true;
-                        pdaInputGUI = new PDAInGUI(topLevelGUI);
+                        pdaInputGUI = new PDAInGUI(topLevelGUI, false);
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -86,7 +86,7 @@ public class PDAVersionGUI extends JDialog {
         buttonLayout = new GridLayout(2,1);
         buttonPanel.setLayout(buttonLayout);
         buttonPanel.add(dpda); buttonPanel.add(ndpda);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,5,10,5));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 5));
         group = new ButtonGroup();
         group.add(ndpda); group.add(dpda);
         add(label, BorderLayout.NORTH);
@@ -98,5 +98,9 @@ public class PDAVersionGUI extends JDialog {
 
     public PDAInGUI getPdaInputGUI() {
         return pdaInputGUI;
+    }
+
+    public void setPdaInputGUI(PDAInGUI pdaInputGUI) {
+        this.pdaInputGUI=pdaInputGUI;
     }
 }

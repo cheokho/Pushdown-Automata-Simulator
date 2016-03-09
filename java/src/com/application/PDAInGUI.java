@@ -23,6 +23,7 @@ public class PDAInGUI extends JDialog {
 
     private String stateString;
     private String acceptString;
+
     private String stackString;
     private String inputString;
 
@@ -59,13 +60,14 @@ public class PDAInGUI extends JDialog {
     private ArrayList<String> stackArray;
     private ArrayList<String> inputArray;
     private String initStateStr;
-    //private boolean isGraph;
     private TopLevelGUI topLevelGUI;
+    private boolean isEdit;
 
 
-    public PDAInGUI(TopLevelGUI topLevelGUI) {
+    public PDAInGUI(TopLevelGUI topLevelGUI, boolean isEdit) {
         setTitle("Input PDA");
         this.topLevelGUI=topLevelGUI;
+        this.isEdit=isEdit;
         createpdaInput();
         pack();
         setModal(true);
@@ -75,10 +77,27 @@ public class PDAInGUI extends JDialog {
 
     }
 
+    public JTextField getInputField() {
+        return inputField;
+    }
+
+    public void setInputField(JTextField inputField) {
+        this.inputField=inputField;
+    }
+
+    public JTextField getStackField() {
+        return stackField;
+    }
+
+    public void setStackField(JTextField stackField) {
+        this.stackField=stackField;
+    }
+
     public void createpdaInput(){
         container = new JPanel();
         CardLayout cl = new CardLayout();
         container.setLayout(cl);
+
         inputPDA = new JPanel();
         defPDA = new JPanel();
 
@@ -165,31 +184,25 @@ public class PDAInGUI extends JDialog {
                 Set<String> set = new HashSet<String>(statesArray);
                 if (statesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "States field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(set.size()<statesArray.size() && !statesField.getText().equals("")){ //duplicates found
+                } else if (set.size() < statesArray.size() && !statesField.getText().equals("")) { //duplicates found
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if (acceptStatesField.getText().equals("")) {
+                } else if (acceptStatesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if (!statesArray.containsAll(acceptStatesArray) && !acceptStatesField.getText().equals("") && !statesField.getText().equals("")) {
+                } else if (!statesArray.containsAll(acceptStatesArray) && !acceptStatesField.getText().equals("") && !statesField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Accepting state(s) is not a subset of your defined states", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if (initStateField.getText().equals("")) {
+                } else if (initStateField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(!statesArray.contains(initStateStr) && !initStateField.getText().equals("")) { //initial state not in states array
+                } else if (!statesArray.contains(initStateStr) && !initStateField.getText().equals("")) { //initial state not in states array
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state needs to be part of your defined states", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
+                } else {
 //                    if (graph.isSelected()) {
 //                        isGraph = true;
 //                    } else if (transTable.isSelected()) {
 //                        isGraph = false;
 //                    }
-                    if(!statesArray.contains(initStateStr)){
+                    if (!statesArray.contains(initStateStr)) {
                     } else {
-                        cl.show(container,"2");
+                        cl.show(container, "2");
                     }
                 }
             }
@@ -208,7 +221,7 @@ public class PDAInGUI extends JDialog {
         centerPanel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel1.setLayout(new GridLayout(2, 2, 0, 10));
         info3 = new JLabel("Separate characters with a space. Use alphabetical letters for the stack and numbers for the input.");
-        info3.setBorder(BorderFactory.createEmptyBorder(10,10,0,10));
+        info3.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
 
         stackAlp = new JLabel("Stack Alphabet:");
         stackField = new JTextField();
@@ -221,9 +234,9 @@ public class PDAInGUI extends JDialog {
             @Override
             public void focusLost(FocusEvent e) {
                 stackString = stackField.getText();
-                stackArray= new ArrayList(Arrays.asList(stackString.split("\\s+")));
+                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
                 stackArray.add("$");
-                System.out.println("Stack Array: "+stackArray);
+                System.out.println("Stack Array: " + stackArray);
             }
         });
 
@@ -238,19 +251,28 @@ public class PDAInGUI extends JDialog {
             @Override
             public void focusLost(FocusEvent e) {
                 inputString = inputField.getText();
-                inputArray= new ArrayList(Arrays.asList(inputString.split("\\s+")));
-                System.out.println("Input Array: "+inputArray);
+                inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                System.out.println("Input Array: " + inputArray);
             }
         });
 
         centerPanel1.add(stackAlp); centerPanel1.add(stackField); centerPanel1.add(inputAlp); centerPanel1.add(inputField);
 
-        done = new JButton("Done");
-        previous = new JButton("Previous");
-
         southPanel1= new JPanel();
         southPanel1.setLayout(new FlowLayout());
-        southPanel1.add(previous);
+
+        done = new JButton("Done");
+        if (isEdit ==  false) {
+            previous = new JButton("Previous");
+            southPanel1.add(previous);
+            previous.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    cl.show(container, "1");
+                }
+            });
+        }
+
         southPanel1.add(done);
 
         done.addActionListener(new ActionListener() {
@@ -277,34 +299,29 @@ public class PDAInGUI extends JDialog {
                 else {
                     int x=20;
                     int y=20;
-                    for (int i=0; i<statesArray.size(); i++) {
-                        if(!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
-                            if (statesArray.get(i).equals(initStateStr) && !acceptStatesArray.contains(statesArray.get(i))) {
-                                topLevelGUI.createNode(x, y, statesArray.get(i), false, true);
+                    if (!isEdit) {
+                        for (int i = 0; i < statesArray.size(); i++) {
+                            if (!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
+                                if (statesArray.get(i).equals(initStateStr) && !acceptStatesArray.contains(statesArray.get(i))) {
+                                    topLevelGUI.createNode(x, y, statesArray.get(i), false, true);
+                                } else if (statesArray.get(i).equals(initStateStr) && acceptStatesArray.contains(statesArray.get(i))) {
+                                    topLevelGUI.createNode(x, y, statesArray.get(i), true, true);
+                                } else if (acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)) {
+                                    topLevelGUI.createNode(x, y, statesArray.get(i), true, false);
+                                } else if (!acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)) {
+                                    topLevelGUI.createNode(x, y, statesArray.get(i), false, false);
+                                }
                             }
-                            else if (statesArray.get(i).equals(initStateStr) && acceptStatesArray.contains(statesArray.get(i))) {
-                                topLevelGUI.createNode(x, y, statesArray.get(i), true, true);
-                            }
-                            else if (acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)) {
-                                topLevelGUI.createNode(x, y, statesArray.get(i), true, false);
-                            } else if (!acceptStatesArray.contains(statesArray.get(i)) && !statesArray.get(i).equals(initStateStr)){
-                                topLevelGUI.createNode(x, y, statesArray.get(i), false, false);
-                            }
+                            x = x + 100;
+                            y = y + 100;
                         }
-                        x=x+100;
-                        y=y+100;
                     }
                     System.out.println("Current node array(non delete): "+topLevelGUI.getNodeArray().toString());
                     dispose();
                 }
             }
         });
-        previous.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(container, "1");
-            }
-        });
+
         //defPDA.add(done);
         defPDA.add(info3, BorderLayout.NORTH);
         defPDA.add(centerPanel1, BorderLayout.CENTER);
@@ -314,7 +331,12 @@ public class PDAInGUI extends JDialog {
         add(container);
         container.add(inputPDA, "1");
         container.add(defPDA, "2");
-        cl.show(container, "1");
+        if (isEdit == false) {
+            cl.show(container, "1");
+        }
+        else {
+            cl.show(container, "2");
+        }
 
     }
 
@@ -326,4 +348,5 @@ public class PDAInGUI extends JDialog {
     public ArrayList<String> getInputArray() {
         return inputArray;
     }
+
 }

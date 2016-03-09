@@ -45,7 +45,20 @@ public class NewNodeGUI implements ActionListener {
         //setTitle("Create new " + nodeType + " node");
         String nodeName = (String)JOptionPane.showInputDialog(new JDialog(), "Specify new node(s) to create. If you want to create multiple nodes, separate them with a space", "Create new "+ nodeType+" node", JOptionPane.PLAIN_MESSAGE, null, null, null);
         boolean hasDupes = false;
+        boolean hasInitial = false;
         if (nodeName != null && !nodeName.equals("")) {
+            if (nodeType.equals("initial") || nodeType.equals("accepting and initial")) {
+                if (!nodeName.matches("[^\\s]")) {
+                    hasInitial = true;
+                }
+                for (Node n: topLevelGUI.getNodeArray()) {
+                    if (n.isInitial()) {
+                        hasInitial = true;
+                        break;
+                    }
+                }
+
+            }
             ArrayList<String> newNodeArray= new ArrayList(Arrays.asList(nodeName.split("\\s+")));
             for (Node n1: topLevelGUI.getNodeArray()) {
                 for (String n2: newNodeArray) {
@@ -57,19 +70,23 @@ public class NewNodeGUI implements ActionListener {
             }
             if (hasDupes) {
                 JOptionPane.showMessageDialog(new JDialog(), "You already have this/these node specified in your graph.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            else {
+            } else if (hasInitial==true) {
+                JOptionPane.showMessageDialog(new JDialog(), "Only one initial state can be specified.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int temp=0;
                 for (String s: newNodeArray) {
                     if (nodeType.equals("initial")) {
-                        topLevelGUI.createNode(x, y, s, false, true);
+                        topLevelGUI.createNode(x+temp, y+temp, s, false, true);
                     } else if (nodeType.equals("accepting")) {
-                        topLevelGUI.createNode(x, y, s, true, false);
+                        topLevelGUI.createNode(x+temp, y+temp, s, true, false);
                     } else if (nodeType.equals("accepting and initial")) {
-                        topLevelGUI.createNode(x, y, s, true, true);
+                        topLevelGUI.createNode(x+temp, y+temp, s, true, true);
                     } else if (nodeType.equals("normal")) {
-                        topLevelGUI.createNode(x, y, s, false, false);
+                        topLevelGUI.createNode(x+temp, y+temp, s, false, false);
                     }
+                    temp=temp+50;
                 }
+
             }
         }
         System.out.println("Current node array(non delete): " + topLevelGUI.getNodeArray().toString());

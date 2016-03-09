@@ -105,6 +105,7 @@ public class TopLevelGUI extends JFrame{
                 boolean testRunnable = false;
                 boolean containsInitial = false;
                 boolean containsAccept = false;
+                //needs better check.
                 if (pdaTypeGUI == null) {
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -239,8 +240,31 @@ public class TopLevelGUI extends JFrame{
                 new PDAVersionGUI(getTopLevelGUI(), false);
             }
         });
-        JMenuItem menuDelete = new JMenuItem("Delete");
-        edit.add(menuPDAType); edit.add(menuDelete);
+        JMenuItem defAlphabets = new JMenuItem("Input/Stack Alphabet");
+        defAlphabets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PDAInGUI pdaInputEdit = new PDAInGUI(getTopLevelGUI(), true);
+                if (pdaTypeGUI !=null) {
+                    JTextField tempInput = pdaTypeGUI.getPdaInputGUI().getInputField();
+                    JTextField tempStack = pdaTypeGUI.getPdaInputGUI().getStackField();
+                    pdaInputEdit.setInputField(tempInput);
+                    pdaInputEdit.setStackField(tempStack);
+                }
+            }
+        });
+
+        JMenuItem menuDelete = new JMenuItem("Clear Graph");
+        menuDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
+                nodeArray.clear();
+                edgeArray.clear();
+            }
+        });
+
+        edit.add(menuPDAType); edit.add(defAlphabets); edit.add(menuDelete);
 
         menuBar.add(file); menuBar.add(edit);
 
