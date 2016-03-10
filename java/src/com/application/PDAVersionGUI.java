@@ -67,10 +67,12 @@ public class PDAVersionGUI extends JDialog {
                     if (dpda.isSelected()) {
                         isNdpda = false;
                         pdaInputGUI = new PDAInGUI(topLevelGUI, false);
+                        pdaInputGUI.setVisible(true);
                         dispose();
                     } else if (ndpda.isSelected()) {
                         isNdpda = true;
                         pdaInputGUI = new PDAInGUI(topLevelGUI, false);
+                        pdaInputGUI.setVisible(true);
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(new JPanel(), "Please select a PDA type before continuing.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -69,31 +68,19 @@ public class PDAInGUI extends JDialog {
         this.topLevelGUI=topLevelGUI;
         this.isEdit=isEdit;
         createpdaInput();
-        pack();
-        setModal(true);
-        setMinimumSize(new Dimension(700, 300));
-        setLocationRelativeTo(null);
-        setVisible(true);
-
     }
 
-    public JTextField getInputField() {
-        return inputField;
+    public void setInputField(String input) {
+        inputField.setText(input);
     }
 
-    public void setInputField(JTextField inputField) {
-        this.inputField=inputField;
-    }
 
-    public JTextField getStackField() {
-        return stackField;
-    }
-
-    public void setStackField(JTextField stackField) {
-        this.stackField=stackField;
+    public void setStackField(String input) {
+        stackField.setText(input);
     }
 
     public void createpdaInput(){
+        System.out.println("start gui");
         container = new JPanel();
         CardLayout cl = new CardLayout();
         container.setLayout(cl);
@@ -225,36 +212,36 @@ public class PDAInGUI extends JDialog {
 
         stackAlp = new JLabel("Stack Alphabet:");
         stackField = new JTextField();
-        stackField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
 
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                stackString = stackField.getText();
-                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
-                stackArray.add("$");
-                System.out.println("Stack Array: " + stackArray);
-            }
-        });
+//        stackField.addFocusListener(new FocusListener() {
+//            @Override
+//            public void focusGained(FocusEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void focusLost(FocusEvent e) {
+//                stackString = stackField.getText();
+//                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
+//                stackArray.add("$");
+//                System.out.println("Stack Array: " + stackArray);
+//            }
+//        });
 
         inputAlp = new JLabel("Input Alphabet:");
         inputField = new JTextField();
-        inputField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                inputString = inputField.getText();
-                inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
-                System.out.println("Input Array: " + inputArray);
-            }
-        });
+//        inputField.addFocusListener(new FocusListener() {
+//            @Override
+//            public void focusGained(FocusEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void focusLost(FocusEvent e) {
+//
+//                System.out.println("Input Array: " + inputArray);
+//            }
+//        });
 
         centerPanel1.add(stackAlp); centerPanel1.add(stackField); centerPanel1.add(inputAlp); centerPanel1.add(inputField);
 
@@ -278,27 +265,29 @@ public class PDAInGUI extends JDialog {
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                inputString = inputField.getText();
+                inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                stackString = stackField.getText();
+                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
+                stackArray.add("$");
+
                 //topLevelGUI.createNode(20,20, "a", false);
                 Set<String> stackSet = new HashSet<String>(stackArray);
                 Set<String> inputSet = new HashSet<String>(inputArray);
-                if(stackField.getText().equals("") || inputField.getText().equals("")) {
+                if (stackField.getText().equals("") || inputField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "You haven't filled all the information!", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(stackSet.size()<stackArray.size()) {
+                } else if (stackSet.size() < stackArray.size()) {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate stack characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(inputSet.size()<inputArray.size()) {
+                } else if (inputSet.size() < inputArray.size()) {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate input characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(!stackString.matches("^[a-zA-Z ]+$") && !stackField.getText().equals("")) {
+                } else if (!stackString.matches("^[a-zA-Z ]+$") && !stackField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use alphabetical letters in your stack only.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(!inputString.matches("^[0-9 ]+$") && !inputField.getText().equals("")) {
+                } else if (!inputString.matches("^[0-9 ]+$") && !inputField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use numbers in your input only.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int x=20;
-                    int y=20;
+                } else {
+                    int x = 20;
+                    int y = 20;
                     if (!isEdit) {
                         for (int i = 0; i < statesArray.size(); i++) {
                             if (!topLevelGUI.getNodeArray().contains(statesArray.get(i))) {
@@ -316,7 +305,9 @@ public class PDAInGUI extends JDialog {
                             y = y + 100;
                         }
                     }
-                    System.out.println("Current node array(non delete): "+topLevelGUI.getNodeArray().toString());
+                    System.out.println("Current node array(non delete): " + topLevelGUI.getNodeArray().toString());
+                    topLevelGUI.setFinished(true);
+                    System.out.println("Input Array: "+getInputArray()+"        Stack Array: "+getStackArray());
                     dispose();
                 }
             }
@@ -337,6 +328,10 @@ public class PDAInGUI extends JDialog {
         else {
             cl.show(container, "2");
         }
+        pack();
+        setModal(true);
+        setMinimumSize(new Dimension(700, 300));
+        setLocationRelativeTo(null);
 
     }
 

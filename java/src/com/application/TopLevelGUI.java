@@ -43,6 +43,7 @@ public class TopLevelGUI extends JFrame{
     //private mxCell nodePressed;
     private mxCell cellReleased;
     private mxCell cellPressed;
+    private boolean finished = false;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
@@ -241,16 +242,30 @@ public class TopLevelGUI extends JFrame{
             }
         });
         JMenuItem defAlphabets = new JMenuItem("Input/Stack Alphabet");
+
         defAlphabets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PDAInGUI pdaInputEdit = new PDAInGUI(getTopLevelGUI(), true);
-                if (pdaTypeGUI !=null) {
-                    JTextField tempInput = pdaTypeGUI.getPdaInputGUI().getInputField();
-                    JTextField tempStack = pdaTypeGUI.getPdaInputGUI().getStackField();
-                    pdaInputEdit.setInputField(tempInput);
-                    pdaInputEdit.setStackField(tempStack);
+                if (finished) {
+                    ArrayList<String> inputAlph = pdaTypeGUI.getPdaInputGUI().getInputArray();
+                    String inputString = inputAlph.toString()
+                            .replace(",", "")  //remove the commas
+                            .replace("[", "")  //remove the right bracket
+                            .replace("]", "")  //remove the left bracket
+                            .trim();           //remove trailing spaces from partially initialized arrays
+                    ArrayList<String> stackAlph = pdaTypeGUI.getPdaInputGUI().getStackArray();
+
+                    stackAlph.remove(stackAlph.size()-1);
+                    String stackString = stackAlph.toString()
+                            .replace(",", "")  //remove the commas
+                            .replace("[", "")  //remove the right bracket
+                            .replace("]", "")  //remove the left bracket
+                            .trim();           //remove trailing spaces from partially initialized arrays
+                    pdaInputEdit.setInputField(inputString);
+                    pdaInputEdit.setStackField(stackString);
                 }
+                pdaInputEdit.setVisible(true);
             }
         });
 
@@ -588,4 +603,7 @@ public class TopLevelGUI extends JFrame{
         return this;
     }
 
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
 }
