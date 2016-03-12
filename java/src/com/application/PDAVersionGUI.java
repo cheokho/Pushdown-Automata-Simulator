@@ -67,11 +67,13 @@ public class PDAVersionGUI extends JDialog {
                     if (dpda.isSelected()) {
                         isNdpda = false;
                         pdaInputGUI = new PDAInGUI(topLevelGUI, false);
+                        pdaInputGUI.setInputStack(new InputStack());
                         pdaInputGUI.setVisible(true);
                         dispose();
                     } else if (ndpda.isSelected()) {
                         isNdpda = true;
                         pdaInputGUI = new PDAInGUI(topLevelGUI, false);
+                        pdaInputGUI.setInputStack(new InputStack());
                         pdaInputGUI.setVisible(true);
                         dispose();
                     } else {

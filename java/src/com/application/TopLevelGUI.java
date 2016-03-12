@@ -39,6 +39,7 @@ public class TopLevelGUI extends JFrame{
     private DefaultTableModel model;
     private JPanel topPanel;
     private JSplitPane splitPane;
+    private InputStack inputStack;
 
     //private mxCell nodePressed;
     private mxCell cellReleased;
@@ -67,6 +68,10 @@ public class TopLevelGUI extends JFrame{
 
 
     public void createMenuBar(){
+
+         inputStack = new InputStack();
+
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -94,6 +99,10 @@ public class TopLevelGUI extends JFrame{
                         nodeArray.clear();
                         edgeArray.clear();
                         pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI(), true);
+                        if(pdaTypeGUI.getPdaInputGUI() != null) {
+                            inputStack.setStackArray(pdaTypeGUI.getPdaInputGUI().getInputStack().getStackArray());
+                            inputStack.setInputArray(pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray());
+                        }
                     }
                 }
             }
@@ -110,7 +119,7 @@ public class TopLevelGUI extends JFrame{
                 if (pdaTypeGUI == null) {
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputArray(), pdaTypeGUI.getPdaInputGUI().getStackArray());
+                    ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray(), pdaTypeGUI.getPdaInputGUI().getInputStack().getStackArray());
                     System.out.println("All input stack combo: " + allInputStackCombo);
                     for (Node n : nodeArray) {
                         System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
@@ -133,7 +142,7 @@ public class TopLevelGUI extends JFrame{
                         model.setRowCount(0);
                         model.addRow(new String[]{"$"});
                         model.fireTableDataChanged();
-                        RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray());
                         runSimGUI.showRunSimGUI();
                         getTextArea().append("\nRunning simulation on: " + runSimGUI.getInput()+"\n");
                         if (PDAVersionGUI.isNdpda) {
@@ -248,15 +257,20 @@ public class TopLevelGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 PDAInGUI pdaInputEdit = new PDAInGUI(getTopLevelGUI(), true);
                 if (finished) {
-                    ArrayList<String> inputAlph = pdaTypeGUI.getPdaInputGUI().getInputArray();
+                    ArrayList<String> inputAlph = inputStack.getInputArray();
                     String inputString = inputAlph.toString()
                             .replace(",", "")  //remove the commas
                             .replace("[", "")  //remove the right bracket
                             .replace("]", "")  //remove the left bracket
                             .trim();           //remove trailing spaces from partially initialized arrays
-                    ArrayList<String> stackAlph = pdaTypeGUI.getPdaInputGUI().getStackArray();
+                    ArrayList<String> stackAlph = inputStack.getStackArray();
 
-                    stackAlph.remove(stackAlph.size()-1);
+                    for (String s:stackAlph) {
+                        if(s.equals("$")) {
+                            stackAlph.remove(s);
+                            break;
+                        }
+                    }
                     String stackString = stackAlph.toString()
                             .replace(",", "")  //remove the commas
                             .replace("[", "")  //remove the right bracket
@@ -265,6 +279,9 @@ public class TopLevelGUI extends JFrame{
                     pdaInputEdit.setInputField(inputString);
                     pdaInputEdit.setStackField(stackString);
                 }
+                pdaInputEdit.setInputStack(inputStack);
+                inputStack.setInputArray(pdaInputEdit.getInputStack().getInputArray());
+                inputStack.setStackArray(pdaInputEdit.getInputStack().getStackArray());
                 pdaInputEdit.setVisible(true);
             }
         });
@@ -501,11 +518,14 @@ public class TopLevelGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
-                    if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
+                    if (inputStack.getInputArray() == null || inputStack.getStackArray() == null) {
+                        System.out.println("no input stack defined yet.");
+                    }
+                    else if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
                         for (Node n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
                                 if (transRule.getEdge() != null) {
@@ -521,9 +541,9 @@ public class TopLevelGUI extends JFrame{
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     } else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
-                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), pdaTypeGUI.getPdaInputGUI().getStackArray(), pdaTypeGUI.getPdaInputGUI().getInputArray(), PDAVersionGUI.isNdpda);
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + pdaTypeGUI.getPdaInputGUI().getInputArray());
+                        transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
+                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
+                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
                         for (Node n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
                                 if (transRule.getEdge() != null) {

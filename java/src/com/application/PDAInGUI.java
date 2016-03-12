@@ -56,12 +56,14 @@ public class PDAInGUI extends JDialog {
 
     private ArrayList<String> statesArray;
     private ArrayList<String> acceptStatesArray;
-    private ArrayList<String> stackArray;
-    private ArrayList<String> inputArray;
+//    private ArrayList<String> stackArray;
+//    private ArrayList<String> inputArray;
+    private InputStack inputStack;
     private String initStateStr;
     private TopLevelGUI topLevelGUI;
     private boolean isEdit;
-
+    private String input;
+    private String stack;
 
     public PDAInGUI(TopLevelGUI topLevelGUI, boolean isEdit) {
         setTitle("Input PDA");
@@ -71,16 +73,16 @@ public class PDAInGUI extends JDialog {
     }
 
     public void setInputField(String input) {
+        this.input=input;
         inputField.setText(input);
     }
 
-
-    public void setStackField(String input) {
-        stackField.setText(input);
+    public void setStackField(String stack) {
+        this.stack=stack;
+        stackField.setText(stack);
     }
 
     public void createpdaInput(){
-        System.out.println("start gui");
         container = new JPanel();
         CardLayout cl = new CardLayout();
         container.setLayout(cl);
@@ -262,24 +264,29 @@ public class PDAInGUI extends JDialog {
 
         southPanel1.add(done);
 
+        //inputStack = new InputStack();
+
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 inputString = inputField.getText();
-                inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                //inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
+                inputStack.setInputArray(new ArrayList(Arrays.asList(inputString.split("\\s+"))));
                 stackString = stackField.getText();
-                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
-                stackArray.add("$");
+                //stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
+                //stackArray.add("$");
+                inputStack.setStackArray(new ArrayList(Arrays.asList(stackString.split("\\s+"))));
+                inputStack.getStackArray().add("$");
 
                 //topLevelGUI.createNode(20,20, "a", false);
-                Set<String> stackSet = new HashSet<String>(stackArray);
-                Set<String> inputSet = new HashSet<String>(inputArray);
+                Set<String> stackSet = new HashSet<String>(inputStack.getStackArray());
+                Set<String> inputSet = new HashSet<String>(inputStack.getInputArray());
                 if (stackField.getText().equals("") || inputField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "You haven't filled all the information!", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (stackSet.size() < stackArray.size()) {
+                } else if (stackSet.size() < inputStack.getStackArray().size()) {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate stack characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (inputSet.size() < inputArray.size()) {
+                } else if (inputSet.size() < inputStack.getInputArray().size()) {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate input characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (!stackString.matches("^[a-zA-Z ]+$") && !stackField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use alphabetical letters in your stack only.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -307,7 +314,7 @@ public class PDAInGUI extends JDialog {
                     }
                     System.out.println("Current node array(non delete): " + topLevelGUI.getNodeArray().toString());
                     topLevelGUI.setFinished(true);
-                    System.out.println("Input Array: "+getInputArray()+"        Stack Array: "+getStackArray());
+                    //System.out.println("Input Array: "+getInputArray()+"        Stack Array: "+getStackArray());
                     dispose();
                 }
             }
@@ -327,6 +334,7 @@ public class PDAInGUI extends JDialog {
         }
         else {
             cl.show(container, "2");
+            JOptionPane.showMessageDialog(new JPanel(), "Modifying the input/stack alphabet will delete all your current transition edges.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         pack();
         setModal(true);
@@ -336,12 +344,19 @@ public class PDAInGUI extends JDialog {
     }
 
 
-    public ArrayList<String> getStackArray() {
-        return stackArray;
+//    public ArrayList<String> getStackArray() {
+//        return stackArray;
+//    }
+//
+//    public ArrayList<String> getInputArray() {
+//        return inputArray;
+//    }
+
+    public InputStack getInputStack() {
+        return inputStack;
     }
 
-    public ArrayList<String> getInputArray() {
-        return inputArray;
+    public void setInputStack(InputStack inputStack) {
+        this.inputStack=inputStack;
     }
-
 }
