@@ -19,7 +19,7 @@ public class PDAVersionGUI extends JDialog {
     private JPanel continuePanel;
     private JButton continueButton;
     private boolean isNew;
-    public static boolean isNdpda;
+    public static Boolean isNdpda;
     private PDAInGUI pdaInputGUI;
     private TopLevelGUI topLevelGUI;
 

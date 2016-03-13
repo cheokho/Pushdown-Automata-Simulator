@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -116,10 +118,10 @@ public class TopLevelGUI extends JFrame{
                 boolean containsInitial = false;
                 boolean containsAccept = false;
                 //needs better check.
-                if (pdaTypeGUI == null) {
+                if (PDAVersionGUI.isNdpda == null || inputStack.getStackArray() == null || inputStack.getInputArray() == null) {
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray(), pdaTypeGUI.getPdaInputGUI().getInputStack().getStackArray());
+                    ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(inputStack.getInputArray(), inputStack.getStackArray());
                     System.out.println("All input stack combo: " + allInputStackCombo);
                     for (Node n : nodeArray) {
                         System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
@@ -142,7 +144,7 @@ public class TopLevelGUI extends JFrame{
                         model.setRowCount(0);
                         model.addRow(new String[]{"$"});
                         model.fireTableDataChanged();
-                        RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray());
+                        RunSimGUI runSimGUI = new RunSimGUI(getFocusOwner(), inputStack.getInputArray());
                         runSimGUI.showRunSimGUI();
                         getTextArea().append("\nRunning simulation on: " + runSimGUI.getInput()+"\n");
                         if (PDAVersionGUI.isNdpda) {
@@ -223,10 +225,53 @@ public class TopLevelGUI extends JFrame{
         menuSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (Node n: nodeArray) {
+                    System.out.println(n.toString() +"  "+n.isInitial()+"   "+n.getXPosition()+"    "+n.getYPosition());
+                }
+                for (Edge edge:edgeArray) {
+                    System.out.println(edge.toString() +"  "+edge.getFromNode()+edge.getToNode());
+                }
+                System.out.println(inputStack.getInputArray());
+                System.out.println(inputStack.getStackArray());
+
                 JFileChooser fileChooser = new JFileChooser();
+                String type="";
+                if (PDAVersionGUI.isNdpda != null && PDAVersionGUI.isNdpda) {
+                    type="Non-Deterministic";
+                } else if (PDAVersionGUI.isNdpda != null){
+                    type="Deterministic";
+                }
+                fileChooser.setDialogTitle("Save "+type+" PDA");
                 if (fileChooser.showSaveDialog(TopLevelGUI.this) == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    // save to file
+                    try(FileWriter fw = new FileWriter(file+".xml")) {
+                        fw.write("<"+type+"_pda>\r\n");
+                        fw.write("  <input_alphabet>"+inputStack.getInputArray()+"</input_alphabet>\r\n");
+                        fw.write("  <stack_alphabet>"+inputStack.getStackArray()+"</stack_alphabet>\r\n");
+                        for (Node n: nodeArray) {
+                            fw.write("  <node name=\""+n.toString()+"\">\r\n");
+                            fw.write("      <is_initial>"+n.isInitial()+"</is_initial>\r\n");
+                            fw.write("      <is_accept>"+n.isAccept()+"</is_accept>\r\n");
+                            fw.write("      <x_pos>"+n.getXPosition()+"</x_pos>\r\n");
+                            fw.write("      <y_pos>"+n.getYPosition()+"</y_pos>\r\n");
+                            fw.write("  </node>\r\n");
+                        }
+                        for (Edge edge:edgeArray) {
+                            fw.write("  <edge>\r\n");
+                            fw.write("      <rule>"+edge.toString()+"</rule>\r\n");
+                            fw.write("      <from_node>"+edge.getFromNode()+"</from_node>\r\n");
+                            fw.write("      <to_node>"+edge.getToNode()+"</to_node>\r\n");
+                            fw.write("  </edge>\r\n");
+                            //fw.write(edge.toString() + "  " + edge.getFromNode() + edge.getToNode()+"\r\n");
+                        }
+                        //fw.write(inputStack.getInputArray()+"\r\n"+inputStack.getStackArray()+"\r\n");
+                        fw.write("</"+type+"_pda>\r\n");
+                        fw.flush();
+                        fw.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
                 }
             }
         });
@@ -518,6 +563,15 @@ public class TopLevelGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
+                    //needs fixing
+//                    if (cellReleased != null) {
+//                        for (Node n: nodeArray) {
+//                            if (cellReleased.getValue().toString().equals(n.toString())) {
+//                                n.setYPosition(e.getY());
+//                                n.setXPosition(e.getX());
+//                            }
+//                        }
+//                    }
                     if (inputStack.getInputArray() == null || inputStack.getStackArray() == null) {
                         System.out.println("no input stack defined yet.");
                     }
@@ -589,6 +643,7 @@ public class TopLevelGUI extends JFrame{
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
             newNode = new Node(node, state, isInitial, isAccepting);
+            newNode.setXPosition(x); newNode.setYPosition(y);
             nodeArray.add(newNode);
 
             graph.setVertexLabelsMovable(false);

@@ -334,7 +334,7 @@ public class PDAInGUI extends JDialog {
         }
         else {
             cl.show(container, "2");
-            JOptionPane.showMessageDialog(new JPanel(), "Modifying the input/stack alphabet will delete all your current transition edges.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(new JPanel(), "Modifying the input/stack alphabet can cause your existing transition rules to be invalid.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         pack();
         setModal(true);
