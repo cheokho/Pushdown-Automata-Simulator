@@ -2,11 +2,66 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" afterPath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Node.java" afterPath="$PROJECT_DIR$/java/src/com/application/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PDAVersionGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDAVersionGUI.java" />
+      <change type="MOVED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\java\src\com\application\Node.java" afterPath="$PROJECT_DIR$/java/src/com/application/GraphNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/BasicGraphEditor.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/BasicGraphEditor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/web/Constants.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/web/Constants.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorAboutFrame.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorAboutFrame.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorActions$TogglePropertyItem.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorActions$TogglePropertyItem.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorActions.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorActions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorRuler.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/editor/EditorRuler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/ExtendedGeneralPath.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/ExtendedGeneralPath.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/ExtendedPathIterator.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/ExtendedPathIterator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/FixedPoints.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/swing/FixedPoints.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Main.class" afterPath="$PROJECT_DIR$/classes/com/application/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/examples/web/Main.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/examples/web/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/PathParser.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/PathParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/StringNormalizingReader.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/svg/StringNormalizingReader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/io/mxCodecRegistry.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/io/mxCodecRegistry.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/test/mxCodecTest.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/test/mxCodecTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/layout/hierarchical/stage/mxCoordinateAssignment.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/layout/hierarchical/stage/mxCoordinateAssignment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/view/mxEdgeStyle.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/view/mxEdgeStyle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxFibonacciHeap.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxFibonacciHeap.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/io/mxGdCodec$1.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/io/mxGdCodec$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/io/mxGdCodec.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/io/mxGdCodec.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/view/mxGraph.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/view/mxGraph.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/swing/util/mxGraphActions.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/swing/util/mxGraphActions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/swing/mxGraphComponent.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/swing/mxGraphComponent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/swing/handler/mxGraphHandler.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/swing/handler/mxGraphHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/model/mxGraphModel.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/model/mxGraphModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/swing/mxGraphOutline.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/swing/mxGraphOutline.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxGraphProperties.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxGraphProperties.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxGraphStructure.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/analysis/mxGraphStructure.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/swing/util/mxGraphTransferable.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/swing/util/mxGraphTransferable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxGraphics2DCanvas.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxGraphics2DCanvas.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxGraphicsCanvas2D.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxGraphicsCanvas2D.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/test/mxHierTests.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/test/mxHierTests.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/layout/hierarchical/mxHierarchicalLayout.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/layout/hierarchical/mxHierarchicalLayout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxHtmlColor.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxHtmlColor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxLightweightLabel.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxLightweightLabel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/test/mxModelTest.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/test/mxModelTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/view/mxMultiplicity.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/view/mxMultiplicity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/io/mxObjectCodec.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/io/mxObjectCodec.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/view/mxPerimeter.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/view/mxPerimeter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/png/mxPngEncodeParam.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/png/mxPngEncodeParam.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/png/mxPngImageEncoder.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/png/mxPngImageEncoder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxPoint.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxPoint.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxResources.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxResources.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/shape/mxStencil.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/shape/mxStencil.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/shape/mxStencilShape.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/shape/mxStencilShape.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxSvgCanvas.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/canvas/mxSvgCanvas.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxUtils.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxUtils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/mxgraph/util/mxXmlUtils.class" afterPath="$PROJECT_DIR$/classes/com/mxgraph/util/mxXmlUtils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Edge.java" afterPath="$PROJECT_DIR$/java/src/com/application/Edge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FinalYearProject.iml" afterPath="$PROJECT_DIR$/FinalYearProject.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/Main.java" afterPath="$PROJECT_DIR$/java/src/com/application/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PathFinder.java" afterPath="$PROJECT_DIR$/java/src/com/application/PathFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
@@ -66,17 +121,7 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="310" column="21" selection-start-line="310" selection-start-column="21" selection-end-line="310" selection-end-column="21" />
+              <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -87,7 +132,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,12 +152,22 @@
       <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71910113">
-              <caret line="260" column="75" selection-start-line="260" selection-start-column="75" selection-end-line="260" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.84719104">
+              <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#14958#14959#0" expanded="true" />
-                <element signature="e#15032#15033#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/src/com/application/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,10 +177,10 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/Edge.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
               <folding>
-                <element signature="e#328#329#0" expanded="true" />
-                <element signature="e#366#367#0" expanded="true" />
+                <element signature="e#271#272#0" expanded="true" />
+                <element signature="e#309#310#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,42 +190,46 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
-              <folding />
+              <caret line="149" column="32" selection-start-line="149" selection-start-column="32" selection-end-line="149" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#12544#12545#0" expanded="false" />
+                <element signature="e#12571#12572#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+      <file leaf-file-name="GraphNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
               <folding>
-                <element signature="e#926#927#0" expanded="true" />
-                <element signature="e#953#954#0" expanded="true" />
-                <element signature="e#984#985#0" expanded="true" />
-                <element signature="e#1011#1012#0" expanded="true" />
-                <element signature="e#1061#1062#0" expanded="true" />
-                <element signature="e#1102#1103#0" expanded="true" />
-                <element signature="e#1154#1155#0" expanded="true" />
-                <element signature="e#1191#1192#0" expanded="true" />
-                <element signature="e#1507#1508#0" expanded="true" />
-                <element signature="e#1543#1544#0" expanded="true" />
-                <element signature="e#1759#1760#0" expanded="true" />
-                <element signature="e#1798#1799#0" expanded="true" />
-                <element signature="e#1846#1847#0" expanded="true" />
-                <element signature="e#1880#1881#0" expanded="true" />
-                <element signature="e#1913#1914#0" expanded="true" />
-                <element signature="e#1945#1946#0" expanded="true" />
-                <element signature="e#1977#1978#0" expanded="true" />
-                <element signature="e#2008#2009#0" expanded="true" />
-                <element signature="e#2108#2109#0" expanded="true" />
-                <element signature="e#2132#2133#0" expanded="true" />
-                <element signature="e#2164#2165#0" expanded="true" />
-                <element signature="e#2188#2189#0" expanded="true" />
-                <element signature="e#2220#2221#0" expanded="true" />
-                <element signature="e#2244#2245#0" expanded="true" />
+                <element signature="e#936#937#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+                <element signature="e#994#995#0" expanded="true" />
+                <element signature="e#1021#1022#0" expanded="true" />
+                <element signature="e#1071#1072#0" expanded="true" />
+                <element signature="e#1112#1113#0" expanded="true" />
+                <element signature="e#1164#1165#0" expanded="true" />
+                <element signature="e#1201#1202#0" expanded="true" />
+                <element signature="e#1517#1518#0" expanded="true" />
+                <element signature="e#1553#1554#0" expanded="true" />
+                <element signature="e#1769#1770#0" expanded="true" />
+                <element signature="e#1808#1809#0" expanded="true" />
+                <element signature="e#1856#1857#0" expanded="true" />
+                <element signature="e#1890#1891#0" expanded="true" />
+                <element signature="e#1923#1924#0" expanded="true" />
+                <element signature="e#1955#1956#0" expanded="true" />
+                <element signature="e#1987#1988#0" expanded="true" />
+                <element signature="e#2018#2019#0" expanded="true" />
+                <element signature="e#2118#2119#0" expanded="true" />
+                <element signature="e#2142#2143#0" expanded="true" />
+                <element signature="e#2174#2175#0" expanded="true" />
+                <element signature="e#2198#2199#0" expanded="true" />
+                <element signature="e#2230#2231#0" expanded="true" />
+                <element signature="e#2254#2255#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,7 +264,6 @@
         <option value="$PROJECT_DIR$/java/src/com/application/Stack.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Edge.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/CustomOutput.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/AllComboArray.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PathFinder.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
@@ -215,6 +275,7 @@
         <option value="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDAVersionGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Node.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       </list>
     </option>
@@ -262,6 +323,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -348,9 +411,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -358,7 +419,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Year 3/PRJ Individual Project/seaglasslookandfeel-0.2.jar!/" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -366,6 +427,9 @@
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/CheokHo/IdeaProjects/mxgraph/java/src/com/application/PDAInGUI.java" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="ClickHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -748,13 +812,8 @@
       <workItem from="1457622536347" duration="987000" />
       <workItem from="1457626217903" duration="8002000" />
       <workItem from="1457799006676" duration="8221000" />
-      <workItem from="1457885811596" duration="9698000" />
-    </task>
-    <task id="LOCAL-00020" summary="lol">
-      <created>1454948778296</created>
-      <option name="number" value="00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1454948778296</updated>
+      <workItem from="1457885811596" duration="13908000" />
+      <workItem from="1457905985256" duration="1217000" />
     </task>
     <task id="LOCAL-00021" summary="edge fix">
       <created>1455034043651</created>
@@ -1044,11 +1103,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457815541582</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="NDPDA new idea revamp testing. 1.1.5&#10;&#10;Save to XML done. Now to load mate.&#10;&#10;&#10;&#10;">
+      <created>1457900095022</created>
+      <option name="number" value="00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1457900095023</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="291102000" />
+    <option name="totallyTimeSpent" value="296529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -1056,18 +1121,17 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32523617" sideWeight="0.4763889" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32523617" sideWeight="0.4625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.28958333" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.30694443" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.7104167" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.69305557" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.46458334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1078,6 +1142,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.46458334" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1092,7 +1157,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="run simulation fixes" />
     <MESSAGE value="run simulation fixes v2" />
     <MESSAGE value="added TODO notes in TopLevelGUI" />
     <MESSAGE value="fixed initial/accepting state deletion." />
@@ -1117,7 +1181,8 @@
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4.1&#10;&#10;Begin work on edit input/stack alphabet instead of having to create new. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4.2&#10;&#10;Begin work on edit input/stack alphabet instead of having to create new. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4.3&#10;&#10;Begin work on edit input/stack alphabet instead of having to create new. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.4.3&#10;&#10;Begin work on edit input/stack alphabet instead of having to create new. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
+    <MESSAGE value="NDPDA new idea revamp testing. 1.1.5&#10;&#10;Save to XML done. Now to load mate.&#10;&#10;&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.5&#10;&#10;Save to XML done. Now to load mate.&#10;&#10;&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1154,8 +1219,6 @@
           <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1174,7 +1237,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
@@ -1205,8 +1268,6 @@
           <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1225,7 +1286,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
@@ -1238,8 +1299,6 @@
           <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1276,7 +1335,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
@@ -1289,8 +1348,6 @@
           <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1327,7 +1384,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
@@ -1340,8 +1397,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1360,7 +1415,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="15" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
@@ -1373,8 +1428,6 @@
           <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1418,13 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -1492,14 +1538,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+          <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1522,35 +1570,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/Node.java">
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
           <folding>
-            <element signature="e#926#927#0" expanded="true" />
-            <element signature="e#953#954#0" expanded="true" />
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-            <element signature="e#1102#1103#0" expanded="true" />
-            <element signature="e#1154#1155#0" expanded="true" />
-            <element signature="e#1191#1192#0" expanded="true" />
-            <element signature="e#1507#1508#0" expanded="true" />
-            <element signature="e#1543#1544#0" expanded="true" />
-            <element signature="e#1759#1760#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1913#1914#0" expanded="true" />
-            <element signature="e#1945#1946#0" expanded="true" />
-            <element signature="e#1977#1978#0" expanded="true" />
-            <element signature="e#2008#2009#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-            <element signature="e#2132#2133#0" expanded="true" />
-            <element signature="e#2164#2165#0" expanded="true" />
-            <element signature="e#2188#2189#0" expanded="true" />
-            <element signature="e#2220#2221#0" expanded="true" />
-            <element signature="e#2244#2245#0" expanded="true" />
+            <element signature="e#936#937#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#994#995#0" expanded="true" />
+            <element signature="e#1021#1022#0" expanded="true" />
+            <element signature="e#1071#1072#0" expanded="true" />
+            <element signature="e#1112#1113#0" expanded="true" />
+            <element signature="e#1164#1165#0" expanded="true" />
+            <element signature="e#1201#1202#0" expanded="true" />
+            <element signature="e#1517#1518#0" expanded="true" />
+            <element signature="e#1553#1554#0" expanded="true" />
+            <element signature="e#1769#1770#0" expanded="true" />
+            <element signature="e#1808#1809#0" expanded="true" />
+            <element signature="e#1856#1857#0" expanded="true" />
+            <element signature="e#1890#1891#0" expanded="true" />
+            <element signature="e#1923#1924#0" expanded="true" />
+            <element signature="e#1955#1956#0" expanded="true" />
+            <element signature="e#1987#1988#0" expanded="true" />
+            <element signature="e#2018#2019#0" expanded="true" />
+            <element signature="e#2118#2119#0" expanded="true" />
+            <element signature="e#2142#2143#0" expanded="true" />
+            <element signature="e#2174#2175#0" expanded="true" />
+            <element signature="e#2198#2199#0" expanded="true" />
+            <element signature="e#2230#2231#0" expanded="true" />
+            <element signature="e#2254#2255#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1558,10 +1606,10 @@
     <entry file="file://$PROJECT_DIR$/java/src/com/application/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
           <folding>
-            <element signature="e#328#329#0" expanded="true" />
-            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#309#310#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1569,22 +1617,120 @@
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
-          <folding />
+          <caret line="149" column="32" selection-start-line="149" selection-start-column="32" selection-end-line="149" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#12544#12545#0" expanded="false" />
+            <element signature="e#12571#12572#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71910113">
-          <caret line="260" column="75" selection-start-line="260" selection-start-column="75" selection-end-line="260" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.84719104">
+          <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14958#14959#0" expanded="true" />
-            <element signature="e#15032#15033#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>FinalYearProject</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

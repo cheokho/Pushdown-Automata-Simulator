@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by CheokHo on 25/01/2016.
  */
-public class Node {
+public class GraphNode {
 
     Object node;
     String name;
@@ -20,7 +20,7 @@ public class Node {
     ArrayList<String> outGoingEdgeRule;
     ArrayList<String> toFromCombo;
 
-    public Node(Object node, String name, boolean isInitial, boolean isAccept) {
+    public GraphNode(Object node, String name, boolean isInitial, boolean isAccept) {
         this.node=node;
         this.name=name;
         this.isInitial=isInitial;

@@ -1,7 +1,6 @@
 package com.application;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class NewNodeGUI implements ActionListener {
                 if (!nodeName.matches("[^\\s]")) {
                     hasInitial = true;
                 }
-                for (Node n: topLevelGUI.getNodeArray()) {
+                for (GraphNode n: topLevelGUI.getNodeArray()) {
                     if (n.isInitial()) {
                         hasInitial = true;
                         break;
@@ -60,7 +59,7 @@ public class NewNodeGUI implements ActionListener {
 
             }
             ArrayList<String> newNodeArray= new ArrayList(Arrays.asList(nodeName.split("\\s+")));
-            for (Node n1: topLevelGUI.getNodeArray()) {
+            for (GraphNode n1: topLevelGUI.getNodeArray()) {
                 for (String n2: newNodeArray) {
                     if (n1.toString().equals(n2)) {
                         hasDupes = true;

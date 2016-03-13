@@ -1,12 +1,8 @@
 package com.application;
 
-import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
-import com.mxgraph.layout.mxEdgeLabelLayout;
-import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.util.mxConstants;
-import com.mxgraph.view.mxEdgeStyle;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxStylesheet;
 
@@ -14,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -26,7 +21,7 @@ public class TransitionRuleGUI extends JDialog {
     private ArrayList<String> inputArray;
     private ArrayList<String> pushOperation;
     private ArrayList<Edge> edgeArray;
-    private ArrayList<Node> nodeArray;
+    private ArrayList<GraphNode> nodeArray;
     private TopLevelGUI topLevelGUI;
     private boolean isNdpda;
 
@@ -142,7 +137,7 @@ public class TransitionRuleGUI extends JDialog {
                 String edgeRule = "{" + inputComboBox.getSelectedItem().toString() + ", " + stackComboBox.getSelectedItem().toString() + ", " + getSelectedButtonText(group) + "}";
 
                 System.out.println("Selected input-stack combo: " + selectedCombo);
-                for (Node n : topLevelGUI.getNodeArray()) {
+                for (GraphNode n : topLevelGUI.getNodeArray()) {
                     if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                         //System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
 
@@ -153,9 +148,9 @@ public class TransitionRuleGUI extends JDialog {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else {
                                 addEdge(topLevelGUI.getGraph(), edgeRule);
-                                Node fromNode = null;
-                                Node toNode = null;
-                                for (Node node : topLevelGUI.getNodeArray()) {
+                                GraphNode fromNode = null;
+                                GraphNode toNode = null;
+                                for (GraphNode node : topLevelGUI.getNodeArray()) {
                                     if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                                         fromNode = node;
                                     }
@@ -187,9 +182,9 @@ public class TransitionRuleGUI extends JDialog {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else {
                                 addEdge(topLevelGUI.getGraph(), edgeRule);
-                                Node fromNode = null;
-                                Node toNode = null;
-                                for (Node node : topLevelGUI.getNodeArray()) {
+                                GraphNode fromNode = null;
+                                GraphNode toNode = null;
+                                for (GraphNode node : topLevelGUI.getNodeArray()) {
                                     if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
                                         fromNode = node;
                                     }

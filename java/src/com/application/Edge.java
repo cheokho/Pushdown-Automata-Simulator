@@ -1,15 +1,12 @@
 package com.application;
 
-import com.mxgraph.model.mxCell;
-import com.mxgraph.view.mxGraph;
-
 /**
  * Created by CheokHo on 25/01/2016.
  */
 public class Edge {
     String edgeRule;
-    Node fromNode;
-    Node toNode;
+    GraphNode fromNode;
+    GraphNode toNode;
     int edgeTopInput;
     String edgeTopStack;
     String transitionOperation;
@@ -39,16 +36,16 @@ public class Edge {
     public String getTransitionOperation() {
         return transitionOperation;
     }
-    public void setFromNode(Node fromNode) {
+    public void setFromNode(GraphNode fromNode) {
         this.fromNode=fromNode;
     }
-    public Node getFromNode() {
+    public GraphNode getFromNode() {
         return fromNode;
     }
-    public void setToNode(Node toNode) {
+    public void setToNode(GraphNode toNode) {
         this.toNode=toNode;
     }
-    public Node getToNode() {
+    public GraphNode getToNode() {
         return toNode;
     }
 }

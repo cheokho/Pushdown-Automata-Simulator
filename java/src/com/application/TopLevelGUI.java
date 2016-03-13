@@ -7,13 +7,17 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.view.mxGraph;
-import javafx.animation.Transition;
-import jdk.nashorn.internal.scripts.JO;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +26,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.*;
 
 /**
@@ -32,7 +35,7 @@ public class TopLevelGUI extends JFrame{
 
     private Object parent;
     private mxGraph graph;
-    private ArrayList<Node> nodeArray;
+    private ArrayList<GraphNode> nodeArray;
     private ArrayList<Edge> edgeArray;
     private JTextArea consoleArea;
     //private ArrayList<String> stackArray;
@@ -52,7 +55,7 @@ public class TopLevelGUI extends JFrame{
         super("Pushdown Automata Tool");
         setLayout(new BorderLayout());
         graph = new mxGraph();
-        nodeArray = new ArrayList<Node>();
+        nodeArray = new ArrayList<GraphNode>();
         edgeArray = new ArrayList<Edge>();
 //        stackArray = new ArrayList<String>();
 //        stackArray.add("$");
@@ -123,7 +126,7 @@ public class TopLevelGUI extends JFrame{
                 } else {
                     ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(inputStack.getInputArray(), inputStack.getStackArray());
                     System.out.println("All input stack combo: " + allInputStackCombo);
-                    for (Node n : nodeArray) {
+                    for (GraphNode n : nodeArray) {
                         System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
                         if (n.isInitial) {
                             containsInitial = true;
@@ -157,8 +160,8 @@ public class TopLevelGUI extends JFrame{
 
                         AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
                         if (PDAVersionGUI.isNdpda) {
-                            Node node=null;
-                            for (Node n: nodeArray) {
+                            GraphNode node=null;
+                            for (GraphNode n: nodeArray) {
                                 if (n.isInitial) {
                                     node=n;
                                     break;
@@ -225,7 +228,7 @@ public class TopLevelGUI extends JFrame{
         menuSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Node n: nodeArray) {
+                for (GraphNode n: nodeArray) {
                     System.out.println(n.toString() +"  "+n.isInitial()+"   "+n.getXPosition()+"    "+n.getYPosition());
                 }
                 for (Edge edge:edgeArray) {
@@ -234,7 +237,29 @@ public class TopLevelGUI extends JFrame{
                 System.out.println(inputStack.getInputArray());
                 System.out.println(inputStack.getStackArray());
 
-                JFileChooser fileChooser = new JFileChooser();
+                JFileChooser fileChooser = new JFileChooser(){
+                    public void approveSelection() {
+                        File f = getSelectedFile();
+                        if (f.exists() && getDialogType() == SAVE_DIALOG) {
+                            int result = JOptionPane.showConfirmDialog(this,
+                                    "This file already exists, do you wish to overwrite?", "Existing file",
+                                    JOptionPane.YES_NO_CANCEL_OPTION);
+                            switch (result) {
+                                case JOptionPane.YES_OPTION:
+                                    super.approveSelection();
+                                    return;
+                                case JOptionPane.CANCEL_OPTION:
+                                    cancelSelection();
+                                    return;
+                                default:
+                                    return;
+                            }
+                        }
+                        super.approveSelection();
+                    }
+                };
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("xml file (*.xml)", "xml");
+                fileChooser.setFileFilter(filter);
                 String type="";
                 if (PDAVersionGUI.isNdpda != null && PDAVersionGUI.isNdpda) {
                     type="Non-Deterministic";
@@ -242,13 +267,17 @@ public class TopLevelGUI extends JFrame{
                     type="Deterministic";
                 }
                 fileChooser.setDialogTitle("Save "+type+" PDA");
-                if (fileChooser.showSaveDialog(TopLevelGUI.this) == JFileChooser.APPROVE_OPTION) {
-                    File file = fileChooser.getSelectedFile();
-                    try(FileWriter fw = new FileWriter(file+".xml")) {
+                if (fileChooser.showSaveDialog(fileChooser) == fileChooser.APPROVE_OPTION) {
+                    String fileName = fileChooser.getSelectedFile().toString();
+                    if (!fileName.endsWith(".xml")) {
+                        fileName+=".xml";
+                    }
+                    File file = new File(fileName);
+                    try(FileWriter fw = new FileWriter(file)) {
                         fw.write("<"+type+"_pda>\r\n");
                         fw.write("  <input_alphabet>"+inputStack.getInputArray()+"</input_alphabet>\r\n");
                         fw.write("  <stack_alphabet>"+inputStack.getStackArray()+"</stack_alphabet>\r\n");
-                        for (Node n: nodeArray) {
+                        for (GraphNode n: nodeArray) {
                             fw.write("  <node name=\""+n.toString()+"\">\r\n");
                             fw.write("      <is_initial>"+n.isInitial()+"</is_initial>\r\n");
                             fw.write("      <is_accept>"+n.isAccept()+"</is_accept>\r\n");
@@ -281,8 +310,31 @@ public class TopLevelGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 if (fileChooser.showOpenDialog(TopLevelGUI.this) == JFileChooser.APPROVE_OPTION) {
-                    File file = fileChooser.getSelectedFile();
-                    // load from file
+                    try {
+                        File file = fileChooser.getSelectedFile();
+                        DocumentBuilderFactory dbFactory
+                                = DocumentBuilderFactory.newInstance();
+                        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                        Document doc = dBuilder.parse(file);
+                        doc.getDocumentElement().normalize();
+                        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+                        NodeList nList = doc.getElementsByTagName("node");
+                        for (int temp = 0; temp < nList.getLength(); temp++) {
+                            Node nNode = nList.item(temp);
+                            System.out.println("\nCurrent Element :"
+                                    + nNode.getNodeName());
+                            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                                Element eElement = (Element) nNode;
+                                System.out.println(eElement.getAttribute("name"));
+                                System.out.println(eElement.getElementsByTagName("is_initial").item(0).getTextContent());
+                                System.out.println(eElement.getElementsByTagName("is_accept").item(0).getTextContent());
+                                System.out.println(eElement.getElementsByTagName("x_pos").item(0).getTextContent());
+                                System.out.println(eElement.getElementsByTagName("y_pos").item(0).getTextContent());
+                            }
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
@@ -514,7 +566,7 @@ public class TopLevelGUI extends JFrame{
                                 }
                                 for (int i = 0; i < edgeArray.size(); i++) {
                                     if (edgeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
-                                        for (Node n : nodeArray) {
+                                        for (GraphNode n : nodeArray) {
                                             for (String s : n.getOutGoingTopStacks()) {
                                                 if (s.equals(edgeArray.get(i).getEdgeTopStack())) {
                                                     n.getOutGoingTopStacks().remove(s);
@@ -580,7 +632,7 @@ public class TopLevelGUI extends JFrame{
                         transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
-                        for (Node n : nodeArray) {
+                        for (GraphNode n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
                                 if (transRule.getEdge() != null) {
                                     n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
@@ -598,7 +650,7 @@ public class TopLevelGUI extends JFrame{
                         transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
                         System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
-                        for (Node n : nodeArray) {
+                        for (GraphNode n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
                                 if (transRule.getEdge() != null) {
                                     n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
@@ -623,7 +675,7 @@ public class TopLevelGUI extends JFrame{
     public Object createNode(int x,int y, String state, boolean isAccepting, boolean isInitial) {
         graph.getModel().beginUpdate();
         Object node=null;
-        Node newNode;
+        GraphNode newNode;
         try
         {
             if (isInitial && !isAccepting) {
@@ -642,7 +694,7 @@ public class TopLevelGUI extends JFrame{
                 //System.out.println("not init - not accept");
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
-            newNode = new Node(node, state, isInitial, isAccepting);
+            newNode = new GraphNode(node, state, isInitial, isAccepting);
             newNode.setXPosition(x); newNode.setYPosition(y);
             nodeArray.add(newNode);
 
@@ -657,7 +709,7 @@ public class TopLevelGUI extends JFrame{
     }
 
 
-    public ArrayList<Node> getNodeArray() {
+    public ArrayList<GraphNode> getNodeArray() {
         return nodeArray;
     }
 

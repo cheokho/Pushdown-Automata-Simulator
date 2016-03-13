@@ -1,9 +1,6 @@
 package com.application;
 
-import javafx.scene.control.Tab;
-
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.util.ArrayList;
 
 /**
@@ -11,21 +8,21 @@ import java.util.ArrayList;
  */
 public class PathFinder {
 
-    Node toNode;
+    GraphNode toNode;
     String currentInput;
     DefaultTableModel model;
-    ArrayList<Node> previousNodes = new ArrayList<Node>();
+    ArrayList<GraphNode> previousNodes = new ArrayList<GraphNode>();
 
 
     public PathFinder() {
 
     }
 
-    public void setToNode(Node toNode) {
+    public void setToNode(GraphNode toNode) {
         this.toNode = toNode;
     }
 
-    public Node getToNode() {
+    public GraphNode getToNode() {
         return toNode;
     }
 
@@ -37,11 +34,11 @@ public class PathFinder {
         return currentInput;
     }
 
-    public void addToList(Node node) {
+    public void addToList(GraphNode node) {
         previousNodes.add(node);
     }
 
-    public ArrayList<Node> getList() {
+    public ArrayList<GraphNode> getList() {
         return previousNodes;
     }
 

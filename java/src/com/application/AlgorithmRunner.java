@@ -12,7 +12,7 @@ import java.util.Set;
 public class AlgorithmRunner {
 
     private RunSimGUI runSimGUI;
-    private ArrayList<Node> nodeArray;
+    private ArrayList<GraphNode> nodeArray;
     private ArrayList<Edge> edgeArray;
     private DefaultTableModel model;
     private JTextArea textArea;
@@ -21,7 +21,7 @@ public class AlgorithmRunner {
 
     private Set<PathGenerator> pathGenerators;
 
-    public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<Node> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
+    public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<GraphNode> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
         this.runSimGUI=runSimGUI;
         this.model=model;
         this.nodeArray=nodeArray;
@@ -41,8 +41,8 @@ public class AlgorithmRunner {
             protected Void doInBackground() throws Exception {
 
                 StringBuilder totalPath = new StringBuilder();
-                Node node = null;
-                for (Node n : nodeArray) {
+                GraphNode node = null;
+                for (GraphNode n : nodeArray) {
                     if (n.isInitial) {
                         node = n;
                         totalPath.append(n.toString());
@@ -141,7 +141,7 @@ public class AlgorithmRunner {
     // allow same edge rule to be created from outgoing node if it is not going to the same node.
     // when edge is deleted, you can't create the same edge rule from that node. needs fixing.
 
-    public void ndpdaAlgorithm(String inputElements, Node node, PathGenerator pathGenerator) {
+    public void ndpdaAlgorithm(String inputElements, GraphNode node, PathGenerator pathGenerator) {
 
         ArrayList<Edge> transitionEdges = new ArrayList<Edge>();
         Edge transitionEdge=null;
@@ -296,7 +296,7 @@ public class AlgorithmRunner {
                 route=route.substring(1);
                 String inputElements = runSimGUI.getInput();
 
-                for (Node n : nodeArray) {
+                for (GraphNode n : nodeArray) {
                     if (n.isInitial) {
                         startNode = n.toString();
                         break;
