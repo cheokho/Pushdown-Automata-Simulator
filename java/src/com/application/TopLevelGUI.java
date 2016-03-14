@@ -1,12 +1,17 @@
 package com.application;
 
+import com.mxgraph.layout.mxIGraphLayout;
+import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.handler.mxConnectionHandler;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxStylesheet;
+import com.sun.xml.internal.ws.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -50,6 +55,8 @@ public class TopLevelGUI extends JFrame{
     private mxCell cellReleased;
     private mxCell cellPressed;
     private boolean finished = false;
+
+    private Edge edge = null;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
@@ -229,7 +236,7 @@ public class TopLevelGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (GraphNode n: nodeArray) {
-                    System.out.println(n.toString() +"  "+n.isInitial()+"   "+n.getXPosition()+"    "+n.getYPosition());
+                    System.out.println(n.toString() +"  "+n.isInitial());
                 }
                 for (Edge edge:edgeArray) {
                     System.out.println(edge.toString() +"  "+edge.getFromNode()+edge.getToNode());
@@ -272,17 +279,35 @@ public class TopLevelGUI extends JFrame{
                     if (!fileName.endsWith(".xml")) {
                         fileName+=".xml";
                     }
+                    String inputString = inputStack.getInputArray().toString()
+                    .replace(",", "")  //remove the commas
+                            .replace("[", "")  //remove the right bracket
+                            .replace("]", "")  //remove the left bracket
+                            .trim();           //remove trailing spaces from partially initialized arrays
+
+                    ArrayList<String> temp = inputStack.getStackArray();
+                    for (String s:temp) {
+                        if(s.equals("$")) {
+                            temp.remove(s);
+                            break;
+                        }
+                    }
+                    String stackString = temp.toString()
+                            .replace(",", "")  //remove the commas
+                            .replace("[", "")  //remove the right bracket
+                            .replace("]", "")  //remove the left bracket
+                            .trim();           //remove trailing spaces from partially initialized arrays
                     File file = new File(fileName);
                     try(FileWriter fw = new FileWriter(file)) {
                         fw.write("<"+type+"_pda>\r\n");
-                        fw.write("  <input_alphabet>"+inputStack.getInputArray()+"</input_alphabet>\r\n");
-                        fw.write("  <stack_alphabet>"+inputStack.getStackArray()+"</stack_alphabet>\r\n");
+                        fw.write("  <input_alphabet>"+inputString+"</input_alphabet>\r\n");
+                        fw.write("  <stack_alphabet>"+stackString+"</stack_alphabet>\r\n");
                         for (GraphNode n: nodeArray) {
                             fw.write("  <node name=\""+n.toString()+"\">\r\n");
                             fw.write("      <is_initial>"+n.isInitial()+"</is_initial>\r\n");
                             fw.write("      <is_accept>"+n.isAccept()+"</is_accept>\r\n");
-                            fw.write("      <x_pos>"+n.getXPosition()+"</x_pos>\r\n");
-                            fw.write("      <y_pos>"+n.getYPosition()+"</y_pos>\r\n");
+                            fw.write("      <x_pos>"+graph.getView().getState(n.getNode()).getX()+"</x_pos>\r\n");
+                            fw.write("      <y_pos>"+graph.getView().getState(n.getNode()).getY()+"</y_pos>\r\n");
                             fw.write("  </node>\r\n");
                         }
                         for (Edge edge:edgeArray) {
@@ -318,20 +343,98 @@ public class TopLevelGUI extends JFrame{
                         Document doc = dBuilder.parse(file);
                         doc.getDocumentElement().normalize();
                         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+                        if (doc.getDocumentElement().getNodeName().startsWith("Non-Deterministic")) {
+                            PDAVersionGUI.isNdpda=true;
+                        } else if (doc.getDocumentElement().getNodeName().startsWith("Deterministic")) {
+                            PDAVersionGUI.isNdpda=false;
+                        }
+
+                        graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
+                        nodeArray.clear();
+                        edgeArray.clear();
+
                         NodeList nList = doc.getElementsByTagName("node");
-                        for (int temp = 0; temp < nList.getLength(); temp++) {
-                            Node nNode = nList.item(temp);
-                            System.out.println("\nCurrent Element :"
-                                    + nNode.getNodeName());
-                            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                                Element eElement = (Element) nNode;
-                                System.out.println(eElement.getAttribute("name"));
-                                System.out.println(eElement.getElementsByTagName("is_initial").item(0).getTextContent());
-                                System.out.println(eElement.getElementsByTagName("is_accept").item(0).getTextContent());
-                                System.out.println(eElement.getElementsByTagName("x_pos").item(0).getTextContent());
-                                System.out.println(eElement.getElementsByTagName("y_pos").item(0).getTextContent());
+
+                        for (int i = 0; i < nList.getLength(); i++) {
+                            Node xmlNode = nList.item(i);
+                            System.out.println("\nCurrent Element :" + xmlNode.getNodeName());
+                            if (xmlNode.getNodeType() == Node.ELEMENT_NODE) {
+                                Element element = (Element) xmlNode;
+                                double x=Double.parseDouble(element.getElementsByTagName("x_pos").item(0).getTextContent());
+                                double y=Double.parseDouble(element.getElementsByTagName("y_pos").item(0).getTextContent());
+                                boolean isInitial;
+                                if (element.getElementsByTagName("is_initial").item(0).getTextContent().equals("true")) {
+                                    isInitial=true;
+                                } else {
+                                    isInitial=false;
+                                }
+                                boolean isAccept;
+                                if (element.getElementsByTagName("is_accept").item(0).getTextContent().equals("true")) {
+                                    isAccept=true;
+                                } else {
+                                    isAccept=false;
+                                }
+                                String state=element.getAttribute("name");
+                                getTopLevelGUI().createNode((int) x, (int) y, state, isAccept, isInitial);
+                                System.out.println(state);
+                                System.out.println(isInitial);
+                                System.out.println(isAccept);
+                                System.out.println(x);
+                                System.out.println(y);
                             }
                         }
+
+                        String inputString = doc.getElementsByTagName("input_alphabet").item(0).getTextContent();
+                        String stackString = doc.getElementsByTagName("stack_alphabet").item(0).getTextContent();
+
+                        NodeList eList = doc.getElementsByTagName("edge");
+
+                        for (int q=0; q<eList.getLength(); q++) {
+                            Node xmlNode = eList.item(q);
+                            System.out.println("\nCurrent Element :" + xmlNode.getNodeName());
+
+                            if (xmlNode.getNodeType() == Node.ELEMENT_NODE) {
+                                Element element = (Element) xmlNode;
+                                String rule = element.getElementsByTagName("rule").item(0).getTextContent();
+                                String splitRule = rule
+                                        .replace(",", "")  //remove the commas
+                                        .replace("{", "")  //remove the right bracket
+                                        .replace("}", "")  //remove the left bracket
+                                        .trim();           //remove trailing spaces from partially initialized arrays
+                                String split[] = splitRule.split("\\s+");
+
+                                String fromNode = element.getElementsByTagName("from_node").item(0).getTextContent();
+                                String toNode = element.getElementsByTagName("to_node").item(0).getTextContent();
+
+                                if (inputString != null && stackString != null) {
+                                    inputStack.setInputArray(new ArrayList(Arrays.asList(inputString.split("\\s+"))));
+                                    inputStack.setStackArray(new ArrayList(Arrays.asList(stackString.split("\\s+"))));
+                                    inputStack.getStackArray().add("$");
+                                }
+
+                                Object from=null;
+                                Object to=null;
+                                for (GraphNode n: nodeArray) {
+                                    if(graph.getView().getState(n.getNode()).getLabel().equals(fromNode)) {
+                                        from=n.getNode();
+                                    }
+                                    if(graph.getView().getState(n.getNode()).getLabel().equals(toNode)) {
+                                        to=n.getNode();
+                                    }
+                                }
+
+                                if (split[2].equals("?")) {
+                                    split[2] = "? (do nothing)";
+                                }
+                                rule = rule.replaceAll("\\?", "\u03F5");
+
+                                addEdge(graph, rule, from, to, Integer.parseInt(split[0]), split[1], split[2]);
+                            }
+
+
+                        }
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -634,11 +737,11 @@ public class TopLevelGUI extends JFrame{
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
                         for (GraphNode n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (transRule.getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
-                                    n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
-                                    n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                if (getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(getEdge().getEdgeTopStack());
+                                    n.addOutgoingCombo(Integer.toString(getEdge().getEdgeTopInput()) + getEdge().getEdgeTopStack());
+                                    n.addOutgoingEdgeRule(getEdge().toString());
                                     n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
                                 }
                             }
@@ -652,11 +755,11 @@ public class TopLevelGUI extends JFrame{
                         System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
                         for (GraphNode n : nodeArray) {
                             if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (transRule.getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(transRule.getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(transRule.getEdge().getEdgeTopStack());
-                                    n.addOutgoingCombo(Integer.toString(transRule.getEdge().getEdgeTopInput()) + transRule.getEdge().getEdgeTopStack());
-                                    n.addOutgoingEdgeRule(transRule.getEdge().toString());
+                                if (getEdge() != null) {
+                                    n.addOutgoingInput(Integer.toString(getEdge().getEdgeTopInput()));
+                                    n.addOutgoingTopStack(getEdge().getEdgeTopStack());
+                                    n.addOutgoingCombo(Integer.toString(getEdge().getEdgeTopInput()) + getEdge().getEdgeTopStack());
+                                    n.addOutgoingEdgeRule(getEdge().toString());
                                     n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
                                 }
                             }
@@ -695,7 +798,6 @@ public class TopLevelGUI extends JFrame{
                 node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
             }
             newNode = new GraphNode(node, state, isInitial, isAccepting);
-            newNode.setXPosition(x); newNode.setYPosition(y);
             nodeArray.add(newNode);
 
             graph.setVertexLabelsMovable(false);
@@ -706,6 +808,65 @@ public class TopLevelGUI extends JFrame{
             graph.getModel().endUpdate();
         }
         return node;
+    }
+
+    public void addEdge(mxGraph graph, String transRule, Object from, Object to, int topInput, String topStack, String transOperation) {
+        graph.getModel().beginUpdate();
+        try {
+            Object parent = graph.getDefaultParent();
+
+            mxIGraphLayout layout = new mxParallelEdgeLayout(graph, 30);
+            layout.execute(parent);
+
+            Map<String, Object> edgeStyle = new HashMap<String, Object>();
+            edgeStyle.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
+            edgeStyle.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+            edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+            edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+            edgeStyle.put(mxConstants.STYLE_ROUNDED, true);
+            edgeStyle.put(mxConstants.STYLE_EDGE, mxConstants.EDGESTYLE_SIDETOSIDE);
+            //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");
+            //edgeStyle.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
+
+            mxStylesheet stylesheet = new mxStylesheet();
+            stylesheet.setDefaultEdgeStyle(edgeStyle);
+            graph.setStylesheet(stylesheet);
+
+
+            graph.setCellsBendable(true);
+            graph.setCellsDisconnectable(false);
+            graph.setEdgeLabelsMovable(false);
+
+            //graph.insertEdge(parent, null, transRule, (Object) getTopLevelGUI().getCellPressed(), (Object) getTopLevelGUI().getCellReleased());
+            graph.insertEdge(parent, null, transRule, from, to);
+
+            GraphNode fromNode = null;
+            GraphNode toNode = null;
+
+
+            for (GraphNode node : getTopLevelGUI().getNodeArray()) {
+                if (node.toString().equals(graph.getView().getState(from).getLabel())) {
+                    fromNode = node;
+                }
+                if (node.toString().equals(graph.getView().getState(to).getLabel())) {
+                    toNode = node;
+                }
+
+            }
+            edge = new Edge(transRule);
+            edge.setFromNode(fromNode);
+            edge.setToNode(toNode);
+            edge.setEdgeTopInput(topInput);
+            edge.setEdgeTopStack(topStack);
+            edge.setTransitionOperation(transOperation);
+
+            edgeArray.add(edge);
+            System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
+            System.out.println("Updated edge array: " + edgeArray);
+
+        } finally {
+            graph.getModel().endUpdate();
+        }
     }
 
 
@@ -733,4 +894,9 @@ public class TopLevelGUI extends JFrame{
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
+
+    public Edge getEdge() {
+        return edge;
+    }
+
 }

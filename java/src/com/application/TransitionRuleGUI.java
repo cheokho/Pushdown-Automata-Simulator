@@ -43,7 +43,8 @@ public class TransitionRuleGUI extends JDialog {
 
     private JButton okButton;
 
-    private Edge edge = null;
+//    private Edge edge = null;
+
 
     public TransitionRuleGUI(TopLevelGUI topLevelGUI, String fromNodeString, String toNodeString, ArrayList<String> stackArray, ArrayList<String> inputArray, boolean isNdpda) {
 
@@ -147,28 +148,28 @@ public class TransitionRuleGUI extends JDialog {
                             } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else {
-                                addEdge(topLevelGUI.getGraph(), edgeRule);
-                                GraphNode fromNode = null;
-                                GraphNode toNode = null;
-                                for (GraphNode node : topLevelGUI.getNodeArray()) {
-                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                                        fromNode = node;
-                                    }
-                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
-                                        toNode = node;
-                                    }
-
-                                }
-                                edge = new Edge(edgeRule);
-                                edge.setFromNode(fromNode);
-                                edge.setToNode(toNode);
-                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
-                                edge.setTransitionOperation(getSelectedButtonText(group));
-
-                                edgeArray.add(edge);
-                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
-                                System.out.println("Updated edge array: " + edgeArray);
+                                topLevelGUI.addEdge(topLevelGUI.getGraph(), edgeRule, topLevelGUI.getCellPressed(), topLevelGUI.getCellReleased(), Integer.parseInt(inputComboBox.getSelectedItem().toString()), stackComboBox.getSelectedItem().toString(), getSelectedButtonText(group));
+//                                GraphNode fromNode = null;
+//                                GraphNode toNode = null;
+//                                for (GraphNode node : topLevelGUI.getNodeArray()) {
+//                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+//                                        fromNode = node;
+//                                    }
+//                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+//                                        toNode = node;
+//                                    }
+//
+//                                }
+//                                edge = new Edge(edgeRule);
+//                                edge.setFromNode(fromNode);
+//                                edge.setToNode(toNode);
+//                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+//                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+//                                edge.setTransitionOperation(getSelectedButtonText(group));
+//
+//                                edgeArray.add(edge);
+//                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
+//                                System.out.println("Updated edge array: " + edgeArray);
                                 dispose();
                             }
                         } else if (isNdpda) {
@@ -181,28 +182,28 @@ public class TransitionRuleGUI extends JDialog {
                             } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else {
-                                addEdge(topLevelGUI.getGraph(), edgeRule);
-                                GraphNode fromNode = null;
-                                GraphNode toNode = null;
-                                for (GraphNode node : topLevelGUI.getNodeArray()) {
-                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                                        fromNode = node;
-                                    }
-                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
-                                        toNode = node;
-                                    }
-
-                                }
-                                edge = new Edge(edgeRule);
-                                edge.setFromNode(fromNode);
-                                edge.setToNode(toNode);
-                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
-                                edge.setTransitionOperation(getSelectedButtonText(group));
-
-                                edgeArray.add(edge);
-                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
-                                System.out.println("Updated edge array: " + edgeArray);
+                                topLevelGUI.addEdge(topLevelGUI.getGraph(), edgeRule, (Object) topLevelGUI.getCellPressed(), topLevelGUI.getCellReleased(), Integer.parseInt(inputComboBox.getSelectedItem().toString()), stackComboBox.getSelectedItem().toString(), getSelectedButtonText(group));
+//                                GraphNode fromNode = null;
+//                                GraphNode toNode = null;
+//                                for (GraphNode node : topLevelGUI.getNodeArray()) {
+//                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
+//                                        fromNode = node;
+//                                    }
+//                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
+//                                        toNode = node;
+//                                    }
+//
+//                                }
+//                                edge = new Edge(edgeRule);
+//                                edge.setFromNode(fromNode);
+//                                edge.setToNode(toNode);
+//                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
+//                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
+//                                edge.setTransitionOperation(getSelectedButtonText(group));
+//
+//                                edgeArray.add(edge);
+//                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
+//                                System.out.println("Updated edge array: " + edgeArray);
                                 dispose();
                             }
                         } else if (!isNdpda) {
@@ -217,39 +218,6 @@ public class TransitionRuleGUI extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void addEdge(mxGraph graph, String transRule) {
-        graph.getModel().beginUpdate();
-        try {
-            Object parent = graph.getDefaultParent();
-
-            mxIGraphLayout layout = new mxParallelEdgeLayout(graph, 30);
-            layout.execute(parent);
-
-            Map<String, Object> edgeStyle = new HashMap<String, Object>();
-            edgeStyle.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
-            edgeStyle.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
-            edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-            edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#000000");
-            edgeStyle.put(mxConstants.STYLE_ROUNDED, true);
-            edgeStyle.put(mxConstants.STYLE_EDGE, mxConstants.EDGESTYLE_SIDETOSIDE);
-            //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");
-            //edgeStyle.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
-
-            mxStylesheet stylesheet = new mxStylesheet();
-            stylesheet.setDefaultEdgeStyle(edgeStyle);
-            graph.setStylesheet(stylesheet);
-
-
-            graph.setCellsBendable(true);
-            graph.setCellsDisconnectable(false);
-            graph.setEdgeLabelsMovable(false);
-
-            graph.insertEdge(parent, null, transRule, (Object) topLevelGUI.getCellPressed(), (Object) topLevelGUI.getCellReleased());
-        } finally {
-            graph.getModel().endUpdate();
-        }
-    }
-
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
@@ -262,10 +230,10 @@ public class TransitionRuleGUI extends JDialog {
         return null;
     }
 
-    public Edge getEdge() {
-        return edge;
-    }
-//
+//    public Edge getEdge() {
+//        return edge;
+//    }
+
 //    public ArrayList<Edge> getEdgeArray() {
 //        return edgeArray;
 //    }

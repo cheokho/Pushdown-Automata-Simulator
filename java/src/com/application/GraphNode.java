@@ -13,7 +13,6 @@ public class GraphNode {
     String name;
     boolean isInitial;
     boolean isAccept;
-    int x; int y;
     ArrayList<String> outGoingInputs;
     ArrayList<String> outGoingTopStacks;
     ArrayList<String> outGoingCombo;
@@ -70,18 +69,6 @@ public class GraphNode {
     }
     public boolean isAccept() {
         return isAccept;
-    }
-    public void setXPosition(int x) {
-        this.x=x;
-    }
-    public void setYPosition(int y) {
-        this.y=y;
-    }
-    public int getXPosition() {
-        return x;
-    }
-    public int getYPosition() {
-        return y;
     }
 }
 
