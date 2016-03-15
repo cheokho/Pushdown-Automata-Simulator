@@ -416,9 +416,6 @@ public class TopLevelGUI extends JFrame{
                                 Object from=null;
                                 Object to=null;
 
-                                if (split[2].equals("?")) {
-                                    split[2] = "? (do nothing)";
-                                }
 
                                 for (GraphNode n: nodeArray) {
                                     if(graph.getView().getState(n.getNode()).getLabel().equals(fromNode)) {
@@ -435,8 +432,6 @@ public class TopLevelGUI extends JFrame{
                                     }
                                     System.out.println(n.getOutGoingEdgeRule());
                                 }
-
-                                rule = rule.replaceAll("\\?", "\u03F5");
 
                                 addEdge(graph, rule, from, to, Integer.parseInt(split[0]), split[1], split[2]);
                             }
@@ -678,6 +673,7 @@ public class TopLevelGUI extends JFrame{
                                 }
                                 for (int i = 0; i < edgeArray.size(); i++) {
                                     if (edgeArray.get(i).toString().equals(cellPressed.getValue().toString())) {
+                                        //doesnt enter this if statement when i create edge from load.
                                         for (GraphNode n : nodeArray) {
                                             for (String s : n.getOutGoingTopStacks()) {
                                                 if (s.equals(edgeArray.get(i).getEdgeTopStack())) {
@@ -700,13 +696,7 @@ public class TopLevelGUI extends JFrame{
                                             }
                                             for (String s3 : n.getOutGoingEdgeRule()) {
                                                 if (s3.equals(edgeArray.get(i).toString())) {
-                                                    if (n.getOutGoingEdgeRule().contains(s3)) {
-                                                        System.out.println("test contains");
-                                                    }
-
                                                     System.out.println(n.getOutGoingEdgeRule().remove(s3));
-                                                    System.out.println("test3"+s3);
-                                                    System.out.println("test2"+n.getOutGoingEdgeRule());
                                                     break;
                                                 }
                                             }
@@ -724,7 +714,6 @@ public class TopLevelGUI extends JFrame{
                                 }
                                 System.out.println("Updated Edge on delete: " + edgeArray.toString());
                                 System.out.println("Updated Node on delete: " + nodeArray.toString());
-                                System.out.println("test "+nodeArray.get(0).getOutGoingEdgeRule());
                                 repaint();
                             }
                         });

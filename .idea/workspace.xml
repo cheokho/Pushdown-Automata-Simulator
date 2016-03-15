@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Main.class" afterPath="$PROJECT_DIR$/classes/com/application/Main.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI$1.class" afterPath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI$1.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" afterPath="C:\Users\CheokHo\IdeaProjects\mxgraph\classes\com\application\TopLevelGUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -111,21 +109,31 @@
       <file leaf-file-name="TransitionRuleGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="164" column="95" selection-start-line="164" selection-start-column="95" selection-end-line="164" selection-end-column="95" />
+            <state vertical-scroll-proportion="-13.538462">
+              <caret line="104" column="43" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33258426">
-              <caret line="751" column="226" selection-start-line="751" selection-start-column="226" selection-end-line="751" selection-end-column="226" />
+            <state vertical-scroll-proportion="-41.653847">
+              <caret line="433" column="33" selection-start-line="433" selection-start-column="33" selection-end-line="433" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="3.9341826">
+              <caret line="343" column="62" selection-start-line="343" selection-start-column="62" selection-end-line="343" selection-end-column="62" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,7 +170,6 @@
         <option value="$PROJECT_DIR$/java/src/com/application/AllComboArray.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PathFinder.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PathGenerator.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/RunSimGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/InputStack.java" />
@@ -173,6 +180,7 @@
         <option value="$PROJECT_DIR$/java/src/com/application/GraphNode.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
       </list>
     </option>
   </component>
@@ -711,13 +719,7 @@
       <workItem from="1457885811596" duration="13908000" />
       <workItem from="1457905985256" duration="1497000" />
       <workItem from="1457959198181" duration="18605000" />
-      <workItem from="1458050771896" duration="5805000" />
-    </task>
-    <task id="LOCAL-00023" summary="many fixes">
-      <created>1455373328254</created>
-      <option name="number" value="00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1455373328254</updated>
+      <workItem from="1458050771896" duration="9203000" />
     </task>
     <task id="LOCAL-00024" summary="Transition rule GUI">
       <created>1455376122234</created>
@@ -1007,11 +1009,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457970509216</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="NDPDA new idea revamp testing. 1.1.7&#10;&#10;ok&#10;&#10;&#10;">
+      <created>1458058237939</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1458058237943</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="321219000" />
+    <option name="totallyTimeSpent" value="324617000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1025,11 +1033,12 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.4625" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1040,7 +1049,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.4625" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1055,7 +1063,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed initial/accepting state deletion." />
     <MESSAGE value="algorithm progressssss" />
     <MESSAGE value="algorithm works without stack! :D" />
     <MESSAGE value="algorithm works with stack! :D" />
@@ -1080,7 +1087,8 @@
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.5&#10;&#10;Save to XML done. Now to load mate.&#10;&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.6&#10;&#10;Sick themes mate. Load kinda works almost.&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.7&#10;&#10;Load kinda works &#10;&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.7&#10;&#10;Load kinda works &#10;&#10;&#10;" />
+    <MESSAGE value="NDPDA new idea revamp testing. 1.1.7&#10;&#10;ok&#10;&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. 1.1.7&#10;&#10;ok&#10;&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1378,14 +1386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="310" column="21" selection-start-line="310" selection-start-column="21" selection-end-line="310" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/mxgraph/swing/mxGraphComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44161358">
@@ -1497,19 +1497,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="164" column="95" selection-start-line="164" selection-start-column="95" selection-end-line="164" selection-end-column="95" />
+        <state vertical-scroll-proportion="-13.538462">
+          <caret line="104" column="43" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33258426">
-          <caret line="751" column="226" selection-start-line="751" selection-start-column="226" selection-end-line="751" selection-end-column="226" />
+        <state vertical-scroll-proportion="-41.653847">
+          <caret line="433" column="33" selection-start-line="433" selection-start-column="33" selection-end-line="433" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.9341826">
+          <caret line="343" column="62" selection-start-line="343" selection-start-column="62" selection-end-line="343" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

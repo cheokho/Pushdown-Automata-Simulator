@@ -102,7 +102,7 @@ public class TransitionRuleGUI extends JDialog {
         });
 
         popButton = new JRadioButton("pop");
-        nothingButton = new JRadioButton("ε (do nothing)");
+        nothingButton = new JRadioButton("e");
         group = new ButtonGroup();
         group.add(pushButton);
         group.add(popButton);

@@ -341,7 +341,7 @@ public class AlgorithmRunner {
                         model.removeRow(0);
                         model.fireTableDataChanged();
 
-                    } else if (transitionOperation.contains("do nothing")) {
+                    } else if (transitionOperation.contains("e")) {
                         //do nothing lol
                     }
 
