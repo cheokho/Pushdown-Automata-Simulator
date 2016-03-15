@@ -415,18 +415,27 @@ public class TopLevelGUI extends JFrame{
 
                                 Object from=null;
                                 Object to=null;
-                                for (GraphNode n: nodeArray) {
-                                    if(graph.getView().getState(n.getNode()).getLabel().equals(fromNode)) {
-                                        from=n.getNode();
-                                    }
-                                    if(graph.getView().getState(n.getNode()).getLabel().equals(toNode)) {
-                                        to=n.getNode();
-                                    }
-                                }
 
                                 if (split[2].equals("?")) {
                                     split[2] = "? (do nothing)";
                                 }
+
+                                for (GraphNode n: nodeArray) {
+                                    if(graph.getView().getState(n.getNode()).getLabel().equals(fromNode)) {
+                                        from=n.getNode();
+                                        n.addOutgoingInput(split[0]);
+                                        n.addOutgoingTopStack(split[1]);
+                                        n.addOutgoingCombo(split[0] + split[1]);
+                                        n.addOutgoingEdgeRule(rule);
+                                        n.addToFromCombo(toNode + fromNode);
+                                    }
+                                    if(graph.getView().getState(n.getNode()).getLabel().equals(toNode)) {
+                                        to=n.getNode();
+
+                                    }
+                                    System.out.println(n.getOutGoingEdgeRule());
+                                }
+
                                 rule = rule.replaceAll("\\?", "\u03F5");
 
                                 addEdge(graph, rule, from, to, Integer.parseInt(split[0]), split[1], split[2]);
@@ -691,7 +700,13 @@ public class TopLevelGUI extends JFrame{
                                             }
                                             for (String s3 : n.getOutGoingEdgeRule()) {
                                                 if (s3.equals(edgeArray.get(i).toString())) {
-                                                    n.getOutGoingEdgeRule().remove(s3);
+                                                    if (n.getOutGoingEdgeRule().contains(s3)) {
+                                                        System.out.println("test contains");
+                                                    }
+
+                                                    System.out.println(n.getOutGoingEdgeRule().remove(s3));
+                                                    System.out.println("test3"+s3);
+                                                    System.out.println("test2"+n.getOutGoingEdgeRule());
                                                     break;
                                                 }
                                             }
@@ -705,9 +720,11 @@ public class TopLevelGUI extends JFrame{
                                         }
                                         edgeArray.remove(i);
                                     }
+                                    break;
                                 }
-                                System.out.println("Updated Edge Array: " + edgeArray.toString());
-                                System.out.println("Updated Node Array: " + nodeArray.toString());
+                                System.out.println("Updated Edge on delete: " + edgeArray.toString());
+                                System.out.println("Updated Node on delete: " + nodeArray.toString());
+                                System.out.println("test "+nodeArray.get(0).getOutGoingEdgeRule());
                                 repaint();
                             }
                         });
@@ -733,40 +750,11 @@ public class TopLevelGUI extends JFrame{
                     else if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
                         transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
-                        for (GraphNode n : nodeArray) {
-                            if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(getEdge().getEdgeTopStack());
-                                    n.addOutgoingCombo(Integer.toString(getEdge().getEdgeTopInput()) + getEdge().getEdgeTopStack());
-                                    n.addOutgoingEdgeRule(getEdge().toString());
-                                    n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
-                                }
-                            }
-                        }
 
                         //graph.insertEdge(parent, null, "self loop", nodePressed, (Object) cellReleased);
                     } else if (cellReleased != null && cellReleased.isVertex() && !cellPressed.getValue().equals(cellReleased.getValue())) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
                         transRule = new TransitionRuleGUI(getTopLevelGUI(), cellPressed.getValue().toString(), cellReleased.getValue().toString(), inputStack.getStackArray(), inputStack.getInputArray(), PDAVersionGUI.isNdpda);
-                        System.out.println("STACK ARRAY ON TRANS RULE RELEASE " + inputStack.getStackArray());
-                        System.out.println("INPUT ARRAY ON TRANS RULE RELEASE " + inputStack.getInputArray());
-                        for (GraphNode n : nodeArray) {
-                            if (n.toString().equals(cellPressed.getValue().toString())) {
-                                if (getEdge() != null) {
-                                    n.addOutgoingInput(Integer.toString(getEdge().getEdgeTopInput()));
-                                    n.addOutgoingTopStack(getEdge().getEdgeTopStack());
-                                    n.addOutgoingCombo(Integer.toString(getEdge().getEdgeTopInput()) + getEdge().getEdgeTopStack());
-                                    n.addOutgoingEdgeRule(getEdge().toString());
-                                    n.addToFromCombo(cellReleased.getValue().toString() + cellPressed.getValue().toString());
-                                }
-                            }
-//                            System.out.println("LOL"+n.getOutgoingInputs());
-//                            System.out.println("LOL1"+n.getOutGoingTopStacks());
-                        }
-//                        graph.insertEdge(parent, null, "test for now", nodePressed, (Object) cellReleased);
                     }
                     //System.out.println(nodeArray.get(0).toString() +"   "+nodeArray.get(0).getOutgoingInputs()+"    "+nodeArray.get(0).getOutGoingTopStacks());
                 }
@@ -862,7 +850,7 @@ public class TopLevelGUI extends JFrame{
 
             edgeArray.add(edge);
             System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
-            System.out.println("Updated edge array: " + edgeArray);
+            System.out.println("added edge array: " + edgeArray);
 
         } finally {
             graph.getModel().endUpdate();
