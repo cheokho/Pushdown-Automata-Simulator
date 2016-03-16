@@ -5,10 +5,7 @@ import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.handler.mxConnectionHandler;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxEventSource;
+import com.mxgraph.util.*;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxStylesheet;
 import com.sun.xml.internal.ws.util.StringUtils;
@@ -17,6 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,13 +92,20 @@ public class TopLevelGUI extends JFrame{
         JMenuItem menuOpen = new JMenuItem("Open");
         JMenuItem menuSave = new JMenuItem("Save");
         JMenuItem menuClose = new JMenuItem("Close");
+        JMenuItem menuExportPic = new JMenuItem("Export Graph as Image");
+
+        JMenu tools = new JMenu("Tools");
+        tools.add(menuRun);
+        tools.add(menuExportPic);
+
+
         menuClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        file.add(menuNew); file.add(menuRun); file.add(menuOpen); file.add(menuSave); file.add(menuClose);
+        file.add(menuNew); file.add(menuOpen); file.add(menuSave); file.add(menuClose);
 
         menuNew.addActionListener(new ActionListener() {
             @Override
@@ -111,7 +117,7 @@ public class TopLevelGUI extends JFrame{
                         nodeArray.clear();
                         edgeArray.clear();
                         pdaTypeGUI = new PDAVersionGUI(getTopLevelGUI(), true);
-                        if(pdaTypeGUI.getPdaInputGUI() != null) {
+                        if (pdaTypeGUI.getPdaInputGUI() != null) {
                             inputStack.setStackArray(pdaTypeGUI.getPdaInputGUI().getInputStack().getStackArray());
                             inputStack.setInputArray(pdaTypeGUI.getPdaInputGUI().getInputStack().getInputArray());
                         }
@@ -232,17 +238,63 @@ public class TopLevelGUI extends JFrame{
             }
         });
 
+        menuExportPic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser(){
+                    public void approveSelection() {
+                        File f = getSelectedFile();
+                        if (f.exists() && getDialogType() == SAVE_DIALOG) {
+                            int result = JOptionPane.showConfirmDialog(this,
+                                    "This file already exists, do you wish to overwrite?", "Existing file",
+                                    JOptionPane.YES_NO_CANCEL_OPTION);
+                            switch (result) {
+                                case JOptionPane.YES_OPTION:
+                                    super.approveSelection();
+                                    return;
+                                case JOptionPane.CANCEL_OPTION:
+                                    cancelSelection();
+                                    return;
+                                default:
+                                    return;
+                            }
+                        }
+                        super.approveSelection();
+                    }
+                };
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("png image (*.png)", "png");
+                fileChooser.setFileFilter(filter);
+                if (fileChooser.showSaveDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
+                    String fileName = fileChooser.getSelectedFile().toString();
+                    if (!fileName.endsWith(".png")) {
+                        fileName+=".png";
+                    }
+                    BufferedImage image = mxCellRenderer.createBufferedImage(graph, null, 1, Color.WHITE, true, null);
+                    try {
+                        if (image == null) {
+                            JOptionPane.showMessageDialog(getFocusOwner(), "No graph found; cannot export as image.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                         else {
+                            ImageIO.write(image, "png", new File(fileName));
+                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+
         menuSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (GraphNode n: nodeArray) {
-                    System.out.println(n.toString() +"  "+n.isInitial());
-                }
-                for (Edge edge:edgeArray) {
-                    System.out.println(edge.toString() +"  "+edge.getFromNode()+edge.getToNode());
-                }
-                System.out.println(inputStack.getInputArray());
-                System.out.println(inputStack.getStackArray());
+//                for (GraphNode n: nodeArray) {
+//                    System.out.println(n.toString() +"  "+n.isInitial());
+//                }
+//                for (Edge edge:edgeArray) {
+//                    System.out.println(edge.toString() +"  "+edge.getFromNode()+edge.getToNode());
+//                }
+//                System.out.println(inputStack.getInputArray());
+//                System.out.println(inputStack.getStackArray());
 
                 JFileChooser fileChooser = new JFileChooser(){
                     public void approveSelection() {
@@ -425,6 +477,7 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingCombo(split[0] + split[1]);
                                         n.addOutgoingEdgeRule(rule);
                                         n.addToFromCombo(toNode + fromNode);
+                                        System.out.println("test"+n.getToFromCombo());
                                     }
                                     if(graph.getView().getState(n.getNode()).getLabel().equals(toNode)) {
                                         to=n.getNode();
@@ -502,7 +555,7 @@ public class TopLevelGUI extends JFrame{
 
         edit.add(menuPDAType); edit.add(defAlphabets); edit.add(menuDelete);
 
-        menuBar.add(file); menuBar.add(edit);
+        menuBar.add(file); menuBar.add(edit); menuBar.add(tools);
 
     }
 
@@ -517,9 +570,13 @@ public class TopLevelGUI extends JFrame{
             }
         };
         //model.addColumn("Stack", stackArray.toArray());
-        model.addRow(new String[] {"$"});
+        model.addRow(new String[]{"$"});
 
         JTable stackTable = new JTable(model);
+        stackTable.setRowHeight(25);
+        stackTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 12));
+        stackTable.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        stackTable.setForeground(Color.decode("#770000"));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         stackTable.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
@@ -643,7 +700,7 @@ public class TopLevelGUI extends JFrame{
                         //System.out.println("Left Click Cell Value: " + cellPressed.getValue().toString());
                     }
                 }
-                if (SwingUtilities.isRightMouseButton(e)) {
+                if (SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
                     popup.show(e.getComponent(), e.getX(), e.getY());
                     newstuff.setEnabled(true);
                     delete.setEnabled(false);
@@ -696,7 +753,7 @@ public class TopLevelGUI extends JFrame{
                                             }
                                             for (String s3 : n.getOutGoingEdgeRule()) {
                                                 if (s3.equals(edgeArray.get(i).toString())) {
-                                                    System.out.println(n.getOutGoingEdgeRule().remove(s3));
+                                                    n.getOutGoingEdgeRule().remove(s3);
                                                     break;
                                                 }
                                             }
@@ -710,7 +767,6 @@ public class TopLevelGUI extends JFrame{
                                         }
                                         edgeArray.remove(i);
                                     }
-                                    break;
                                 }
                                 System.out.println("Updated Edge on delete: " + edgeArray.toString());
                                 System.out.println("Updated Node on delete: " + nodeArray.toString());
@@ -734,7 +790,10 @@ public class TopLevelGUI extends JFrame{
 //                        }
 //                    }
                     if (inputStack.getInputArray() == null || inputStack.getStackArray() == null) {
-                        System.out.println("no input stack defined yet.");
+                        JOptionPane.showMessageDialog(getFocusOwner(), "Please specify an input/stack alphabet before creating transition rules.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else if(PDAVersionGUI.isNdpda == null) {
+                        JOptionPane.showMessageDialog(getFocusOwner(), "Please specify a deterministic/non deterministic graph before creating transition rules.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     else if (cellReleased != null && cellReleased.isVertex() && e.getClickCount() == 2) {
                         //if (!pdaTypeGUI.isNdpda()) { //this is a deterministic PDA so each node must only have 1 rule for each input.
@@ -760,19 +819,19 @@ public class TopLevelGUI extends JFrame{
         {
             if (isInitial && !isAccepting) {
                 //System.out.println("init - not accept");
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse;perimeter=ellipsePerimeter;fillColor=green");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse;perimeter=ellipsePerimeter;fillColor=#4CC417;strokeColor=#0C090A;fontColor=#770000;fontSize=16;fontStyle=4");
             }
             else if (isAccepting && !isInitial) {
                 //System.out.println("not init - accept");
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse; perimeter=ellipsePerimeter");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse; perimeter=ellipsePerimeter;fillColor=#3090C7;strokeColor=#0C090A;fontColor=;fontSize=16;fontStyle=4");
             }
             else if (isAccepting && isInitial) {
                 //System.out.println("init - accept");
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse;perimeter=ellipsePerimeter;fillColor=green");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=doubleEllipse;perimeter=ellipsePerimeter;fillColor=#4CC417;strokeColor=#0C090A;fontColor=#770000;fontSize=16;fontStyle=4");
             }
             else if (!isInitial && !isAccepting) {
                 //System.out.println("not init - not accept");
-                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter");
+                node = graph.insertVertex(parent, null, state, x, y, 80, 60, "shape=ellipse; perimeter=ellipsePerimeter;fillColor=#3090C7;strokeColor=#0C090A;fontColor=#770000;fontSize=16;fontStyle=4");
             }
             newNode = new GraphNode(node, state, isInitial, isAccepting);
             nodeArray.add(newNode);
@@ -798,8 +857,8 @@ public class TopLevelGUI extends JFrame{
             Map<String, Object> edgeStyle = new HashMap<String, Object>();
             edgeStyle.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
             edgeStyle.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
-            edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-            edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+            edgeStyle.put(mxConstants.STYLE_STROKECOLOR, "#0C090A");
+            edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#0C090A");
             edgeStyle.put(mxConstants.STYLE_ROUNDED, true);
             edgeStyle.put(mxConstants.STYLE_EDGE, mxConstants.EDGESTYLE_SIDETOSIDE);
             //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");

@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by CheokHo on 08/03/2016.
@@ -47,7 +49,7 @@ public class NewNodeGUI implements ActionListener {
         boolean hasInitial = false;
         if (nodeName != null && !nodeName.equals("")) {
             if (nodeType.equals("initial") || nodeType.equals("accepting and initial")) {
-                if (!nodeName.matches("[^\\s]")) {
+                if (!nodeName.matches("^\\S+$")) {
                     hasInitial = true;
                 }
                 for (GraphNode n: topLevelGUI.getNodeArray()) {
@@ -59,6 +61,7 @@ public class NewNodeGUI implements ActionListener {
 
             }
             ArrayList<String> newNodeArray= new ArrayList(Arrays.asList(nodeName.split("\\s+")));
+            Set<String> set = new HashSet<String>(newNodeArray);
             for (GraphNode n1: topLevelGUI.getNodeArray()) {
                 for (String n2: newNodeArray) {
                     if (n1.toString().equals(n2)) {
@@ -69,7 +72,10 @@ public class NewNodeGUI implements ActionListener {
             }
             if (hasDupes) {
                 JOptionPane.showMessageDialog(new JDialog(), "You already have this/these node specified in your graph.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (hasInitial==true) {
+            } else if (set.size() < newNodeArray.size()) {
+                JOptionPane.showMessageDialog(new JDialog(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (hasInitial==true) {
                 JOptionPane.showMessageDialog(new JDialog(), "Only one initial state can be specified.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 int temp=0;

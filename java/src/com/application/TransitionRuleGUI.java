@@ -145,6 +145,7 @@ public class TransitionRuleGUI extends JDialog {
                         System.out.println(n.getOutGoingEdgeRule());
                         System.out.println(edgeRule);
                         System.out.println((!n.getOutGoingEdgeRule().contains(edgeRule)));
+                        System.out.println(n.getToFromCombo());
                         System.out.println(!n.getToFromCombo().contains(toNodeString+fromNodeString));
 
                         if (((!n.getOutGoingEdgeRule().contains(edgeRule)) || (!n.getToFromCombo().contains(toNodeString+fromNodeString))) && isNdpda) {
@@ -166,27 +167,6 @@ public class TransitionRuleGUI extends JDialog {
                                         }
                                     }
                                 }
-//                                GraphNode fromNode = null;
-//                                GraphNode toNode = null;
-//                                for (GraphNode node : topLevelGUI.getNodeArray()) {
-//                                    if (node.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-//                                        fromNode = node;
-//                                    }
-//                                    if (node.toString().equals(topLevelGUI.getCellReleased().getValue().toString())) {
-//                                        toNode = node;
-//                                    }
-//
-//                                }
-//                                edge = new Edge(edgeRule);
-//                                edge.setFromNode(fromNode);
-//                                edge.setToNode(toNode);
-//                                edge.setEdgeTopInput(Integer.parseInt(inputComboBox.getSelectedItem().toString()));
-//                                edge.setEdgeTopStack(stackComboBox.getSelectedItem().toString());
-//                                edge.setTransitionOperation(getSelectedButtonText(group));
-//
-//                                edgeArray.add(edge);
-//                                System.out.println("Edge from: " + edge.getFromNode() + " Edge to: " + edge.getToNode());
-//                                System.out.println("Updated edge array: " + edgeArray);
                                 dispose();
                             }
                         } else if (isNdpda) {

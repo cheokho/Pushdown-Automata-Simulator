@@ -95,7 +95,7 @@ public class AlgorithmRunner {
                             model.removeRow(0);
                             model.fireTableDataChanged();
 
-                        } else if (transitionOperation.contains("do nothing")) {
+                        } else if (transitionOperation.contains("e")) {
                             //do nothing lol
                         }
                         node = transitionEdge.getToNode();
@@ -203,7 +203,7 @@ public class AlgorithmRunner {
                     } else if (transitionOperation.contains("pop")) {
                         newPath.getStackArray().remove(0);
 
-                    } else if (transitionOperation.contains("do nothing")) {
+                    } else if (transitionOperation.contains("e")) {
                         //do nothing lol
                     }
                     newPath.addToStackOperations(transitionOperation);
@@ -230,7 +230,7 @@ public class AlgorithmRunner {
 //                model.fireTableDataChanged();
                     pathGenerator.getStackArray().remove(0);
 
-                } else if (transitionOperation.contains("do nothing")) {
+                } else if (transitionOperation.contains("e")) {
                     //do nothing lol
                 }
 
