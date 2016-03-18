@@ -51,6 +51,7 @@ public class TransitionRuleGUI extends JDialog {
         this.toNodeString=toNodeString;
         this.fromNodeString=fromNodeString;
         setTitle("Transition rule from '" + fromNodeString + "' to '" + toNodeString + "'.");
+        setIconImage(new ImageIcon(getClass().getResource("/com/icon/favicon.png")).getImage());
         this.stackArray = stackArray;
         this.inputArray = inputArray;
         this.topLevelGUI = topLevelGUI;

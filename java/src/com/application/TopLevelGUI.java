@@ -44,6 +44,7 @@ public class TopLevelGUI extends JFrame{
     private JTextArea consoleArea;
     //private ArrayList<String> stackArray;
     private PDAVersionGUI pdaTypeGUI;
+    private PDAInGUI pdaInputEdit;
     private TransitionRuleGUI transRule;
     private DefaultTableModel model;
     private JPanel topPanel;
@@ -56,6 +57,8 @@ public class TopLevelGUI extends JFrame{
     private boolean finished = false;
 
     private Edge edge = null;
+    private String inputString = null;
+    private String stackString = null;
 
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
@@ -407,6 +410,7 @@ public class TopLevelGUI extends JFrame{
                         nodeArray.clear();
                         edgeArray.clear();
 
+
                         NodeList nList = doc.getElementsByTagName("node");
 
                         for (int i = 0; i < nList.getLength(); i++) {
@@ -438,8 +442,8 @@ public class TopLevelGUI extends JFrame{
                             }
                         }
 
-                        String inputString = doc.getElementsByTagName("input_alphabet").item(0).getTextContent();
-                        String stackString = doc.getElementsByTagName("stack_alphabet").item(0).getTextContent();
+                        inputString = doc.getElementsByTagName("input_alphabet").item(0).getTextContent();
+                        stackString = doc.getElementsByTagName("stack_alphabet").item(0).getTextContent();
 
                         NodeList eList = doc.getElementsByTagName("edge");
 
@@ -513,7 +517,7 @@ public class TopLevelGUI extends JFrame{
         defAlphabets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PDAInGUI pdaInputEdit = new PDAInGUI(getTopLevelGUI(), true);
+                pdaInputEdit = new PDAInGUI(getTopLevelGUI(), true);
                 if (finished) {
                     ArrayList<String> inputAlph = inputStack.getInputArray();
                     String inputString = inputAlph.toString()
@@ -540,6 +544,10 @@ public class TopLevelGUI extends JFrame{
                 pdaInputEdit.setInputStack(inputStack);
                 inputStack.setInputArray(pdaInputEdit.getInputStack().getInputArray());
                 inputStack.setStackArray(pdaInputEdit.getInputStack().getStackArray());
+                if (pdaInputEdit.getInputStack().getInputArray()!=null && pdaInputEdit.getInputStack().getStackArray()!=null && inputString!=null && stackString!=null) {
+                    pdaInputEdit.setInputField(inputString);
+                    pdaInputEdit.setStackField(stackString);
+                }
                 pdaInputEdit.setVisible(true);
             }
         });

@@ -62,23 +62,20 @@ public class PDAInGUI extends JDialog {
     private String initStateStr;
     private TopLevelGUI topLevelGUI;
     private boolean isEdit;
-    private String input;
-    private String stack;
 
     public PDAInGUI(TopLevelGUI topLevelGUI, boolean isEdit) {
         setTitle("Input PDA");
+        setIconImage(new ImageIcon(getClass().getResource("/com/icon/favicon.png")).getImage());
         this.topLevelGUI=topLevelGUI;
         this.isEdit=isEdit;
         createpdaInput();
     }
 
     public void setInputField(String input) {
-        this.input=input;
         inputField.setText(input);
     }
 
     public void setStackField(String stack) {
-        this.stack=stack;
         stackField.setText(stack);
     }
 
