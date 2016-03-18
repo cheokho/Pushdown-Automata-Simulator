@@ -60,6 +60,7 @@ public class TopLevelGUI extends JFrame{
     public TopLevelGUI(){
         super("Pushdown Automata Tool");
         setLayout(new BorderLayout());
+        setIconImage(new ImageIcon(getClass().getResource("/com/icon/favicon.png")).getImage());
         graph = new mxGraph();
         nodeArray = new ArrayList<GraphNode>();
         edgeArray = new ArrayList<Edge>();
@@ -555,7 +556,9 @@ public class TopLevelGUI extends JFrame{
 
         edit.add(menuPDAType); edit.add(defAlphabets); edit.add(menuDelete);
 
-        menuBar.add(file); menuBar.add(edit); menuBar.add(tools);
+        JMenu help = new JMenu("Help");
+
+        menuBar.add(file); menuBar.add(edit); menuBar.add(tools);menuBar.add(help);
 
     }
 
