@@ -275,7 +275,7 @@ public class AlgorithmRunner {
     public Set<PathGenerator> getPathGenerators(RunSimGUI runSimGUI) {
         Set<PathGenerator> toRemove = new LinkedHashSet<>();
         for (PathGenerator s: pathGenerators) {
-                if ((s.getPath().toString().length()) != (runSimGUI.getInput().length() + 1)) {
+                if ((s.getPath().toString().length()) > (runSimGUI.getInput().length() + 1)) {
                     toRemove.add(s);
                 }
         }
@@ -367,10 +367,6 @@ public class AlgorithmRunner {
             }
         };
         worker.execute();
-    }
-
-    public boolean choicePointFound() {
-        return choicePointFound;
     }
 
 }

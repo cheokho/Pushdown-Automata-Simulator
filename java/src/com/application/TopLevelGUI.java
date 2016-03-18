@@ -212,7 +212,7 @@ public class TopLevelGUI extends JFrame{
                             System.out.println("paths:"+paths.toString());
                             if (paths.isEmpty() == false) {
                                 Object[] possibilities = paths.toArray();
-                                PathGenerator result = (PathGenerator) JOptionPane.showInputDialog(getFocusOwner(), "Non-stuck paths found are shown below. Please select which you would like to run.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
+                                PathGenerator result = (PathGenerator) JOptionPane.showInputDialog(getFocusOwner(), "Path(s) found are shown below. Please select which you would like to run. If the path selected does not return a RESULT, the automaton is stuck.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
 
                                 if (result !=null && result.toString().length() >0) {
                                     //TODO run algorithm stuffs here. n.b there can be same paths with multiple routes.
@@ -220,7 +220,7 @@ public class TopLevelGUI extends JFrame{
                                 }
 
                             } else if (runSimGUI.getInput() !=null && runSimGUI.getInput().length() > 0){
-                                JOptionPane.showMessageDialog(getContentPane(), "No non-stuck path found. This means that all possible routes lead to the a state where the automaton becomes stuck.", "Simulation failed", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(getContentPane(), "No path found. This means there is no available transition to be taken.", "Simulation failed", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);

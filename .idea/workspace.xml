@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
     <ignored path="mxgraph.iws" />
@@ -103,8 +104,8 @@
       <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1085">
-              <caret line="551" column="13" selection-start-line="551" selection-start-column="13" selection-end-line="551" selection-end-column="13" />
+            <state relative-caret-position="304">
+              <caret line="214" column="261" selection-start-line="214" selection-start-column="261" selection-end-line="214" selection-end-column="261" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,8 +116,8 @@
       <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="287" column="20" selection-start-line="287" selection-start-column="19" selection-end-line="287" selection-end-column="20" />
+            <state relative-caret-position="508">
+              <caret line="362" column="21" selection-start-line="362" selection-start-column="21" selection-end-line="362" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -169,11 +170,11 @@
         <option value="$PROJECT_DIR$/java/src/com/application/PDAVersionGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Node.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/GraphNode.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       </list>
     </option>
@@ -733,13 +734,6 @@
       <workItem from="1458050771896" duration="9347000" />
       <workItem from="1458140724545" duration="8164000" />
     </task>
-    <task id="LOCAL-00027" summary="edge creation.">
-      <created>1455475212858</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1455475212858</updated>
-    </task>
     <task id="LOCAL-00028" summary="edge deletion problem fixed.">
       <created>1455547634355</created>
       <option name="number" value="00028" />
@@ -1076,7 +1070,14 @@
       <option name="project" value="LOCAL" />
       <updated>1458329615336</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="NDPDA new idea revamp testing. fixed a load bug.&#10;&#10;&#10;&#10;">
+      <created>1458338871654</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1458338871654</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1094,7 +1095,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928476" sideWeight="0.5375" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3304253" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33260632" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1126,7 +1127,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed swingworker." />
     <MESSAGE value="working on NDPDA stuff inn progress." />
     <MESSAGE value="working on NDPDA stuff in progress v2." />
     <MESSAGE value="NDPDA new idea revamp testing." />
@@ -1151,7 +1151,8 @@
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.7&#10;&#10;delete on load not working.&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. Fixed a new bug.&#10;&#10;&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. added icon.&#10;&#10;&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. added icon.&#10;&#10;&#10;&#10;" />
+    <MESSAGE value="NDPDA new idea revamp testing. fixed a load bug.&#10;&#10;&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. fixed a load bug.&#10;&#10;&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1552,14 +1553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="287" column="20" selection-start-line="287" selection-start-column="19" selection-end-line="287" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/PDAInGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3805">
@@ -1574,10 +1567,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="362" column="21" selection-start-line="362" selection-start-column="21" selection-end-line="362" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1085">
-          <caret line="551" column="13" selection-start-line="551" selection-start-column="13" selection-end-line="551" selection-end-column="13" />
+        <state relative-caret-position="304">
+          <caret line="214" column="261" selection-start-line="214" selection-start-column="261" selection-end-line="214" selection-end-column="261" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
