@@ -95,9 +95,9 @@ public class PDAInGUI extends JDialog {
         centerPanel = new JPanel();
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel.setLayout(new GridLayout(3, 2, 0, 10));
-        info = new JLabel("Separate a list of states using a space between each state.");
+        info = new JLabel("Separate a list of states using a space between each state. Each state can be specified as any singular letter [a-z A-Z].");
         info.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
-        states = new JLabel("States:");
+        states = new JLabel("States ([a-zA-Z]):");
         statesField = new JTextField();
         statesField.addFocusListener(new FocusListener() {
             @Override
@@ -112,7 +112,7 @@ public class PDAInGUI extends JDialog {
                 System.out.println("States Array: "+statesArray);
             }
         });
-        acceptStates = new JLabel("Accepting state(s):");
+        acceptStates = new JLabel("Accepting state(s) ([a-zA-Z]):");
         acceptStatesField = new JTextField();
 
         acceptStatesField.addFocusListener(new FocusListener() {
@@ -128,7 +128,7 @@ public class PDAInGUI extends JDialog {
             }
         });
 
-        initState = new JLabel("Initial state:");
+        initState = new JLabel("Initial state ([a-zA-Z]):");
         initStateField = new JTextField();
 
         initStateField.addFocusListener(new FocusListener() {
@@ -171,8 +171,11 @@ public class PDAInGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Set<String> set = new HashSet<String>(statesArray);
+                String temp=statesField.getText().trim();
                 if (statesField.getText().equals("")) {
-                    JOptionPane.showMessageDialog(new JPanel(), "States field empty or invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(new JPanel(), "States field empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!temp.matches("^(?:[a-zA-Z]\\s)+[a-zA-Z]$|[a-zA-Z]{1}$")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "States field invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (set.size() < statesArray.size() && !statesField.getText().equals("")) { //duplicates found
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (acceptStatesField.getText().equals("")) {
@@ -209,10 +212,10 @@ public class PDAInGUI extends JDialog {
         centerPanel1 = new JPanel();
         centerPanel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
         centerPanel1.setLayout(new GridLayout(2, 2, 0, 10));
-        info3 = new JLabel("Separate characters with a space. Use alphabetical letters for the stack and numbers for the input.");
+        info3 = new JLabel("Separate characters with a space. Use alphabetical letters for the stack and numbers between [0-9] for the input only.");
         info3.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
 
-        stackAlp = new JLabel("Stack Alphabet:");
+        stackAlp = new JLabel("Stack Alphabet ([a-zA-Z]:");
         stackField = new JTextField();
 
 //        stackField.addFocusListener(new FocusListener() {
@@ -230,7 +233,7 @@ public class PDAInGUI extends JDialog {
 //            }
 //        });
 
-        inputAlp = new JLabel("Input Alphabet:");
+        inputAlp = new JLabel("Input Alphabet ([0-9]:");
         inputField = new JTextField();
 //        inputField.addFocusListener(new FocusListener() {
 //            @Override
@@ -271,6 +274,7 @@ public class PDAInGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
 
                 inputString = inputField.getText();
+                inputString=inputString.trim();
                 //inputArray = new ArrayList(Arrays.asList(inputString.split("\\s+")));
                 inputStack.setInputArray(new ArrayList(Arrays.asList(inputString.split("\\s+"))));
                 stackString = stackField.getText();
@@ -290,8 +294,8 @@ public class PDAInGUI extends JDialog {
                     JOptionPane.showMessageDialog(new JPanel(), "You have duplicate input characters specified.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (!stackString.matches("^[a-zA-Z ]+$") && !stackField.getText().equals("")) {
                     JOptionPane.showMessageDialog(new JPanel(), "Please use alphabetical letters in your stack only.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (!inputString.matches("^[0-9 ]+$") && !inputField.getText().equals("")) {
-                    JOptionPane.showMessageDialog(new JPanel(), "Please use numbers in your input only.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!inputString.matches("^(?:[0-9]\\s)+[0-9]$|[0-9]{1}$") && !inputField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Please use numbers in your input only. Please separate each number by a space and ensure only [0-9] is used.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     int x = 20;
                     int y = 20;

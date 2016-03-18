@@ -44,7 +44,7 @@ public class NewNodeGUI implements ActionListener {
             nodeType="normal";
         }
         //setTitle("Create new " + nodeType + " node");
-        String nodeName = (String)JOptionPane.showInputDialog(new JDialog(), "Specify new node(s) to create. If you want to create multiple nodes, separate them with a space", "Create new "+ nodeType+" node", JOptionPane.PLAIN_MESSAGE, null, null, null);
+        String nodeName = (String)JOptionPane.showInputDialog(new JDialog(), "Specify new node(s) to create. If you want to create multiple nodes, separate them with a space. Each state can be specified as any singular letter [a-z A-Z].", "Create new "+ nodeType+" node", JOptionPane.PLAIN_MESSAGE, null, null, null);
         boolean hasDupes = false;
         boolean hasInitial = false;
         if (nodeName != null && !nodeName.equals("")) {
@@ -70,8 +70,11 @@ public class NewNodeGUI implements ActionListener {
                     }
                 }
             }
+            nodeName=nodeName.trim();
             if (hasDupes) {
                 JOptionPane.showMessageDialog(new JDialog(), "You already have this/these node specified in your graph.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (!nodeName.matches("^(?:[a-zA-Z]\\s)+[a-zA-Z]$|[a-zA-Z]{1}$")) {
+                JOptionPane.showMessageDialog(new JDialog(), "States field invalid format.", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (set.size() < newNodeArray.size()) {
                 JOptionPane.showMessageDialog(new JDialog(), "You have duplicate states specified.", "Error", JOptionPane.ERROR_MESSAGE);
             }
