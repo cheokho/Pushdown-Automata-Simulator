@@ -115,6 +115,13 @@ public class TopLevelGUI extends JFrame{
             }
         });
 
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AboutGUI aboutGUI = new AboutGUI();
+            }
+        });
+
 
         menuClose.addActionListener(new ActionListener() {
             @Override
