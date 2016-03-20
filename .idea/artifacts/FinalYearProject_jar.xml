@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="FinalYearProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FinalYearProject_jar</output-path>
+    <root id="archive" name="FinalYearProject.jar">
+      <element id="module-output" name="FinalYearProject" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/java/jars/iText-2.1.7_mx-1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/java/jars/servlet-api-2.5-6.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/java/jars/jetty-util-6.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/java/jars/jetty-6.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/java/jars/junit-4.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

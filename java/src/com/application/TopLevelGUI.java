@@ -102,6 +102,19 @@ public class TopLevelGUI extends JFrame{
         tools.add(menuRun);
         tools.add(menuExportPic);
 
+        JMenu help = new JMenu("Help");
+        JMenuItem userGuide = new JMenuItem("User Guide");
+        JMenuItem about = new JMenuItem("About");
+        help.add(userGuide);
+        help.add(about);
+
+        userGuide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HelpTab helpTab = new HelpTab();
+            }
+        });
+
 
         menuClose.addActionListener(new ActionListener() {
             @Override
@@ -563,8 +576,6 @@ public class TopLevelGUI extends JFrame{
         });
 
         edit.add(menuPDAType); edit.add(defAlphabets); edit.add(menuDelete);
-
-        JMenu help = new JMenu("Help");
 
         menuBar.add(file); menuBar.add(edit); menuBar.add(tools);menuBar.add(help);
 
