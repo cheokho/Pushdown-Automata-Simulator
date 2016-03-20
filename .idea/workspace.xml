@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/src/com/helpimages/screen2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/src/com/helpimages/screen3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/src/com/helpimages/screen4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/src/com/helpimages/screen5.png" />
-      <change type="DELETED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\java\src\com\helpimages\Screen 4.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\java\src\com\helpimages\Screen 5.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/HelpTab.java" afterPath="$PROJECT_DIR$/java/src/com/application/HelpTab.java" />
+      <change type="DELETED" beforePath="C:\Users\CheokHo\IdeaProjects\mxgraph\java\src\com\icon\favicon.ico" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/icon/favicon.png" afterPath="$PROJECT_DIR$/java/src/com/icon/favicon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
@@ -96,8 +91,8 @@
       <file leaf-file-name="HelpTab.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/HelpTab.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18123667">
-              <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.54371">
+              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -781,13 +776,7 @@
       <workItem from="1458050771896" duration="9347000" />
       <workItem from="1458140724545" duration="8164000" />
       <workItem from="1458490711067" duration="4974000" />
-      <workItem from="1458496656800" duration="1662000" />
-    </task>
-    <task id="LOCAL-00029" summary="transition rule fixes.">
-      <created>1455550895380</created>
-      <option name="number" value="00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1455550895380</updated>
+      <workItem from="1458496656800" duration="2421000" />
     </task>
     <task id="LOCAL-00030" summary="overlap temp fix.">
       <created>1455571636634</created>
@@ -1077,11 +1066,17 @@
       <option name="project" value="LOCAL" />
       <updated>1458497724974</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="NDPDA new idea revamp testing. help guides added.&#10;&#10;">
+      <created>1458498330686</created>
+      <option name="number" value="00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1458498330686</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="339561000" />
+    <option name="totallyTimeSpent" value="340320000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -1127,7 +1122,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working on NDPDA stuff in progress v2." />
     <MESSAGE value="NDPDA new idea revamp testing." />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.1" />
@@ -1152,7 +1146,8 @@
     <MESSAGE value="NDPDA new idea revamp testing. added icon.&#10;&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. fixed a load bug.&#10;&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. help guides adding.&#10;&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. help guides adding.&#10;&#10;&#10;" />
+    <MESSAGE value="NDPDA new idea revamp testing. help guides added.&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="NDPDA new idea revamp testing. help guides added.&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1576,8 +1571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/HelpTab.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18123667">
-          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.54371">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding />
         </state>
       </provider>
