@@ -1,4 +1,4 @@
-package com.application;
+package com.miscgui;
 
 import javax.swing.*;
 import java.awt.*;

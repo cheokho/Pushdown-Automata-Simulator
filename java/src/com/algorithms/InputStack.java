@@ -1,10 +1,12 @@
-package com.application;
+package com.algorithms;
 
 import java.util.ArrayList;
 
 /**
  * Created by CheokHo on 12/03/2016.
  */
+
+
 public class InputStack {
     private ArrayList<String> inputArray;
     private ArrayList<String> stackArray;

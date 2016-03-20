@@ -1,5 +1,10 @@
 package com.application;
 
+import com.algorithms.AllComboArray;
+import com.algorithms.InputStack;
+import com.algorithms.PathGenerator;
+import com.miscgui.AboutGUI;
+import com.miscgui.HelpTab;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
@@ -8,7 +13,6 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.*;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxStylesheet;
-import com.sun.xml.internal.ws.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -246,13 +250,6 @@ public class TopLevelGUI extends JFrame{
                             algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
                         }
 
-                        /**TODO - Get initial state for starting point.
-                         - Get top stack element AND leftmost input element; loop through all edges and find a match then call break.
-                         - When matched, get 'toNode' value of specified edge and specify that as node to move to.
-                         - Delete leftmost input string now it is consumed and update stack according to edge transition rule.
-                         - When input string is empty algorithm has finished, determine if the state we are on is accepting.
-                         **/
-
                     } else if (containsAccept == false || containsInitial == false) {
                         JOptionPane.showMessageDialog(getFocusOwner(), "There is no initial and/or accepting state in your PDA.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -311,14 +308,6 @@ public class TopLevelGUI extends JFrame{
         menuSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                for (GraphNode n: nodeArray) {
-//                    System.out.println(n.toString() +"  "+n.isInitial());
-//                }
-//                for (Edge edge:edgeArray) {
-//                    System.out.println(edge.toString() +"  "+edge.getFromNode()+edge.getToNode());
-//                }
-//                System.out.println(inputStack.getInputArray());
-//                System.out.println(inputStack.getStackArray());
 
                 JFileChooser fileChooser = new JFileChooser(){
                     public void approveSelection() {
@@ -637,35 +626,7 @@ public class TopLevelGUI extends JFrame{
 
 
     public void createGraphPane(){
-//        Edge edge = new Edge(graph);
-//        try
-//        {
-//            Object v1 = graph.insertVertex(parent, null, "a", 20, 20, 80,
-//                    60);
-//            Object v2 = graph.insertVertex(parent, null, "b", 240, 150,
-//                    80, 60);
-//            graph.insertEdge(parent, null, "Edge", v1, v2);
-//        }
-//        finally
-//        {
-//            graph.getModel().endUpdate();
-//        }
-//        Node nodeA = new Node(graph, "a", false);
-//        nodeA.createNode(20,20);
-//        Node nodeB = new Node(graph, "b", true);
-//        nodeB.createNode(240,150);
-//        try {
-//            edge.addEdge(nodeA.getNode(), nodeB.getNode(), "transition rule temp");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         parent = graph.getDefaultParent();
-//        mxIGraphLayout layout = new mxParallelEdgeLayout(graph, 30);
-//        layout.execute(parent);
-
-        //Object a=createNode(20,20, "a", false);
-        //Object b=createNode(240,150, "b", true);
-        //addEdge(a, b, "temp trans rule");
 
         mxGraphComponent graphComponent = new mxGraphComponent(graph) {
             @Override
@@ -679,9 +640,6 @@ public class TopLevelGUI extends JFrame{
             }
         };
 
-
-
-        //new mxKeyboardHandler(graphComponent); needs to be fixed for backend (keyboard deleting)
 
         //This handles edge creation handlers.
         graphComponent.getConnectionHandler().addListener(mxEvent.CONNECT, new mxEventSource.mxIEventListener() {
@@ -809,15 +767,6 @@ public class TopLevelGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 cellReleased = (mxCell) graphComponent.getCellAt(e.getX(), e.getY());
                 if (SwingUtilities.isLeftMouseButton(e) && cellPressed != null) {
-                    //needs fixing
-//                    if (cellReleased != null) {
-//                        for (Node n: nodeArray) {
-//                            if (cellReleased.getValue().toString().equals(n.toString())) {
-//                                n.setYPosition(e.getY());
-//                                n.setXPosition(e.getX());
-//                            }
-//                        }
-//                    }
                     if (inputStack.getInputArray() == null || inputStack.getStackArray() == null) {
                         JOptionPane.showMessageDialog(getFocusOwner(), "Please specify an input/stack alphabet before creating transition rules.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -890,8 +839,6 @@ public class TopLevelGUI extends JFrame{
             edgeStyle.put(mxConstants.STYLE_FONTCOLOR, "#0C090A");
             edgeStyle.put(mxConstants.STYLE_ROUNDED, true);
             edgeStyle.put(mxConstants.STYLE_EDGE, mxConstants.EDGESTYLE_SIDETOSIDE);
-            //edgeStyle.put(mxConstants.STYLE_LABEL_BACKGROUNDCOLOR, "#ffffff");
-            //edgeStyle.put(mxConstants.STYLE_EDGE, mxEdgeStyle.SegmentConnector);
 
             mxStylesheet stylesheet = new mxStylesheet();
             stylesheet.setDefaultEdgeStyle(edgeStyle);

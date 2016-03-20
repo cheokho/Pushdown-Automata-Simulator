@@ -1,4 +1,4 @@
-package com.application;
+package com.algorithms;
 
 import java.util.ArrayList;
 
@@ -37,9 +37,6 @@ public class PathGenerator {
         stackOperations.add(stackOperation);
     }
 
-    public ArrayList<String> getStackOperations() {
-        return stackOperations;
-    }
 }
 
 

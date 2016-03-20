@@ -1,5 +1,8 @@
 package com.application;
 
+import com.algorithms.PathFinder;
+import com.algorithms.PathGenerator;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -17,7 +20,6 @@ public class AlgorithmRunner {
     private DefaultTableModel model;
     private JTextArea textArea;
     private SwingWorker<Void, Void> worker;
-    private boolean choicePointFound;
 
     private Set<PathGenerator> pathGenerators;
 
@@ -32,8 +34,6 @@ public class AlgorithmRunner {
         pathGenerators = new LinkedHashSet<PathGenerator>();
     }
 
-    //same rule but different TONODE needs fixing too.
-    //basically I need a check which can detect that there is a choice point in the algorithm. If there is, the runalgorithm method needs to be recalled using the 2nd choice.
     public void runAlgorithm(boolean isNdpda) {
 
         worker = new SwingWorker<Void, Void>() {
@@ -116,13 +116,6 @@ public class AlgorithmRunner {
                             textArea.append("Current input elements: " + inputElements + "\n");
                         }
 
-                        // TODO
-                        // PathFinder object stores a full path into an ArrayList until input elements =""
-                        // PathFinder realises when there is choice point. Creates a new PathFinder for each choice point.
-                        // Search all paths first and get a list of them. Let user choose which ones to run??
-                        // Run transitionEdge calculator on all transitionEdges it finds. (transitionEdge.get(i)
-                        // update this for all PathFinder objects.
-
                     }
                 }
                 return null;
@@ -132,25 +125,10 @@ public class AlgorithmRunner {
     }
 
 
-    //TODO IMPLEMENT THIS
-    // instead of storing strings, store objects which also contain the stack array at each point.
-    // pass in PathGenerator object into ndpdaAlgorithm instead of StringBuilder
-    // check length of path string to see if path is valid.
-
-    //TODO BUGS TO FIX
-    // allow same edge rule to be created from outgoing node if it is not going to the same node.
-    // when edge is deleted, you can't create the same edge rule from that node. needs fixing.
-
     public void ndpdaAlgorithm(String inputElements, GraphNode node, PathGenerator pathGenerator) {
 
         ArrayList<Edge> transitionEdges = new ArrayList<Edge>();
         Edge transitionEdge=null;
-
-
-//        for (int q=0; q<model.getRowCount(); q++) {
-//            stackArray.add(model.getValueAt(q, 0).toString());
-//        }
-
 
 
         if (inputElements!=null && !inputElements.equals("") && node!=null) {
@@ -255,21 +233,6 @@ public class AlgorithmRunner {
             pathGenerators.add(pathGenerator);
         }
 
-//        Thread.sleep(1000);
-//        textArea.setCaretPosition(textArea.getDocument().getLength());
-//        textArea.append("Moving to node: '"+transitionEdge.getToNode()+"' from node: '"+transitionEdge.getFromNode()+"' through transition rule: "+transitionEdge.toString()+"\n");
-//        totalPath.append(transitionEdge.getToNode());
-//        if (inputElements.equals("")) {
-//            textArea.append("Simulation finished at node: '"+transitionEdge.getToNode()+"'.\nPath taken: '"+totalPath.toString()+"'.\n");
-//            if(transitionEdge.getToNode().isAccept()) {
-//                textArea.append("RESULT: SUCCESS. '"+transitionEdge.getToNode()+"' is an accepting state.\n");
-//            } else {
-//                textArea.append("RESULT: FAILURE. '"+transitionEdge.getToNode()+"' is not an accepting state.\n");
-//            }
-//        }
-//        else {
-//            textArea.append("Current input elements: " + inputElements + "\n");
-//        }
     }
 
     public Set<PathGenerator> getPathGenerators(RunSimGUI runSimGUI) {

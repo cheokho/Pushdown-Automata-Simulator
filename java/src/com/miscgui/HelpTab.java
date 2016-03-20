@@ -1,12 +1,10 @@
-package com.application;
+package com.miscgui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by CheokHo on 17/03/2016.

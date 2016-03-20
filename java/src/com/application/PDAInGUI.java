@@ -1,5 +1,7 @@
 package com.application;
 
+import com.algorithms.InputStack;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -143,19 +145,6 @@ public class PDAInGUI extends JDialog {
         });
 
 
-
-        //info2 = new JLabel("Specify transition rules through:");
-        //graph = new JRadioButton("Graph");
-        //transTable = new JRadioButton("Transition table");
-//        group = new ButtonGroup();
-//        group.add(graph);
-//        group.add(transTable);
-//        graph.setSelected(true);
-//        BorderLayout centerBotLayout = new BorderLayout();
-//        centerBotPanel = new JPanel();
-//        centerBotPanel.setLayout(centerBotLayout);
-//        centerBotPanel.add(info2, BorderLayout.NORTH); centerBotPanel.add(graph, BorderLayout.CENTER); centerBotPanel.add(transTable, BorderLayout.SOUTH);
-
         centerPanel.add(states); centerPanel.add(statesField);
         centerPanel.add(acceptStates); centerPanel.add(acceptStatesField);
         centerPanel.add(initState);
@@ -184,11 +173,6 @@ public class PDAInGUI extends JDialog {
                 } else if (!statesArray.contains(initStateStr) && !initStateField.getText().equals("")) { //initial state not in states array
                     JOptionPane.showMessageDialog(new JPanel(), "Initial state needs to be part of your defined states", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-//                    if (graph.isSelected()) {
-//                        isGraph = true;
-//                    } else if (transTable.isSelected()) {
-//                        isGraph = false;
-//                    }
                     if (!statesArray.contains(initStateStr)) {
                     } else {
                         cl.show(container, "2");
@@ -215,35 +199,10 @@ public class PDAInGUI extends JDialog {
         stackAlp = new JLabel("Stack Alphabet ([a-zA-Z]:");
         stackField = new JTextField();
 
-//        stackField.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                stackString = stackField.getText();
-//                stackArray = new ArrayList(Arrays.asList(stackString.split("\\s+")));
-//                stackArray.add("$");
-//                System.out.println("Stack Array: " + stackArray);
-//            }
-//        });
 
         inputAlp = new JLabel("Input Alphabet ([0-9]:");
         inputField = new JTextField();
-//        inputField.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//
-//                System.out.println("Input Array: " + inputArray);
-//            }
-//        });
+
 
         centerPanel1.add(stackAlp); centerPanel1.add(stackField); centerPanel1.add(inputAlp); centerPanel1.add(inputField);
 
@@ -344,14 +303,6 @@ public class PDAInGUI extends JDialog {
 
     }
 
-
-//    public ArrayList<String> getStackArray() {
-//        return stackArray;
-//    }
-//
-//    public ArrayList<String> getInputArray() {
-//        return inputArray;
-//    }
 
     public InputStack getInputStack() {
         return inputStack;

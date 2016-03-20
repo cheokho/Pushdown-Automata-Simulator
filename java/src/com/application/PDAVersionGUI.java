@@ -1,5 +1,7 @@
 package com.application;
 
+import com.algorithms.InputStack;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -104,7 +106,4 @@ public class PDAVersionGUI extends JDialog {
         return pdaInputGUI;
     }
 
-    public void setPdaInputGUI(PDAInGUI pdaInputGUI) {
-        this.pdaInputGUI=pdaInputGUI;
-    }
 }
