@@ -1,12 +1,9 @@
 package com.application;
 
 
-
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.swing.UIManager.*;
 
 /**
  * Created by CheokHo on 25/01/2016.

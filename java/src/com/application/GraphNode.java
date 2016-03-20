@@ -1,7 +1,5 @@
 package com.application;
 
-import com.mxgraph.view.mxGraph;
-
 import java.util.ArrayList;
 
 /**

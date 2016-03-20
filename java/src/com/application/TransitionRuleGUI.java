@@ -1,16 +1,11 @@
 package com.application;
 
-import com.mxgraph.layout.mxIGraphLayout;
-import com.mxgraph.layout.mxParallelEdgeLayout;
-import com.mxgraph.util.mxConstants;
-import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxStylesheet;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by Cheeeky on 13/02/2016.
