@@ -133,7 +133,7 @@ public class TransitionRuleGUI extends JDialog {
                 System.out.println("Selected input-stack combo: " + selectedCombo);
                 for (GraphNode n : topLevelGUI.getNodeArray()) {
                     if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                        //System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
+                        System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
 
                         System.out.println(n.getOutGoingEdgeRule());
                         System.out.println(edgeRule);
@@ -173,6 +173,18 @@ public class TransitionRuleGUI extends JDialog {
                                 JOptionPane.showMessageDialog(getContentPane(), "You cannot pop from empty stack $.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else {
                                 topLevelGUI.addEdge(topLevelGUI.getGraph(), edgeRule, (Object) topLevelGUI.getCellPressed(), topLevelGUI.getCellReleased(), Integer.parseInt(inputComboBox.getSelectedItem().toString()), stackComboBox.getSelectedItem().toString(), getSelectedButtonText(group));
+
+                                for (GraphNode node : nodeArray) {
+                                    if (node.toString().equals(fromNodeString)) {
+                                        if (topLevelGUI.getEdge() != null) {
+                                            node.addOutgoingInput(Integer.toString(topLevelGUI.getEdge().getEdgeTopInput()));
+                                            node.addOutgoingTopStack(topLevelGUI.getEdge().getEdgeTopStack());
+                                            node.addOutgoingCombo(Integer.toString(topLevelGUI.getEdge().getEdgeTopInput()) + topLevelGUI.getEdge().getEdgeTopStack());
+                                            node.addOutgoingEdgeRule(topLevelGUI.getEdge().toString());
+                                            node.addToFromCombo(toNodeString + fromNodeString);
+                                        }
+                                    }
+                                }
                                 dispose();
                             }
                         } else if (!isNdpda) {

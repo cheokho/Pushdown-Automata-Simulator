@@ -97,7 +97,6 @@ public class JPanelMod extends JPanel{
         int iImageWidth = (int) Math.round(img.getWidth() * dScaleFactor);
         int iImageHeight = (int) Math.round(img.getHeight() * dScaleFactor);
 
-//        System.out.println("Scale Size = " + iImageWidth + "x" + iImageHeight);
         if (dScaleFactor <= 1.0d) {
 
             imgScale = getScaledDownInstance(img, iImageWidth, iImageHeight, hint, bHighQuality);
