@@ -20,10 +20,12 @@ public class AlgorithmRunner {
     private DefaultTableModel model;
     private JTextArea textArea;
     private SwingWorker<Void, Void> worker;
+    private int executionTime;
 
     private Set<PathGenerator> pathGenerators;
 
-    public AlgorithmRunner(RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<GraphNode> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
+    public AlgorithmRunner(int executionTime, RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<GraphNode> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
+        this.executionTime=executionTime;
         this.runSimGUI=runSimGUI;
         this.model=model;
         this.nodeArray=nodeArray;
@@ -62,7 +64,7 @@ public class AlgorithmRunner {
                 pathFinders.add(pathFinder);
 
 
-                while (inputElements != null && !inputElements.equals("") && node != null && !isStuck && !pathFinders.isEmpty()) {
+                while (inputElements != null && !inputElements.equals("") && node != null && !pathFinders.isEmpty()) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q = 0; q < model.getRowCount(); q++) {
                         stackArray.add(model.getValueAt(q, 0).toString());
@@ -101,7 +103,7 @@ public class AlgorithmRunner {
                         node = transitionEdge.getToNode();
                         inputElements = inputElements.substring(1);
 
-                        Thread.sleep(1000);
+                        Thread.sleep(executionTime);
                         textArea.setCaretPosition(textArea.getDocument().getLength());
                         textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
                         totalPath.append(transitionEdge.getToNode());
@@ -311,7 +313,7 @@ public class AlgorithmRunner {
                     inputElements = inputElements.substring(1);
                     startNode=nextNode;
 
-                    Thread.sleep(1000);
+                    Thread.sleep(executionTime);
                     textArea.setCaretPosition(textArea.getDocument().getLength());
                     textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
                     if (inputElements.equals("")) {

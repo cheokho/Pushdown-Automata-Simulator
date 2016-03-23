@@ -133,14 +133,13 @@ public class TransitionRuleGUI extends JDialog {
                 System.out.println("Selected input-stack combo: " + selectedCombo);
                 for (GraphNode n : topLevelGUI.getNodeArray()) {
                     if (n.toString().equals(topLevelGUI.getCellPressed().getValue().toString())) {
-                        System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
-
-                        System.out.println(n.getOutGoingEdgeRule());
-                        System.out.println(edgeRule);
-                        System.out.println((!n.getOutGoingEdgeRule().contains(edgeRule)));
-                        System.out.println(n.getToFromCombo());
-                        System.out.println(!n.getToFromCombo().contains(toNodeString+fromNodeString));
-
+//                        System.out.println("Node outgoing combo: " + n.getOutGoingCombo());
+//
+//                        System.out.println(n.getOutGoingEdgeRule());
+//                        System.out.println(edgeRule);
+//                        System.out.println((!n.getOutGoingEdgeRule().contains(edgeRule)));
+//                        System.out.println(n.getToFromCombo());
+//                        System.out.println(!n.getToFromCombo().contains(toNodeString+fromNodeString));
                         if (((!n.getOutGoingEdgeRule().contains(edgeRule)) || (!n.getToFromCombo().contains(toNodeString+fromNodeString))) && isNdpda) {
                             if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
                                 JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
@@ -167,6 +166,9 @@ public class TransitionRuleGUI extends JDialog {
                         }
 
                         if (!n.getOutGoingCombo().contains(selectedCombo) && !isNdpda) {
+                            System.out.println("selected combo:"+selectedCombo);
+                            System.out.println("outgoing combo:"+n.getOutGoingCombo());
+
                             if (pushButton.getText().equals("push(__)") && pushButton.isSelected()) {
                                 JOptionPane.showMessageDialog(getContentPane(), "Please select a valid push operation.", "Invalid operation", JOptionPane.ERROR_MESSAGE);
                             } else if (popButton.isSelected() && stackComboBox.getSelectedItem().equals("$")) {

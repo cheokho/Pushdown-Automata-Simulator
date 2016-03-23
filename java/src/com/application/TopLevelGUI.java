@@ -54,6 +54,7 @@ public class TopLevelGUI extends JFrame{
     private JPanel topPanel;
     private JSplitPane splitPane;
     private InputStack inputStack;
+    private int executionTime = 1000;
 
     //private mxCell nodePressed;
     private mxCell cellReleased;
@@ -198,8 +199,7 @@ public class TopLevelGUI extends JFrame{
                         }
 
                         SwingWorker<Void, Void> worker = null;
-
-                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
+                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(executionTime, runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
                         if (PDAVersionGUI.isNdpda) {
                             GraphNode node=null;
                             for (GraphNode n: nodeArray) {
@@ -515,6 +515,35 @@ public class TopLevelGUI extends JFrame{
 
         JMenu edit = new JMenu("Edit");
         JMenuItem menuPDAType = new JMenuItem("PDA Type");
+        JMenu execTime = new JMenu("Simulation delay");
+
+        JMenuItem exec1000 = new JMenuItem("1 second");
+        JMenuItem exec3000 = new JMenuItem("3 seconds");
+        JMenuItem exec5000 = new JMenuItem("5 seconds");
+
+        exec1000.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                executionTime=1000;
+            }
+        });
+        exec3000.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                executionTime=3000;
+            }
+        });
+        exec5000.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                executionTime = 5000;
+            }
+        });
+
+        execTime.add(exec1000); execTime.add(exec3000); execTime.add(exec5000);
+
+
+
         menuPDAType.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -571,7 +600,7 @@ public class TopLevelGUI extends JFrame{
             }
         });
 
-        edit.add(menuPDAType); edit.add(defAlphabets); edit.add(menuDelete);
+        edit.add(menuPDAType); edit.add(defAlphabets); edit.add(execTime); edit.add(menuDelete);
 
         menuBar.add(file); menuBar.add(edit); menuBar.add(tools);menuBar.add(help);
 

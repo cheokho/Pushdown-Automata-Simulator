@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/Main.class" afterPath="$PROJECT_DIR$/classes/com/application/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/miscgui/JPanelMod.java" afterPath="$PROJECT_DIR$/java/src/com/miscgui/JPanelMod.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -63,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransitionRuleGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TransitionRuleGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71308017">
-              <caret line="186" column="33" selection-start-line="186" selection-start-column="33" selection-end-line="186" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="169" column="85" selection-start-line="169" selection-start-column="85" selection-end-line="169" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -97,13 +97,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="491" column="42" selection-start-line="491" selection-start-column="42" selection-end-line="491" selection-end-column="42" />
+              <caret line="602" column="75" selection-start-line="602" selection-start-column="75" selection-end-line="602" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#26705#26706#0" expanded="true" />
+                <element signature="e#26755#26756#0" expanded="true" />
+                <element signature="e#26904#26905#0" expanded="true" />
+                <element signature="e#26954#26955#0" expanded="true" />
+                <element signature="e#27103#27104#0" expanded="true" />
+                <element signature="e#27155#27156#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,17 +129,17 @@
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="190" column="27" selection-start-line="190" selection-start-column="27" selection-end-line="190" selection-end-column="27" />
+              <caret line="315" column="46" selection-start-line="315" selection-start-column="46" selection-end-line="315" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewNodeGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java">
+      <file leaf-file-name="PathFinder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathFinder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
+              <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -179,7 +185,6 @@
         <option value="$PROJECT_DIR$/java/src/com/application/AboutGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/algorithms/AllComboArray.java" />
         <option value="$PROJECT_DIR$/java/src/com/algorithms/InputStack.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
         <option value="$PROJECT_DIR$/java/src/com/algorithms/PathFinder.java" />
         <option value="$PROJECT_DIR$/java/src/com/algorithms/PathGenerator.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/PDAInGUI.java" />
@@ -188,8 +193,9 @@
         <option value="$PROJECT_DIR$/java/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/NewNodeGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/miscgui/JPanelMod.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       </list>
     </option>
   </component>
@@ -236,9 +242,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -275,108 +280,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="miscgui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mxgraph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="algorithms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -794,13 +700,8 @@
       <workItem from="1458496656800" duration="2497000" />
       <workItem from="1458510675559" duration="2850000" />
       <workItem from="1458558762612" duration="652000" />
-      <workItem from="1458762354536" duration="1706000" />
-    </task>
-    <task id="LOCAL-00034" summary="transition rule fixes.">
-      <created>1455718701247</created>
-      <option name="number" value="00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1455718701247</updated>
+      <workItem from="1458762354536" duration="3935000" />
+      <workItem from="1458766326692" duration="9000" />
     </task>
     <task id="LOCAL-00035" summary="delete backend needs fixing.">
       <created>1455721242949</created>
@@ -1090,42 +991,48 @@
       <option name="project" value="LOCAL" />
       <updated>1458513078456</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="accidentally broke deterministic but fixed now">
+      <created>1458764079909</created>
+      <option name="number" value="00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1458764079909</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="345604000" />
+    <option name="totallyTimeSpent" value="347842000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32497275" sideWeight="0.4575" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5375" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32523617" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32793522" sideWeight="0.4625" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991276" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991276" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32497275" sideWeight="0.4575" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32523617" sideWeight="0.686875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32793522" sideWeight="0.4625" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1140,7 +1047,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="NDPDA new idea revamp testing. 1.1.2" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.2.1" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.3&#10;&#10;add top stack so when simulator is run we know which path to take." />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.3.1&#10;&#10;Everything works in console now !&#10;&#10;" />
@@ -1165,7 +1071,8 @@
     <MESSAGE value="icon updated.&#10;" />
     <MESSAGE value="about updated.&#10;" />
     <MESSAGE value="removed a lot of duplicate code and reorganised packages." />
-    <option name="LAST_COMMIT_MESSAGE" value="removed a lot of duplicate code and reorganised packages." />
+    <MESSAGE value="accidentally broke deterministic but fixed now" />
+    <option name="LAST_COMMIT_MESSAGE" value="accidentally broke deterministic but fixed now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1202,6 +1109,12 @@
           <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1233,6 +1146,12 @@
           <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1282,6 +1201,12 @@
           <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1331,6 +1256,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1362,6 +1293,12 @@
           <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1437,9 +1374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding>
-            <element signature="e#524#532#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1447,14 +1381,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1462,7 +1388,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1470,10 +1395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
-          <folding>
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1481,7 +1402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1522,7 +1442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1554,10 +1473,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="169" column="85" selection-start-line="169" selection-start-column="85" selection-end-line="169" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="190" column="27" selection-start-line="190" selection-start-column="27" selection-end-line="190" selection-end-column="27" />
+          <caret line="315" column="46" selection-start-line="315" selection-start-column="46" selection-end-line="315" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1565,18 +1500,16 @@
     <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="491" column="42" selection-start-line="491" selection-start-column="42" selection-end-line="491" selection-end-column="42" />
+          <caret line="602" column="75" selection-start-line="602" selection-start-column="75" selection-end-line="602" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26705#26706#0" expanded="true" />
+            <element signature="e#26755#26756#0" expanded="true" />
+            <element signature="e#26904#26905#0" expanded="true" />
+            <element signature="e#26954#26955#0" expanded="true" />
+            <element signature="e#27103#27104#0" expanded="true" />
+            <element signature="e#27155#27156#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/TransitionRuleGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71308017">
-          <caret line="186" column="33" selection-start-line="186" selection-start-column="33" selection-end-line="186" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
