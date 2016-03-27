@@ -103,17 +103,26 @@ public class TopLevelGUI extends JFrame{
         JMenuItem menuOpen = new JMenuItem("Open");
         JMenuItem menuSave = new JMenuItem("Save");
         JMenuItem menuClose = new JMenuItem("Close");
-        JMenuItem menuExportPic = new JMenuItem("Export Graph as Image");
+        JMenuItem menuExportPic = new JMenuItem("Export graph as image");
+        JMenuItem menuEdges = new JMenuItem("Current transitions");
 
         JMenu tools = new JMenu("Tools");
         tools.add(menuRun);
         tools.add(menuExportPic);
+        tools.add(menuEdges);
 
         JMenu help = new JMenu("Help");
         JMenuItem userGuide = new JMenuItem("User Guide");
         JMenuItem about = new JMenuItem("About");
         help.add(userGuide);
         help.add(about);
+
+        menuEdges.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowTransitionsGUI showTransitionsGUI = new ShowTransitionsGUI(getEdgeArray());
+            }
+        });
 
         userGuide.addActionListener(new ActionListener() {
             @Override
