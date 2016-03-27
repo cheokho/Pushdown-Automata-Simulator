@@ -16,7 +16,15 @@ public class ShowTransitionsGUI extends JFrame {
     private DefaultTableModel model;
 
     public ShowTransitionsGUI(ArrayList<Edge> edgeArray) {
-        setTitle("Transition Edges");
+        String temp="";
+        if (PDAVersionGUI.isNdpda == null) {
+            temp="Unspecified";
+        } else if (!PDAVersionGUI.isNdpda){
+            temp="Deterministic";
+        } else if (PDAVersionGUI.isNdpda) {
+            temp="Non-deterministic";
+        }
+        setTitle("Transition edges || Graph type: "+temp);
         setIconImage(new ImageIcon(getClass().getResource("/com/icon/favicon.png")).getImage());
         this.edgeArray=edgeArray;
 

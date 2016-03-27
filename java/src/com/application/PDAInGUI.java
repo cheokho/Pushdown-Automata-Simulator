@@ -196,11 +196,11 @@ public class PDAInGUI extends JDialog {
         info3 = new JLabel("Separate characters with a space. Use alphabetical letters for the stack and numbers between [0-9] for the input only.");
         info3.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
 
-        stackAlp = new JLabel("Stack Alphabet ([a-zA-Z]:");
+        stackAlp = new JLabel("Stack Alphabet ([a-zA-Z]):");
         stackField = new JTextField();
 
 
-        inputAlp = new JLabel("Input Alphabet ([0-9]:");
+        inputAlp = new JLabel("Input Alphabet ([0-9]):");
         inputField = new JTextField();
 
 

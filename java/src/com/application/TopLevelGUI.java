@@ -184,18 +184,20 @@ public class TopLevelGUI extends JFrame{
                     //System.out.println("All input stack combo: " + allInputStackCombo);
                     for (GraphNode n : nodeArray) {
                         //System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
+                        missingCombo.removeAll(n.getOutGoingCombo());
                         if (n.isInitial) {
                             containsInitial = true;
                         }
                         if (n.isAccept) {
                             containsAccept = true;
                         }
-                        if (n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())) {
+//                        if (n.getOutGoingCombo().containsAll(allInputStackCombo) && allInputStackCombo.containsAll(n.getOutGoingCombo())) {
+                        if (missingCombo.isEmpty()) {
                             testRunnable = true;
                         } else {
                             testRunnable = false;
                         }
-                        missingCombo.removeAll(n.getOutGoingCombo());
+
                     }
                     if (PDAVersionGUI.isNdpda) {
                         testRunnable = true;
@@ -268,7 +270,8 @@ public class TopLevelGUI extends JFrame{
                     } else if (containsAccept == false || containsInitial == false) {
                         JOptionPane.showMessageDialog(getFocusOwner(), "There is no initial and/or accepting state in your PDA.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.\nMissing combination(s) is: "+missingCombo+", where the left value is the input and the right value is the top stack.", "Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.println("Missing combo: "+missingCombo);
+                        JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.\nMissing combination(s) is: "+missingCombo+", where the left value is the input and the right value is the top stack.\nPlease ensure that every state contains an outgoing rule with each missing combination.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -506,7 +509,7 @@ public class TopLevelGUI extends JFrame{
                                         n.addOutgoingCombo(split[0] + split[1]);
                                         n.addOutgoingEdgeRule(rule);
                                         n.addToFromCombo(toNode + fromNode);
-                                        System.out.println("test"+n.getToFromCombo());
+                                        //System.out.println("test"+n.getToFromCombo());
                                     }
                                     if(graph.getView().getState(n.getNode()).getLabel().equals(toNode)) {
                                         to=n.getNode();

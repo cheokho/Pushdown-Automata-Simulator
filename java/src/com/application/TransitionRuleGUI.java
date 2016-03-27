@@ -73,6 +73,9 @@ public class TransitionRuleGUI extends JDialog {
 
         stackLabel = new JLabel("and top of stack symbol=");
         stackComboBox = new JComboBox<>();
+        if (!stackArray.contains("$")) {
+            stackArray.add("$");
+        }
         stackComboBox.setModel(new DefaultComboBoxModel(stackArray.toArray()));
 
         transitionLabel = new JLabel("then perform the following operation:");

@@ -51,6 +51,15 @@ public class PDAVersionGUI extends JDialog {
         label.setBorder(BorderFactory.createEmptyBorder(10,5,10,5));
         ndpda = new JRadioButton("Nondeterministic");
         dpda = new JRadioButton("Deterministic");
+
+        if (PDAVersionGUI.isNdpda != null) {
+            if (PDAVersionGUI.isNdpda) {
+                ndpda.setSelected(true);
+            } else if (!PDAVersionGUI.isNdpda) {
+                dpda.setSelected(true);
+            }
+        }
+
         if (!isNew) {
             continueButton = new JButton("OK");
             continueButton.addActionListener(new ActionListener() {
