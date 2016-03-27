@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by CheokHo on 25/01/2016.
@@ -57,6 +58,7 @@ public class TopLevelGUI extends JFrame{
     private JSplitPane splitPane;
     private InputStack inputStack;
     private int executionTime = 1000;
+    private List<String> missingCombo;
 
     //private mxCell nodePressed;
     private mxCell cellReleased;
@@ -178,9 +180,10 @@ public class TopLevelGUI extends JFrame{
                     JOptionPane.showMessageDialog(getFocusOwner(), "No PDA is specified. No simulation can be run. \nPlease create a new PDA first.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     ArrayList<String> allInputStackCombo = allComboArray.getAllCombinations(inputStack.getInputArray(), inputStack.getStackArray());
-                    System.out.println("All input stack combo: " + allInputStackCombo);
+                    missingCombo = allInputStackCombo;
+                    //System.out.println("All input stack combo: " + allInputStackCombo);
                     for (GraphNode n : nodeArray) {
-                        System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
+                        //System.out.println("Current input-stack combo: " + n.getOutGoingCombo());
                         if (n.isInitial) {
                             containsInitial = true;
                         }
@@ -192,6 +195,7 @@ public class TopLevelGUI extends JFrame{
                         } else {
                             testRunnable = false;
                         }
+                        missingCombo.removeAll(n.getOutGoingCombo());
                     }
                     if (PDAVersionGUI.isNdpda) {
                         testRunnable = true;
@@ -264,7 +268,7 @@ public class TopLevelGUI extends JFrame{
                     } else if (containsAccept == false || containsInitial == false) {
                         JOptionPane.showMessageDialog(getFocusOwner(), "There is no initial and/or accepting state in your PDA.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(getFocusOwner(), "You have not specified all the transition rules required to run a deterministic PDA simulation.\nMissing combination(s) is: "+missingCombo+", where the left value is the input and the right value is the top stack.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
