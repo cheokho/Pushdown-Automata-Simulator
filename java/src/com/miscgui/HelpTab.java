@@ -18,7 +18,6 @@ public class HelpTab extends JDialog {
 
         setMinimumSize(new Dimension(700, 700));
         setLocationRelativeTo(null);
-        setResizable(false);
         setVisible(true);
 
     }

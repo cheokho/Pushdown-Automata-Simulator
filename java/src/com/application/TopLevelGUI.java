@@ -26,6 +26,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -640,8 +642,39 @@ public class TopLevelGUI extends JFrame{
 
     public JPanel createConsoleGUI() {
         JPanel consolePanel = new JPanel();
+
         consolePanel.setLayout(new BorderLayout());
         consoleArea = new JTextArea();
+        JPopupMenu copymenu = new JPopupMenu();
+        JMenuItem copy = new JMenuItem("Copy");
+        JMenuItem clear = new JMenuItem("Clear console");
+        copymenu.add(copy); copymenu.add(clear);
+        consoleArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
+                    copymenu.show(e.getComponent(), e.getX(), e.getY());
+
+                    copy.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String selection = consoleArea.getSelectedText();
+                            StringSelection data = new StringSelection(selection);
+                            Clipboard clipboard =
+                                    Toolkit.getDefaultToolkit().getSystemClipboard();
+                            clipboard.setContents(data, data);
+                        }
+                    });
+
+                    clear.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            consoleArea.setText("");
+                        }
+                    });
+                }
+            }
+        });
         consoleArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(consoleArea);
         consolePanel.add(scrollPane, BorderLayout.CENTER);
