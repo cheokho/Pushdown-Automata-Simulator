@@ -754,13 +754,6 @@
       <workItem from="1458762354536" duration="3935000" />
       <workItem from="1458766326692" duration="9000" />
     </task>
-    <task id="LOCAL-00039" summary="updated node backend">
-      <created>1456080485555</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1456080485555</updated>
-    </task>
     <task id="LOCAL-00040" summary="updated node backend v2">
       <created>1456085431133</created>
       <option name="number" value="00040" />
@@ -1097,7 +1090,14 @@
       <option name="project" value="LOCAL" />
       <updated>1459099113386</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="small fix">
+      <created>1459179086164</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1459179086164</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
