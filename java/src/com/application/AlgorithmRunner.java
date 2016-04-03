@@ -21,6 +21,7 @@ public class AlgorithmRunner {
     private JTextArea textArea;
     private SwingWorker<Void, Void> worker;
     private int executionTime;
+    private String inputElements;
 
     private Set<PathGenerator> pathGenerators;
 
@@ -51,7 +52,7 @@ public class AlgorithmRunner {
                         break;
                     }
                 }
-                String inputElements = runSimGUI.getInput();
+                inputElements = runSimGUI.getInput();
                 Edge transitionEdge = null;
                 boolean isStuck = false;
 
@@ -259,7 +260,7 @@ public class AlgorithmRunner {
                 String route = selectedPath.toString();
                 String startNode=route.substring(0,1);
                 route=route.substring(1);
-                String inputElements = runSimGUI.getInput();
+                inputElements = runSimGUI.getInput();
 
                 for (GraphNode n : nodeArray) {
                     if (n.isInitial) {
@@ -327,11 +328,16 @@ public class AlgorithmRunner {
                         textArea.append("Current input elements: " + inputElements + "\n");
                     }
                 }
-
                 return null;
+            }
+
+            @Override
+            protected void done() {
+                if (!inputElements.equals("")) {
+                    textArea.append("RESULT: STUCK.");
+                }
             }
         };
         worker.execute();
     }
-
 }
