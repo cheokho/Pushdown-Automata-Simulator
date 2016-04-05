@@ -37,7 +37,7 @@ public class AlgorithmRunner {
         pathGenerators = new LinkedHashSet<PathGenerator>();
     }
 
-    public void runAlgorithm(boolean isNdpda) {
+    public void dpdaAlgorithm(boolean isNdpda) {
 
         worker = new SwingWorker<Void, Void>() {
             @Override

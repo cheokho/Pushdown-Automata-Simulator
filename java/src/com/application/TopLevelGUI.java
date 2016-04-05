@@ -264,7 +264,7 @@ public class TopLevelGUI extends JFrame{
                                 JOptionPane.showMessageDialog(getContentPane(), "No path found. This means there is no available transition to be taken.", "Simulation failed", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            algorithmRunner.runAlgorithm(PDAVersionGUI.isNdpda);
+                            algorithmRunner.dpdaAlgorithm(PDAVersionGUI.isNdpda);
                         }
 
                     } else if (containsAccept == false || containsInitial == false) {
