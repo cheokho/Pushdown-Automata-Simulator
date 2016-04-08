@@ -215,6 +215,24 @@ public class TopLevelGUI extends JFrame{
                             getTextArea().append("Preparing to run simulation. Specified graph is: Deterministic\n");
                         }
 
+                        GraphNode tempNode = null;
+                        boolean accept = false;
+                        for (GraphNode n: getNodeArray()) {
+                            if (n.isInitial && n.isAccept) {
+                                tempNode = n;
+                                accept = true;
+                            } else if (n.isInitial && !n.isAccept) {
+                                tempNode = n;
+                                accept = false;
+                            }
+                        }
+                        if (runSimGUI.getInput().equals("") && accept==true) {
+                            getTextArea().append("RESULT: SUCCESS. '" + tempNode.toString() + "' is an accepting state.\n");
+                        } else if  (runSimGUI.getInput().equals("") && accept==false) {
+                            getTextArea().append("RESULT: FAILURE. '" + tempNode.toString() + "' is not an accepting state.\n");
+                        }
+
+
                         SwingWorker<Void, Void> worker = null;
                         AlgorithmRunner algorithmRunner = new AlgorithmRunner(executionTime, runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
                         if (PDAVersionGUI.isNdpda) {

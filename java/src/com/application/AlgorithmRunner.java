@@ -64,7 +64,6 @@ public class AlgorithmRunner {
                 ArrayList<PathFinder> pathFinders = new ArrayList<PathFinder>();
                 pathFinders.add(pathFinder);
 
-
                 while (inputElements != null && !inputElements.equals("") && node != null && !pathFinders.isEmpty()) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q = 0; q < model.getRowCount(); q++) {
