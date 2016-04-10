@@ -234,7 +234,7 @@ public class TopLevelGUI extends JFrame{
 
 
                         SwingWorker<Void, Void> worker = null;
-                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(executionTime, runSimGUI, getModel(), nodeArray, edgeArray, getTextArea(), worker);
+                        AlgorithmRunner algorithmRunner = new AlgorithmRunner(executionTime, runSimGUI, getModel(), getGraph(), nodeArray, edgeArray, getTextArea(), worker);
                         if (PDAVersionGUI.isNdpda) {
                             GraphNode node=null;
                             for (GraphNode n: nodeArray) {

@@ -2,6 +2,10 @@ package com.application;
 
 import com.algorithms.PathFinder;
 import com.algorithms.PathGenerator;
+import com.mxgraph.model.mxCell;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
+import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,19 +26,56 @@ public class AlgorithmRunner {
     private SwingWorker<Void, Void> worker;
     private int executionTime;
     private String inputElements;
-
+    private mxGraph graph;
+    private mxGraphComponent graphComponent;
+    private ArrayList<mxCell> frontEndStates;
     private Set<PathGenerator> pathGenerators;
 
-    public AlgorithmRunner(int executionTime, RunSimGUI runSimGUI, DefaultTableModel model, ArrayList<GraphNode> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
+    public AlgorithmRunner(int executionTime, RunSimGUI runSimGUI, DefaultTableModel model, mxGraph graph, ArrayList<GraphNode> nodeArray, ArrayList<Edge> edgeArray, JTextArea textArea, SwingWorker<Void, Void> worker) {
         this.executionTime=executionTime;
         this.runSimGUI=runSimGUI;
         this.model=model;
+        this.graph=graph;
         this.nodeArray=nodeArray;
         this.edgeArray=edgeArray;
         this.textArea=textArea;
         this.worker=worker;
 
         pathGenerators = new LinkedHashSet<PathGenerator>();
+
+        graphComponent = new mxGraphComponent(graph);
+
+        graph.clearSelection();
+        graph.selectAll();
+        Object[] cells = graph.getSelectionCells();
+        frontEndStates = new ArrayList<mxCell>();
+
+        for (Object c : cells) {
+            mxCell cell = (mxCell) c;
+            if (cell.isVertex()) {
+                frontEndStates.add(cell);
+                //System.out.println("test        "+ cell.getValue().toString());
+            }
+        }
+        graph.clearSelection();
+
+        //refreshes state colours back to orig.
+        GraphNode initial = null;
+        Object initialCell = null;
+        for (GraphNode n: nodeArray) {
+            if (n.isInitial) {
+                initial=n;
+            }
+        }
+        for (mxCell m: frontEndStates) {
+            if (m.getValue().toString().equals(initial.toString())) {
+                initialCell = m;
+            }
+            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#3090C7", new Object[]{m});
+            graphComponent.refresh();
+        }
+        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#4CC417", new Object[]{initialCell});
+        graphComponent.refresh();
     }
 
     public void dpdaAlgorithm(boolean isNdpda) {
@@ -64,6 +105,23 @@ public class AlgorithmRunner {
                 ArrayList<PathFinder> pathFinders = new ArrayList<PathFinder>();
                 pathFinders.add(pathFinder);
 
+//                mxGraphComponent graphComponent = new mxGraphComponent(graph);
+//
+//                graph.clearSelection();
+//                graph.selectAll();
+//                Object[] cells = graph.getSelectionCells();
+//                ArrayList<mxCell> frontEndStates = new ArrayList<mxCell>();
+//
+//                for (Object c : cells) {
+//                    mxCell cell = (mxCell) c;
+//                    if (cell.isVertex()) {
+//                        frontEndStates.add(cell);
+//                        //System.out.println("test        "+ cell.getValue().toString());
+//                    }
+//                }
+//                graph.clearSelection();
+
+
                 while (inputElements != null && !inputElements.equals("") && node != null && !pathFinders.isEmpty()) {
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q = 0; q < model.getRowCount(); q++) {
@@ -84,6 +142,19 @@ public class AlgorithmRunner {
                                 }
                             }
                         }
+
+                        Object colorState = null;
+                        GraphNode colorNode = null;
+                        for (mxCell state: frontEndStates) {
+                            if (state.getValue().toString().equals(node.toString())) {
+                                colorState = state;
+                                colorNode = node;
+                                //System.out.println("test    "+colorState);
+                            }
+                        }
+                        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{colorState});
+                        graphComponent.refresh();
+
                         String transitionOperation = "";
                         if (transitionEdge != null) {
                             transitionOperation = transitionEdge.getTransitionOperation();
@@ -100,21 +171,60 @@ public class AlgorithmRunner {
                         } else if (transitionOperation.contains("e")) {
                             //do nothing lol
                         }
+
+
                         node = transitionEdge.getToNode();
                         inputElements = inputElements.substring(1);
 
                         Thread.sleep(executionTime);
+
+                        if (colorNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#4CC417", new Object[]{colorState});
+                            graphComponent.refresh();
+                        } else if (!colorNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#3090C7", new Object[]{colorState});
+                            graphComponent.refresh();
+                        }
+
                         textArea.setCaretPosition(textArea.getDocument().getLength());
                         textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
                         totalPath.append(transitionEdge.getToNode());
                         if (inputElements.equals("")) {
+
+                            Object endState = null;
+                            GraphNode endNode = null;
+                            for (mxCell state: frontEndStates) {
+                                if (state.getValue().toString().equals(node.toString())) {
+                                    endState = state;
+                                    endNode = node;
+                                }
+                            }
+
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{endState});
+                            graphComponent.refresh();
+                            try {
+                                Thread.sleep(executionTime);
+                            } catch(InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            }
+
+                            if (endNode.isInitial) {
+                                graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#4CC417", new Object[]{endState});
+                                graphComponent.refresh();
+                            } else if (!endNode.isInitial) {
+                                graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#3090C7", new Object[]{endState});
+                                graphComponent.refresh();
+                            }
+
                             textArea.append("Simulation finished at node: '" + transitionEdge.getToNode() + "'.\nPath taken: '" + totalPath.toString() + "'.\n");
                             if (transitionEdge.getToNode().isAccept()) {
                                 textArea.append("RESULT: SUCCESS. '" + transitionEdge.getToNode() + "' is an accepting state.\n");
                             } else {
                                 textArea.append("RESULT: FAILURE. '" + transitionEdge.getToNode() + "' is not an accepting state.\n");
                             }
-                        } else {
+                        }
+
+                        else {
                             textArea.append("Current input elements: " + inputElements + "\n");
                         }
 
@@ -268,12 +378,29 @@ public class AlgorithmRunner {
                     }
                 }
 
+
                 while (inputElements != null && !inputElements.equals("") && startNode != null && route != null) {
 
                     ArrayList<String> stackArray = new ArrayList<String>();
                     for (int q = 0; q < model.getRowCount(); q++) {
                         stackArray.add(model.getValueAt(q, 0).toString());
                     }
+
+                    Object colorState = null;
+                    GraphNode colorNode = null;
+                    for (mxCell state: frontEndStates) {
+                        if (state.getValue().toString().equals(startNode)) {
+                            colorState = state;
+                            //System.out.println("test    "+colorState);
+                        }
+                    }
+                    for (GraphNode n: nodeArray) {
+                        if (n.toString().equals(startNode)) {
+                            colorNode = n;
+                        }
+                    }
+                    graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{colorState});
+                    graphComponent.refresh();
 
                     String input = inputElements.substring(0, 1);
 
@@ -314,9 +441,51 @@ public class AlgorithmRunner {
                     startNode=nextNode;
 
                     Thread.sleep(executionTime);
+
+                    assert colorNode != null;
+                    if (colorState != null) {
+                        if (colorNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#4CC417", new Object[]{colorState});
+                            graphComponent.refresh();
+                        } else if (!colorNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#3090C7", new Object[]{colorState});
+                            graphComponent.refresh();
+                        }
+                    }
+
                     textArea.setCaretPosition(textArea.getDocument().getLength());
                     textArea.append("Moving to node: '" + transitionEdge.getToNode() + "' from node: '" + transitionEdge.getFromNode() + "' through transition rule: " + transitionEdge.toString() + "\n");
                     if (inputElements.equals("")) {
+
+                        Object endState = null;
+                        GraphNode endNode = null;
+                        for (mxCell state: frontEndStates) {
+                            if (state.getValue().toString().equals(startNode)) {
+                                endState = state;
+                            }
+                        }
+                        for (GraphNode n: nodeArray) {
+                            if (n.toString().equals(startNode)) {
+                                endNode = n;
+                            }
+                        }
+
+                        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{endState});
+                        graphComponent.refresh();
+                        try {
+                            Thread.sleep(executionTime);
+                        } catch(InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+
+                        if (endNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#4CC417", new Object[]{endState});
+                            graphComponent.refresh();
+                        } else if (!endNode.isInitial) {
+                            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#3090C7", new Object[]{endState});
+                            graphComponent.refresh();
+                        }
+
                         textArea.append("Simulation finished at node: '" + transitionEdge.getToNode() + "'.\n");
                         if (transitionEdge.getToNode().isAccept()) {
                             textArea.append("RESULT: SUCCESS. '" + transitionEdge.getToNode() + "' is an accepting state.\n");
