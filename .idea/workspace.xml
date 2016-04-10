@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d7a4c8b-affd-434d-b6e8-17e6c1276862" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/test/com/algorithms/AllComboArrayTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/test/com/application/EdgeTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/test/com/application/GraphNodeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" afterPath="$PROJECT_DIR$/classes/com/application/TopLevelGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" afterPath="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" afterPath="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
     </list>
     <list id="dce4e55f-2e0f-4c07-a9df-32eb7f739009" name="Failed commit: Default" comment="sketch PDA gui" />
@@ -33,23 +28,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TopLevelGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="256" column="48" selection-start-line="256" selection-start-column="48" selection-end-line="256" selection-end-column="48" />
+            <state relative-caret-position="399">
+              <caret line="298" column="37" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#12067#12078#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PathGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+              <folding>
+                <element signature="e#493#494#0" expanded="true" />
+                <element signature="e#531#532#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlgorithmRunner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1170">
-              <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="256">
+              <caret line="406" column="38" selection-start-line="406" selection-start-column="38" selection-end-line="406" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -83,19 +92,6 @@
               <folding>
                 <element signature="e#783#784#0" expanded="true" />
                 <element signature="e#843#844#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PathGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-              <folding>
-                <element signature="e#493#494#0" expanded="true" />
-                <element signature="e#531#532#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,8 +177,8 @@
         <option value="$PROJECT_DIR$/java/test/com/application/GraphNodeTest.java" />
         <option value="$PROJECT_DIR$/java/test/com/application/EdgeTest.java" />
         <option value="$PROJECT_DIR$/java/test/com/algorithms/AllComboArrayTest.java" />
-        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
         <option value="$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java" />
+        <option value="$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java" />
       </list>
     </option>
   </component>
@@ -932,13 +928,6 @@
       <workItem from="1458762354536" duration="3935000" />
       <workItem from="1458766326692" duration="9000" />
     </task>
-    <task id="LOCAL-00043" summary="duplicate transition rule fix">
-      <created>1456160307944</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1456160307944</updated>
-    </task>
     <task id="LOCAL-00044" summary="run simulation fixes">
       <created>1456175997319</created>
       <option name="number" value="00044" />
@@ -1275,7 +1264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1460127753859</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="color added">
+      <created>1460311531430</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1460311531431</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1357,7 +1353,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="NDPDA new idea revamp testing. 1.1.4&#10;&#10;Split pane added.&#10;&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4&#10;&#10;commenced work on creating nodes in graph pane.&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4&#10;&#10;Creating nodes works. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
     <MESSAGE value="NDPDA new idea revamp testing. 1.1.4.1&#10;&#10;Begin work on edit input/stack alphabet instead of having to create new. Need to fix null pointers when user tries to run simulation.&#10;&#10;" />
@@ -1382,7 +1377,8 @@
     <MESSAGE value="small fix" />
     <MESSAGE value="renames" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="color added" />
+    <option name="LAST_COMMIT_MESSAGE" value="color added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1430,6 +1426,7 @@
           <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#12067#12078#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1476,6 +1473,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#12067#12078#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1507,6 +1505,7 @@
           <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#12067#12078#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1661,17 +1660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-          <folding>
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#531#532#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/GraphNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -1744,16 +1732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="256" column="48" selection-start-line="256" selection-start-column="48" selection-end-line="256" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/mxgraph/shape/mxConnectorShape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -1764,9 +1742,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/com/application/AlgorithmRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1170">
-          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        <state relative-caret-position="256">
+          <caret line="406" column="38" selection-start-line="406" selection-start-column="38" selection-end-line="406" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/algorithms/PathGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding>
+            <element signature="e#493#494#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/com/application/TopLevelGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="298" column="37" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12067#12078#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

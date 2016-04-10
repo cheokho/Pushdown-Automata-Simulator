@@ -269,12 +269,34 @@ public class TopLevelGUI extends JFrame{
                                 }
                             }
                             System.out.println("paths:"+paths.toString());
+
+                            ArrayList<GraphNode> accepters = new ArrayList<GraphNode>();
+                            for (GraphNode n: nodeArray) {
+                                if (n.isAccept) {
+                                    accepters.add(n);
+                                }
+                            }
+                            for (PathGenerator p: paths) {
+                                for (GraphNode n1: accepters) {
+                                    if (p.toString().length() == runSimGUI.getInput().length()+1 && p.toString().endsWith(n1.toString())) {
+                                        p.getPath().append(" ACCEPT");
+                                    } else if (p.toString().length() == runSimGUI.getInput().length()+1 && !p.toString().endsWith(n1.toString())) {
+                                        p.getPath().append(" FAILURE");
+                                    } else if (p.toString().length() != runSimGUI.getInput().length()+1) {
+                                        p.getPath().append(" STUCK");
+                                    }
+                                }
+                            }
                             if (paths.isEmpty() == false) {
                                 Object[] possibilities = paths.toArray();
                                 PathGenerator result = (PathGenerator) JOptionPane.showInputDialog(getFocusOwner(), "Path(s) found are shown below. Please select which you would like to run. If the path selected does not return a RESULT, the automaton is stuck.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
 
                                 if (result !=null && result.toString().length() >0) {
                                     //TODO run algorithm stuffs here. n.b there can be same paths with multiple routes.
+                                    int i = result.getPath().indexOf(" ");
+                                    if (i != -1) {
+                                        result.getPath().delete(i, i + result.getPath().length());
+                                    }
                                     algorithmRunner.runNDPDAPath(result);
                                 }
 
