@@ -288,8 +288,23 @@ public class TopLevelGUI extends JFrame{
                                 }
                             }
                             if (paths.isEmpty() == false) {
+                                boolean inputAccepted = false;
                                 Object[] possibilities = paths.toArray();
-                                PathGenerator result = (PathGenerator) JOptionPane.showInputDialog(getFocusOwner(), "Path(s) found are shown below. Please select which you would like to run. If the path selected does not return a RESULT, the automaton is stuck.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
+                                for (PathGenerator p: paths) {
+                                    if (p.toString().contains("ACCEPT")) {
+                                        inputAccepted=true;
+                                        break;
+                                    }else {
+                                        inputAccepted=false;
+                                    }
+                                }
+                                if (inputAccepted) {
+                                    JOptionPane.showMessageDialog(getContentPane(), "Input string is accepted by this machine.");
+                                } else {
+                                    JOptionPane.showMessageDialog(getContentPane(), "Input string is rejected by this machine.");
+                                }
+
+                                PathGenerator result = (PathGenerator) JOptionPane.showInputDialog(getFocusOwner(), "Path(s) found are shown below. Please select which you would like to run.", "Simulation successful", JOptionPane.INFORMATION_MESSAGE, null, possibilities, paths.get(0));
 
                                 if (result !=null && result.toString().length() >0) {
                                     //TODO run algorithm stuffs here. n.b there can be same paths with multiple routes.
